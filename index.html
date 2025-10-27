@@ -23,11 +23,12 @@
                     <p>"La ingeniería sostenible aportando soluciones para desafios complejos"</p>
                 </div>
                 <div class="event-dates">
-                    <span class="divider">|</span>
-                    <span>5-7 de noviembre</span>
+                    <span class="divider" id="uno">|</span>
+                    <span id="uno">5-7 de noviembre</span>
                     <span class="divider">|</span>
                     <span><img src="assets/img/Logo25aniv_Blanco.png" alt="25° Aniversario"></span>
                     <span class="divider">|</span>
+                    <span><img id="ceilogo" src="assets/img/Logo_Ingenierias_V1.2_blanco.svg" alt="Logo CEI"></span>
                 </div>
             </div>
         </div>
@@ -51,6 +52,7 @@
                     <a href="#acerca" class="nav-item">Acerca</a>
                     <a href="#ponentes" class="nav-item">Ponentes</a>
                     <a href="#programa" class="nav-item">Programa</a>
+                    <a href="#talleres" class="nav-item">Talleres</a>
                 </div>
             </div>
         </div>
@@ -80,6 +82,7 @@
                 </div>
 
                 <div class="countdown-timer" id="countdown" data-aos="fade-up" data-aos-delay="600">
+                    <div class="countdown-text"><p>Faltan:</p></div>
                     <div class="countdown-grid">
                         <div class="countdown-unit">
                             <div class="countdown-value" id="days">00</div>
@@ -105,13 +108,13 @@
                         <i class="fas fa-user-plus"></i>
                         Registrarse al Congreso
                     </a>
-                    <a href="#programa" class="btn btn-secondary">
-                        <i class="fas fa-calendar"></i>
-                        Ver Programa
-                    </a>
                     <a href="#ponentes" class="btn btn-secondary">
                         <i class="fas fa-users"></i>
                         Conoce a los Ponentes
+                    </a>
+                    <a href="#programa" class="btn btn-secondary">
+                        <i class="fas fa-calendar"></i>
+                        Ver Programa
                     </a>
                 </div>
             </div>
@@ -250,63 +253,597 @@
         </div>
     </section>
 
-    <!-- Programa -->
-    <section id="programa" class="content-section">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Programa de Ponencias Magistrales</h2>
-            <p class="section-description" data-aos="fade-up" data-aos-delay="100">Agenda completa de actividades del XIX CEI 2025</p>
+<!-- Programa -->
+<section id="programa" class="content-section">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Programa del Congreso</h2>
+        <p class="section-description" data-aos="fade-up" data-aos-delay="100">Línea de tiempo de actividades</p>
+        
+        <div class="program-tabs" data-aos="fade-up" data-aos-delay="200">
+            <div class="tab-navigation">
+                <button class="tab-button active" data-tab="day1">
+                    <span class="tab-number">1</span>
+                </button>
+                <button class="tab-button" data-tab="day2">
+                    <span class="tab-number">2</span>
+                </button>
+                <button class="tab-button" data-tab="day3">
+                    <span class="tab-number">3</span>
+                </button>
+            </div>
             
-            <div class="program-tabs" data-aos="fade-up" data-aos-delay="200">
-                <div class="tab-navigation">
-                    <button class="tab-button active" data-tab="day1">Día 1 - 5 Nov</button>
-                    <button class="tab-button" data-tab="day2">Día 2 - 6 Nov</button>
-                    <button class="tab-button" data-tab="day3">Día 3 - 7 Nov</button>
-                </div>
-                
-                <div class="tab-content active" id="day1">
-                    <div class="session-item" data-aos="fade-right">
-                        <div class="session-time">9:00 hrs</div>
-                        <div class="session-info">
-                            <h4>Aplicaciones nanotecnológicas en la industria</h4>
-                            <p class="session-speaker">Dra. Mónica De La Luz Corea Téllez</p>
-                            <p class="session-location">Escuela Superior de Ing. Química e Industrias Extractivas, IPN</p>
-                        </div>
-                    </div>
+            <!-- DÍA 1 - 5 NOVIEMBRE -->
+            <div class="tab-content active" id="day1">
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
                     
-                    <div class="session-item" data-aos="fade-right" data-aos-delay="100">
-                        <div class="session-time">9:30 hrs</div>
-                        <div class="session-info">
+                    <div class="timeline-event event-central" data-aos="fade-up">
+                        <div class="event-time">9:00 - 9:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-inauguration">Inauguración</div>
+                            <h4>Ceremonia de Inauguración</h4>
+                            <p class="event-location">Todos los auditorios</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="100">
+                        <div class="event-time">9:30 - 10:00</div>
+                        <div class="event-content">
+                            <div class="event-badge event-keynote">Conferencia</div>
                             <h4>Finding Your North Star</h4>
-                            <p class="session-speaker">PhD Renée Martin-Nagle</p>
-                            <p class="session-location">Secretary General of the International Water Resources Association</p>
+                            <p class="event-speaker">PhD Renée Martin-Nagle</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="parallel-sessions" data-aos="fade-up" data-aos-delay="150">
+                        <div class="session-block">
+                            <div class="session-time">10:30 - 14:00</div>
+                            <div class="session-content">
+                                <h4>Sesiones Técnicas Paralelas</h4>
+                                
+                                <div class="parallel-columns">
+                                    <div class="session-track">
+                                        <div class="track-header">
+                                            <span class="track-badge">G</span>
+                                            <h5>Auditorio Principal</h5>
+                                        </div>
+                                        <div class="session-items">
+                                            <div class="mini-session">
+                                                <span class="mini-time">10:30</span>
+                                                <span class="mini-title">Plataforma interactiva con chatbot</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">11:00</span>
+                                                <span class="mini-title">Biorremediación con ascomicetos</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">11:30</span>
+                                                <span class="mini-title">Hongos micorrizógenos</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">12:00</span>
+                                                <span class="mini-title">Calidad de agua Nichupté</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">13:00</span>
+                                                <span class="mini-title">Plataforma IA para aprendizaje</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="session-track">
+                                        <div class="track-header">
+                                            <span class="track-badge">A1</span>
+                                            <h5>Auditorio A1</h5>
+                                        </div>
+                                        <div class="session-items">
+                                            <div class="mini-session">
+                                                <span class="mini-time">10:30</span>
+                                                <span class="mini-title">Plan mantenimiento RCM</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">11:00</span>
+                                                <span class="mini-title">Censo energético</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">11:30</span>
+                                                <span class="mini-title">BI para gestión de residuos</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">12:30</span>
+                                                <span class="mini-title">Modelado logístico-operativo</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">13:00</span>
+                                                <span class="mini-title">Sistema respaldo con hidrógeno</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-central" data-aos="fade-up" data-aos-delay="200">
+                        <div class="event-time">14:00 - 14:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-break">Receso</div>
+                            <h4>Tiempo para networking</h4>
+                            <p class="event-location">Áreas comunes</p>
+                        </div>
+                    </div>
+
+                    <div class="parallel-sessions" data-aos="fade-up" data-aos-delay="250">
+                        <div class="session-block">
+                            <div class="session-time">16:00 - 18:00</div>
+                            <div class="session-content">
+                                <h4>Sesiones de Proyectos</h4>
+                                
+                                <div class="parallel-columns">
+                                    <div class="session-track">
+                                        <div class="track-header">
+                                            <span class="track-badge">G</span>
+                                            <h5>Auditorio Principal</h5>
+                                        </div>
+                                        <div class="session-items">
+                                            <div class="mini-session">
+                                                <span class="mini-time">16:00</span>
+                                                <span class="mini-title">Dashboard programas sociales</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">16:30</span>
+                                                <span class="mini-title">Optimización picking</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">17:00</span>
+                                                <span class="mini-title">Red distribución climas</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">17:30</span>
+                                                <span class="mini-title">Gestión inventarios vinos</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="session-track">
+                                        <div class="track-header">
+                                            <span class="track-badge">A1</span>
+                                            <h5>Auditorio A1</h5>
+                                        </div>
+                                        <div class="session-items">
+                                            <div class="mini-session">
+                                                <span class="mini-time">16:00</span>
+                                                <span class="mini-title">Análisis térmico Hydrilla</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">16:30</span>
+                                                <span class="mini-title">Dashboard residuos hoteleros</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">17:00</span>
+                                                <span class="mini-title">Sistema web gestión sostenible</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-right" data-aos="fade-left" data-aos-delay="300">
+                        <div class="event-time">18:00 - 18:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-keynote">Conferencia</div>
+                            <h4>Geopolítica y cadenas de suministro</h4>
+                            <p class="event-speaker">Dr. Javier Valencia Méndez</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="350">
+                        <div class="event-time">19:00 - 19:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-keynote">Conferencia</div>
+                            <h4>IA en Beneficio de la Sociedad</h4>
+                            <p class="event-speaker">Dr. Carlos Alberto Reyes García</p>
+                            <span class="event-auditorio">Auditorio G</span>
                         </div>
                     </div>
                 </div>
-                
-                <div class="tab-content" id="day2">
-                    <div class="session-item" data-aos="fade-right">
-                        <div class="session-time">10:00 hrs</div>
-                        <div class="session-info">
-                            <h4>Cibernética: Indispensable, ubicua e invisible</h4>
-                            <p class="session-speaker">Dra. María Cristina Verde Rodarte</p>
-                            <p class="session-location">Instituto de Ingeniería, UNAM</p>
+            </div>
+            
+            <!-- DÍA 2 - 6 NOVIEMBRE -->
+            <div class="tab-content" id="day2">
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-event event-left" data-aos="fade-right">
+                        <div class="event-time">9:00 - 9:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-keynote">Conferencia</div>
+                            <h4>Aplicaciones nanotecnológicas en la industria</h4>
+                            <p class="event-speaker">Dra. Mónica de la Luz Corea Téllez</p>
+                            <p class="event-location">IPN - ESIQIE</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-central" data-aos="fade-up" data-aos-delay="100">
+                        <div class="event-time">10:00 - 10:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-competition">Concurso</div>
+                            <h4>Desafío IA por un futuro sostenible</h4>
+                            <p class="event-location">Competencia estudiantil</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-right" data-aos="fade-left" data-aos-delay="150">
+                        <div class="event-time">12:30 - 13:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-talk">Charlas</div>
+                            <h4>Mi experiencia en Hackaton Talent Land</h4>
+                            <p class="event-location">Testimonios estudiantiles</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-central" data-aos="fade-up" data-aos-delay="200">
+                        <div class="event-time">13:30 - 14:00</div>
+                        <div class="event-content">
+                            <div class="event-badge event-break">Receso</div>
+                            <h4>Tiempo para networking</h4>
+                            <p class="event-location">Áreas comunes</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="250">
+                        <div class="event-time">15:00 - 16:00</div>
+                        <div class="event-content">
+                            <div class="event-badge event-poster">Exposición</div>
+                            <h4>Presentación de póster</h4>
+                            <p class="event-location">Afuera del Auditorio G</p>
+                            <span class="event-auditorio">Área de Exhibición</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-right" data-aos="fade-left" data-aos-delay="300">
+                        <div class="event-time">16:00 - 17:00</div>
+                        <div class="event-content">
+                            <div class="event-badge event-competition">Concurso</div>
+                            <h4>Desafío Lógico para mentes ingeniosas</h4>
+                            <p class="event-location">Competencia estudiantil</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="350">
+                        <div class="event-time">17:00 - 17:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-talk">Charla</div>
+                            <h4>Emprendedurismo y liderazgo</h4>
+                            <p class="event-speaker">Ing. Javier Carlos Olvera Silveira</p>
+                            <p class="event-location">Consejo Coordinador Empresarial del Caribe</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-right" data-aos="fade-left" data-aos-delay="400">
+                        <div class="event-time">18:00 - 18:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-keynote">Conferencia</div>
+                            <h4>LLMs en la Ciencia de Datos: Aplicaciones y Desafíos</h4>
+                            <p class="event-speaker">Dr. Tonatiuh Hernández del Toro</p>
+                            <p class="event-location">Universidad de Guadalajara</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="450">
+                        <div class="event-time">19:00 - 19:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-talk">Charla</div>
+                            <h4>De la universidad a la industria TI</h4>
+                            <p class="event-speaker">Ing. Leonel Adriel Uc Canul</p>
+                            <p class="event-location">dot NET Desarrollo de Sistemas</p>
+                            <span class="event-auditorio">Auditorio G</span>
                         </div>
                     </div>
                 </div>
-                
-                <div class="tab-content" id="day3">
-                    <div class="session-item" data-aos="fade-right">
-                        <div class="session-time">17:00 hrs</div>
-                        <div class="session-info">
+            </div>
+            <!-- DÍA 3 - 7 NOVIEMBRE -->
+            <div class="tab-content" id="day3">
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-event event-left" data-aos="fade-right">
+                        <div class="event-time">9:00 - 9:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-keynote">Conferencia</div>
+                            <h4>Ingeniería de alimentos: Alimentos funcionales</h4>
+                            <p class="event-speaker">Dra. Perla Osorio Díaz</p>
+                            <p class="event-location">IPN - Centro de Desarrollo de Productos Bióticos</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-right" data-aos="fade-left" data-aos-delay="50">
+                        <div class="event-time">10:00 - 10:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-keynote">Conferencia</div>
+                            <h4>Cibernética: Indispensable, Ubicua e Invisible</h4>
+                            <p class="event-speaker">Dra. María Cristina Verde Rodarte</p>
+                            <p class="event-location">Instituto de Ingeniería, UNAM</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <!-- Bloque de sesiones paralelas - Mañana -->
+                    <div class="parallel-sessions" data-aos="fade-up" data-aos-delay="100">
+                        <div class="session-block">
+                            <div class="session-time">11:00 - 14:20</div>
+                            <div class="session-content">
+                                <h4>Sesiones Técnicas Paralelas</h4>
+                                
+                                <div class="parallel-columns">
+                                    <div class="session-track">
+                                        <div class="track-header">
+                                            <span class="track-badge">G</span>
+                                            <h5>Auditorio Principal</h5>
+                                        </div>
+                                        <div class="session-items">
+                                            <div class="mini-session">
+                                                <span class="mini-time">11:00</span>
+                                                <span class="mini-title">Mecanismos de defensa en plantas</span>
+                                                <span class="mini-speaker">M.C. Paola Severo Martínez</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">11:40</span>
+                                                <span class="mini-title">Operaciones binarias con cuaterniones</span>
+                                                <span class="mini-speaker">Dr. David Orbe</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">12:20</span>
+                                                <span class="mini-title">Neurotecnología y Dolor</span>
+                                                <span class="mini-speaker">Dr. Rogelio Reyes Galaviz</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">13:00</span>
+                                                <span class="mini-title">Polimorfismos en β-caseína de leche</span>
+                                                <span class="mini-speaker">M.C. Paula Fuentes García</span>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">13:40</span>
+                                                <span class="mini-title">Conferencia por confirmar</span>
+                                                <span class="mini-speaker">Dr. Ramón Ronzón Lavié</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="session-track">
+                                        <div class="track-header">
+                                            <span class="track-badge">A1</span>
+                                            <h5>Auditorio A1</h5>
+                                        </div>
+                                        <div class="session-items">
+                                            <div class="mini-session">
+                                                <span class="mini-time">11:00</span>
+                                                <span class="mini-title">Concurso Shark Tank</span>
+                                                <span class="mini-speaker">Competencia estudiantil</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="session-track">
+                                        <div class="track-header">
+                                            <span class="track-badge">🏃</span>
+                                            <h5>Explanada</h5>
+                                        </div>
+                                        <div class="session-items">
+                                            <div class="mini-session">
+                                                <span class="mini-time">16:00</span>
+                                                <span class="mini-title">Concurso Carrera de Seguidores de Línea</span>
+                                                <span class="mini-speaker">Competencia de robótica</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-central" data-aos="fade-up" data-aos-delay="150">
+                        <div class="event-time">14:20 - 14:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-break">Receso</div>
+                            <h4>Tiempo para networking</h4>
+                            <p class="event-location">Todos los espacios</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="200">
+                        <div class="event-time">16:00 - 16:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-talk">Charla</div>
+                            <h4>Como ir a una entrevista y no fracasar en el intento</h4>
+                            <p class="event-speaker">Lic. Ninive Eulalia Torres Rodríguez</p>
+                            <p class="event-location">BEPENSA</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-right" data-aos="fade-left" data-aos-delay="250">
+                        <div class="event-time">17:00 - 17:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-keynote">Conferencia</div>
                             <h4>Adaptación. El planeta no se está calentando... ya se calentó</h4>
-                            <p class="session-speaker">Mtro. Oscar Alberto Rébora Aguilera</p>
-                            <p class="session-location">Secretaría de Ecología y Medio Ambiente del Estado de Quintana Roo</p>
+                            <p class="event-speaker">Lic. Oscar Rébora</p>
+                            <p class="event-location">SEMA</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="300">
+                        <div class="event-time">18:00 - 18:30</div>
+                        <div class="event-content">
+                            <div class="event-badge event-keynote">Conferencia</div>
+                            <h4>Aprendiendo Disruptivamente AI</h4>
+                            <p class="event-speaker">Ing. Jorge Zavala</p>
+                            <p class="event-location">Silicon Valley</p>
+                            <span class="event-auditorio">Auditorio G</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Talleres -->
+<section id="talleres" class="content-section  section-light">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Talleres Especializados</h2>
+        <p class="section-description" data-aos="fade-up" data-aos-delay="100">Sesiones prácticas del 6 de noviembre - Cupo limitado</p>
+        
+        <!-- Filtros por horario -->
+        <div class="talleres-filtros" data-aos="fade-up" data-aos-delay="150">
+            <button class="filtro-btn active" data-horario="todos">Todos</button>
+            <button class="filtro-btn" data-horario="manana">Matutino</button>
+            <button class="filtro-btn" data-horario="tarde">Vespertino</button>
+        </div>
+
+        <div class="talleres-grid">
+            <!-- Taller 1 -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="200" data-horario="manana">
+                <div class="taller-header">
+                    <span class="taller-cupo">25 cupos</span>
+                    <span class="taller-lugar">LAMA</span>
+                </div>
+                <h3 class="taller-titulo">Simulación</h3>
+                <p class="taller-ponente">Dr. Francisco López Monzalvo</p>
+                <p class="taller-procedencia">Universidad del Caribe</p>
+                <div class="taller-info">
+                    <span class="taller-horario">10:00 - 13:00 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge">Taller Matutino</div>
+            </div>
+
+            <!-- Taller 2 -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="250" data-horario="manana">
+                <div class="taller-header">
+                    <span class="taller-cupo">25 cupos</span>
+                    <span class="taller-lugar">LTI</span>
+                </div>
+                <h3 class="taller-titulo">Taller Maple</h3>
+                <p class="taller-ponente">Mtro. Juan Diego Canul</p>
+                <p class="taller-procedencia">Universidad del Caribe</p>
+                <div class="taller-info">
+                    <span class="taller-horario">10:00 - 13:00 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge">Taller Matutino</div>
+            </div>
+
+            <!-- Taller 3 -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="300" data-horario="manana">
+                <div class="taller-header">
+                    <span class="taller-cupo">25 cupos</span>
+                    <span class="taller-lugar">LAD</span>
+                </div>
+                <h3 class="taller-titulo">Protege tu creatividad: Sistema de propiedad industrial</h3>
+                <p class="taller-ponente">Mtra. Samia Yolanda Cárdenas Gaucin</p>
+                <p class="taller-procedencia">IMPI</p>
+                <div class="taller-info">
+                    <span class="taller-horario">10:00 - 13:00 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge">Taller Matutino</div>
+            </div>
+
+            <!-- Taller 4 -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="350" data-horario="manana">
+                <div class="taller-header">
+                    <span class="taller-cupo">30 cupos</span>
+                    <span class="taller-lugar">LTA</span>
+                </div>
+                <h3 class="taller-titulo">Energía Eólica: De la teoría a la práctica</h3>
+                <p class="taller-ponente">Estefania Paola Severo Martínez</p>
+                <p class="taller-procedencia">UAM</p>
+                <div class="taller-info">
+                    <span class="taller-horario">10:00 - 13:30 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge">Taller Matutino</div>
+            </div>
+
+            <!-- Taller 5 -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="400" data-horario="tarde">
+                <div class="taller-header">
+                    <span class="taller-cupo">25 cupos</span>
+                    <span class="taller-lugar">LFQ</span>
+                </div>
+                <h3 class="taller-titulo">Desarrollo de alimentos funcionales</h3>
+                <p class="taller-ponente">Dra. Perla Osorio</p>
+                <p class="taller-procedencia">IPN - Centro de Desarrollo de Productos Bióticos</p>
+                <div class="taller-info">
+                    <span class="taller-horario">15:00 - 18:00 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge-v">Taller Vespertino</div>
+            </div>
+
+            <!-- Taller 6 -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="450" data-horario="tarde">
+                <div class="taller-header">
+                    <span class="taller-cupo">29 cupos</span>
+                    <span class="taller-lugar">LIS</span>
+                </div>
+                <h3 class="taller-titulo">De cero a dashboard: Python + Looker Studio</h3>
+                <p class="taller-ponente">Erin González Zavala</p>
+                <p class="taller-procedencia">Universidad del Caribe</p>
+                <div class="taller-info">
+                    <span class="taller-horario">15:00 - 18:00 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge-v">Taller Vespertino</div>
+            </div>
+
+            <!-- Taller 7 -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="500" data-horario="manana">
+                <div class="taller-header">
+                    <span class="taller-cupo">30 cupos</span>
+                    <span class="taller-lugar">LIPI</span>
+                </div>
+                <h3 class="taller-titulo">Aplicaciones nanotecnológicas</h3>
+                <p class="taller-ponente">Dra. Mónica De La Cruz Corea Tellez</p>
+                <p class="taller-procedencia">IPN</p>
+                <div class="taller-info">
+                    <span class="taller-horario">10:00 - 13:00 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge">Taller Matutino</div>
+            </div>
+
+            <!-- Taller 8 -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="550" data-horario="manana">
+                <div class="taller-header">
+                    <span class="taller-cupo">25 cupos</span>
+                    <span class="taller-lugar">LFQ</span>
+                </div>
+                <h3 class="taller-titulo">Una mirada cualitativa a la complejidad ambiental</h3>
+                <p class="taller-ponente">Dra. Diana Burgos Lugo</p>
+                <p class="taller-procedencia">CINVESTAV</p>
+                <div class="taller-info">
+                    <span class="taller-horario">10:00 - 13:00 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge">Taller Matutino</div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -326,13 +863,7 @@
                             <i class="fab fa-facebook-f"></i>
                         </a>
                         <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link">
                             <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
                 </div>
@@ -344,6 +875,7 @@
                         <a href="#acerca">Acerca del Congreso</a>
                         <a href="#ponentes">Ponentes</a>
                         <a href="#programa">Programa</a>
+                        <a href="#talleres">Talleres</a>
                     </div>
                 </div>
                 

@@ -383,3 +383,38 @@ document.addEventListener('touchstart', function(e) {
         document.documentElement.style.zoom = '1';
     }
 });
+
+// ===== FILTRADO DE TALLERES =====
+function initTalleresFilters() {
+    const filterBtns = document.querySelectorAll('.filtro-btn');
+    const tallerCards = document.querySelectorAll('.taller-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remover active de todos los botones
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Agregar active al botón clickeado
+            btn.classList.add('active');
+            
+            const horario = btn.getAttribute('data-horario');
+            
+            // Filtrar talleres
+            tallerCards.forEach(card => {
+                if (horario === 'todos') {
+                    card.classList.remove('hidden');
+                } else {
+                    if (card.getAttribute('data-horario') === horario) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    });
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    initTalleresFilters();
+});

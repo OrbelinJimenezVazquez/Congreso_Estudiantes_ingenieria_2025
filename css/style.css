@@ -419,6 +419,7 @@ body {
     height: 3px; /* Más delgado para móvil */
     background: linear-gradient(90deg, var(--accent-turquoise), var(--accent-light));
     border-radius: 2px;
+    
 }
 
 .section-description {
@@ -436,6 +437,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px; /* Menos gap para móvil */
+    padding-top: 1.5rem;
 }
 
 /* ===== CARACTERÍSTICAS - MOBILE FIRST ===== */
@@ -467,6 +469,12 @@ body {
     font-size: 1rem; /* Más pequeño para móvil */
     flex-shrink: 0;
 }
+
+    .content-left, .content-right {
+        font-size: 1rem;
+        line-height: 1.8;
+        margin: 1rem;
+    }
 
 /* ===== TARJETA INFORMATIVA - MOBILE FIRST ===== */
 .info-panel {
@@ -1491,7 +1499,7 @@ body {
     }
     
     .main-nav {
-        top: 75px;
+        top: 90px;
         padding: 15px 0;
     }
     
@@ -1572,6 +1580,11 @@ body {
         font-size: 2.5rem;
     }
     
+    .section-title::after{
+        width: 80px;
+        height: 7px;
+        border-radius: var(--border-radius-sm);
+    }
     .section-description {
         font-size: 1.2rem;
         margin-bottom: 3rem;
@@ -1581,8 +1594,9 @@ body {
         grid-template-columns: 1fr 1fr;
         display: grid;
         gap: 60px;
+        padding-top: 2rem;
     }
-    
+
     .feature-card {
         gap: 20px;
         padding: 20px;

@@ -3,15 +3,18 @@ const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
 if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
+    navToggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevenir que el click se propague
         navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
         
         // Prevenir scroll cuando el menú está abierto
         if (navMenu.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
         }
     });
 
@@ -21,6 +24,7 @@ if (navToggle && navMenu) {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
             document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
         });
     });
 
@@ -31,6 +35,17 @@ if (navToggle && navMenu) {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
             document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+        }
+    });
+
+    // Cerrar menú al redimensionar (si se abre en móvil y se cambia a desktop)
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
         }
     });
 }
@@ -39,8 +54,10 @@ if (navToggle && navMenu) {
 let lastScrollY = window.scrollY;
 const headerTop = document.querySelector('.header-top');
 const mainNav = document.querySelector('.main-nav');
+let scrollTimeout;
 
-window.addEventListener('scroll', () => {
+// Función para manejar el scroll optimizada para móviles
+function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollDirection = scrollTop > lastScrollY ? 'down' : 'up';
 
@@ -77,28 +94,49 @@ window.addEventListener('scroll', () => {
 
     // Active nav link (solo en desktop)
     if (window.innerWidth >= 768) {
-        const sections = document.querySelectorAll('.content-section, .hero-banner');
-        const navItems = document.querySelectorAll('.nav-item');
-
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 120;
-            const sectionHeight = section.clientHeight;
-            if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === `#${current}`) {
-                item.classList.add('active');
-            }
-        });
+        updateActiveNavLink(scrollTop);
     }
 
     lastScrollY = scrollTop;
-});
+}
+
+// Debounce para mejorar rendimiento en móviles
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Actualizar enlace activo en navegación
+function updateActiveNavLink(scrollTop) {
+    const sections = document.querySelectorAll('.content-section, .hero-banner');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.clientHeight;
+        if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === `#${current}`) {
+            item.classList.add('active');
+        }
+    });
+}
+
+// Aplicar debounce al scroll para mejor rendimiento en móviles
+window.addEventListener('scroll', debounce(handleScroll, 10));
 
 // ===== SMOOTH SCROLL MEJORADO =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -110,6 +148,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         e.preventDefault();
         const targetId = this.getAttribute('href');
+        
+        // Si es el mismo enlace actual, no hacer nada
+        if (targetId === window.location.hash) {
+            return;
+        }
+        
         const target = document.querySelector(targetId);
         
         if (target) {
@@ -118,6 +162,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const navHeight = isMobile ? 80 : 120;
             const offsetTop = target.offsetTop - navHeight;
             
+            // Smooth scroll con comportamiento suave
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -125,6 +170,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
             // Actualizar URL sin recargar la página
             history.pushState(null, null, targetId);
+            
+            // Cerrar menú móvil si está abierto
+            if (navMenu && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
+            }
         }
     });
 });
@@ -183,8 +236,11 @@ function showEventStarted() {
 }
 
 // Iniciar contador
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown(); // Ejecutar inmediatamente
+let countdownInterval;
+function initCountdown() {
+    countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // Ejecutar inmediatamente
+}
 
 // ===== SISTEMA DE PESTAÑAS =====
 function initTabs() {
@@ -212,6 +268,13 @@ function initTabs() {
             if (targetContent) {
                 targetContent.classList.add('active');
                 targetContent.setAttribute('aria-hidden', 'false');
+                
+                // AOS refresh para animaciones en contenido de pestañas
+                if (typeof AOS !== 'undefined') {
+                    setTimeout(() => {
+                        AOS.refresh();
+                    }, 300);
+                }
             }
         });
     });
@@ -220,34 +283,6 @@ function initTabs() {
     if (tabButtons.length > 0) {
         tabButtons[0].click();
     }
-}
-
-// ===== MANEJO DE FORMULARIOS =====
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        
-        // Efecto de carga
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-        submitBtn.disabled = true;
-        
-        // Simular envío (reemplazar con tu lógica real)
-        setTimeout(() => {
-            // Aquí iría tu lógica de envío real
-            showNotification('¡Mensaje enviado! Te contactaremos en breve.', 'success');
-            
-            // Resetear formulario
-            this.reset();
-            
-            // Restaurar botón
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        }, 2000);
-    });
 }
 
 // ===== BOTÓN VOLVER ARRIBA =====
@@ -262,67 +297,7 @@ if (scrollToTop) {
     });
 }
 
-// ===== NOTIFICACIONES =====
-function showNotification(message, type = 'info') {
-    // Crear elemento de notificación
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <span>${message}</span>
-        <button class="notification-close">&times;</button>
-    `;
-    
-    // Estilos básicos para la notificación
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
-        color: white;
-        padding: 15px 20px;
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow-medium);
-        z-index: 10000;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        max-width: 300px;
-        animation: slideInRight 0.3s ease-out;
-    `;
-    
-    // Botón cerrar
-    const closeBtn = notification.querySelector('.notification-close');
-    closeBtn.style.cssText = `
-        background: none;
-        border: none;
-        color: white;
-        font-size: 18px;
-        cursor: pointer;
-        padding: 0;
-        width: 20px;
-        height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    `;
-    
-    closeBtn.addEventListener('click', () => {
-        notification.style.animation = 'slideOutRight 0.3s ease-in';
-        setTimeout(() => notification.remove(), 300);
-    });
-    
-    document.body.appendChild(notification);
-    
-    // Auto-remover después de 5 segundos
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.style.animation = 'slideOutRight 0.3s ease-in';
-            setTimeout(() => notification.remove(), 300);
-        }
-    }, 5000);
-}
-
-// ===== INICIALIZACIÓN AOS =====
+// ===== INICIALIZACIÓN AL CARGAR EL DOM =====
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar AOS si existe
     if (typeof AOS !== 'undefined') {
@@ -331,18 +306,27 @@ document.addEventListener('DOMContentLoaded', function() {
             easing: 'ease-in-out',
             once: true,
             mirror: false,
-            offset: 100
+            offset: 100,
+            disable: function() {
+                return window.innerWidth < 768; // Deshabilitar AOS en móviles si es necesario
+            }
         });
     }
     
-    // Inicializar pestañas
+    // Inicializar componentes
     initTabs();
+    initCountdown();
     
-    // Prevenir comportamientos no deseados en móvil
+    // Forzar un reflow para evitar problemas de visualización en móviles
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+    }, 100);
+    
+    // Prevenir zoom en inputs en iOS
     document.addEventListener('touchstart', function() {}, { passive: true });
     document.addEventListener('touchmove', function() {}, { passive: true });
     
-    console.log('XIX CEI 2025 - Sitio completamente optimizado');
+    console.log('XIX CEI 2025 - Sitio optimizado para móviles');
 });
 
 // ===== MANEJO DE REDIMENSIONAMIENTO =====
@@ -350,38 +334,52 @@ let resizeTimeout;
 window.addEventListener('resize', function() {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(function() {
-        // Cerrar menú móvil al redimensionar a desktop
-        if (window.innerWidth >= 768 && navMenu && navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            document.body.style.overflow = '';
+        // Refresh AOS en redimensionamiento
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
         }
+        
+        // Actualizar navegación activa
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        updateActiveNavLink(scrollTop);
     }, 250);
 });
 
 // ===== MEJORA DE ACCESIBILIDAD =====
-// Agregar soporte para teclado en la navegación
 document.addEventListener('keydown', function(e) {
     // Cerrar menú con ESC
     if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
         navMenu.classList.remove('active');
         navToggle.classList.remove('active');
         document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
         navToggle.focus();
     }
-    
-    // Navegación con teclado en menú móvil
-    if (e.key === 'Tab' && navMenu && navMenu.classList.contains('active')) {
-        const focusableElements = navMenu.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-        
-        if (e.shiftKey && document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-        } else if (!e.shiftKey && document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
+});
+
+// ===== FIX PARA VIEWPORT EN IOS =====
+// Prevenir problemas de viewport en Safari iOS
+window.addEventListener('orientationchange', function() {
+    setTimeout(function() {
+        // Forzar recálculo del viewport
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.content = viewport.content;
         }
+    }, 100);
+});
+
+// ===== PREVENIR COMPORTAMIENTOS NO DESEADOS =====
+// Prevenir pull-to-refresh en móviles
+document.addEventListener('touchmove', function(e) {
+    if (navMenu && navMenu.classList.contains('active')) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Prevenir zoom en inputs en iOS
+document.addEventListener('touchstart', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+        document.documentElement.style.zoom = '1';
     }
 });

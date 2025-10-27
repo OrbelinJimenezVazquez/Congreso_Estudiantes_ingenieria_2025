@@ -42,11 +42,19 @@ body {
     padding-top: 120px; /* Para móvil por la navegación fija */
 }
 
+/* CORRECCIÓN: Container sin padding en móvil */
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0; /* Eliminamos padding en móvil */
+}
+
+/* CORRECCIÓN: Añadimos padding interno a las secciones en móvil */
+.content-section .container,
+.hero-banner .container,
+.site-footer .container {
+    padding: 0 15px; /* Solo padding interno en contenedores específicos */
 }
 
 /* ===== BARRA SUPERIOR - MOBILE FIRST ===== */
@@ -66,6 +74,10 @@ body {
 
 .header-top.hidden {
     transform: translateY(-100%);
+}
+
+.header-top .container {
+    padding: 0 15px; /* Padding específico para header */
 }
 
 .header-top-content {
@@ -125,6 +137,10 @@ body {
 
 .main-nav.scrolled + .header-top {
     transform: translateY(-100%);
+}
+
+.main-nav .container {
+    padding: 0 15px; /* Padding específico para nav */
 }
 
 .nav-container {
@@ -247,7 +263,7 @@ body {
 
 .hero-logo {
     margin-top: 2rem; /* Menos margen para móvil */
-    padding: 2rem; /* Menos padding para móvil */
+    padding: 2rem 0; /* Menos padding para móvil, solo vertical */
     font-weight: 800;
     line-height: 1.2;
 }
@@ -636,6 +652,10 @@ body {
     margin-top: 40px; /* Menos margen para móvil */
 }
 
+.site-footer .container {
+    padding: 0 15px; /* Padding específico para footer */
+}
+
 .footer-grid {
     display: flex;
     flex-direction: column;
@@ -757,9 +777,20 @@ body {
     text-align: center;
 }
 
+.lead {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
 /* ===== MEDIA QUERIES - TABLET (768px) ===== */
 @media (min-width: 768px) {
-    /* TODOS LOS ESTILOS ORIGINALES DE 768px SE MANTIENEN IGUAL */
+    /* CORRECCIÓN: Restauramos el padding del container para tablet/desktop */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* EL RESTO DE ESTILOS ORIGINALES SE MANTIENEN IGUAL */
     body {
         padding-top: 140px;
     }
@@ -909,9 +940,8 @@ body {
     }
 }
 
-/* ===== MEDIA QUERIES - DESKTOP (1024px) ===== */
+/* ===== MEDIA QUERIES - DESKTOP ===== */
 @media (min-width: 1024px) {
-    /* TODOS LOS ESTILOS ORIGINALES DE 1024px SE MANTIENEN IGUAL */
     body {
         padding-top: 100px;
     }
@@ -1195,19 +1225,6 @@ body {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-    }
-    
-    html {
-        scroll-behavior: auto;
-    }
-}
-
-/* ===== MODO OSCURO ===== */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --light-bg: #1a1a1a;
-        --dark-text: #ffffff;
-        --gray-light: #2d2d2d;
-        --gray-medium: #a0a0a0;
+        scroll-behavior: auto !important;
     }
 }

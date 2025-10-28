@@ -242,48 +242,155 @@ function initCountdown() {
     updateCountdown(); // Ejecutar inmediatamente
 }
 
-// ===== SISTEMA DE PESTAÑAS =====
+// ===== SISTEMA DE PESTAÑAS COMPLETAMENTE REVISADO =====
 function initTabs() {
-    const tabButtons = document.querySelectorAll('.tab-button');
+    console.log('Inicializando sistema de pestañas...');
     
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    // Verificar que existen elementos
+    if (tabButtons.length === 0 || tabContents.length === 0) {
+        console.error('No se encontraron pestañas o contenidos');
+        return;
+    }
+    
+    console.log(`Encontradas ${tabButtons.length} pestañas y ${tabContents.length} contenidos`);
+    
+    // Función para cambiar de pestaña
+    function switchTab(tabId, button) {
+        console.log(`Cambiando a pestaña: ${tabId}`);
+        
+        // Remover active de todos los botones
+        tabButtons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+        });
+        
+        // Ocultar todos los contenidos
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+            content.setAttribute('aria-hidden', 'true');
+        });
+        
+        // Activar el botón clickeado
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        
+        // Mostrar el contenido correspondiente
+        const targetContent = document.getElementById(tabId);
+        if (targetContent) {
+            targetContent.classList.add('active');
+            targetContent.setAttribute('aria-hidden', 'false');
+            
+            console.log(`Contenido ${tabId} activado`);
+            
+            // Refresh AOS para animaciones
+            if (typeof AOS !== 'undefined') {
+                setTimeout(() => {
+                    AOS.refresh();
+                    console.log('AOS refrescado');
+                }, 100);
+            }
+        } else {
+            console.error(`No se encontró el contenido para: ${tabId}`);
+        }
+    }
+    
+    // Agregar event listeners a los botones
     tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabId = button.getAttribute('data-tab');
-            
-            // Remover active de todos los botones y contenidos
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
-                btn.setAttribute('aria-selected', 'false');
-            });
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-                content.setAttribute('aria-hidden', 'true');
-            });
-            
-            // Activar el botón y contenido actual
-            button.classList.add('active');
-            button.setAttribute('aria-selected', 'true');
-            
-            const targetContent = document.getElementById(tabId);
-            if (targetContent) {
-                targetContent.classList.add('active');
-                targetContent.setAttribute('aria-hidden', 'false');
-                
-                // AOS refresh para animaciones en contenido de pestañas
-                if (typeof AOS !== 'undefined') {
-                    setTimeout(() => {
-                        AOS.refresh();
-                    }, 300);
-                }
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tabId = this.getAttribute('data-tab');
+            switchTab(tabId, this);
+        });
+        
+        // También permitir navegación con teclado
+        button.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const tabId = this.getAttribute('data-tab');
+                switchTab(tabId, this);
             }
         });
     });
-
-    // Activar primera pestaña por defecto
-    if (tabButtons.length > 0) {
+    
+    // Activar primera pestaña por defecto si no hay ninguna activa
+    const activeTab = document.querySelector('.tab-button.active');
+    if (!activeTab && tabButtons.length > 0) {
+        console.log('Activando primera pestaña por defecto');
         tabButtons[0].click();
+    } else if (activeTab) {
+        console.log('Pestaña activa encontrada:', activeTab.getAttribute('data-tab'));
     }
+    
+    // Debug: mostrar estado inicial
+    console.log('Estado inicial de pestañas:');
+    tabContents.forEach(content => {
+        console.log(`- ${content.id}: ${content.classList.contains('active') ? 'visible' : 'oculto'}`);
+    });
 }
+
+// ===== INICIALIZACIÓN MEJORADA =====
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM completamente cargado - Inicializando componentes');
+    
+    // Inicializar AOS primero
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false,
+            offset: 100,
+            disable: function() {
+                return window.innerWidth < 768;
+            }
+        });
+        console.log('AOS inicializado');
+    }
+    
+    // Inicializar componentes en orden
+    initTabs();
+    initCountdown();
+    initTalleresFilters();
+    
+    // Forzar verificación final
+    setTimeout(() => {
+        console.log('Verificación final del sistema de pestañas:');
+        const activeTabs = document.querySelectorAll('.tab-content.active');
+        console.log(`Contenidos activos: ${activeTabs.length}`);
+        
+        if (activeTabs.length !== 1) {
+            console.warn('ADVERTENCIA: No hay exactamente un contenido activo. Re-inicializando...');
+            initTabs();
+        }
+    }, 500);
+    
+    console.log('Todos los componentes inicializados');
+});
+
+// ===== MANEJO DE ERRORES =====
+window.addEventListener('error', function(e) {
+    console.error('Error global:', e.error);
+});
+
+// Función auxiliar para debug
+function debugTabs() {
+    console.log('=== DEBUG PESTAÑAS ===');
+    console.log('Botones:');
+    document.querySelectorAll('.tab-button').forEach((btn, i) => {
+        console.log(` ${i + 1}. ${btn.getAttribute('data-tab')} - active: ${btn.classList.contains('active')}`);
+    });
+    
+    console.log('Contenidos:');
+    document.querySelectorAll('.tab-content').forEach((content, i) => {
+        console.log(` ${i + 1}. ${content.id} - active: ${content.classList.contains('active')} - display: ${window.getComputedStyle(content).display}`);
+    });
+    console.log('=====================');
+}
+
+// Ejecutar debug en consola: debugTabs()
 
 // ===== BOTÓN VOLVER ARRIBA =====
 const scrollToTop = document.getElementById('scrollToTop');

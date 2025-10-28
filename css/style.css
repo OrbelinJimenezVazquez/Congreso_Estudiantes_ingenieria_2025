@@ -637,7 +637,51 @@ body {
 }
 
 
-/* ===== ITEMS DE PROGRAMA - MOBILE FIRST ===== */
+/* ===== CORRECCIÓN PARA PESTAÑAS DEL PROGRAMA ===== */
+.tab-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Asegurar que solo el contenido activo sea visible */
+.program-tabs .tab-content:not(.active) {
+    display: none !important;
+}
+
+/* Estilos mejorados para botones de pestañas */
+.tab-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--accent-turquoise), var(--accent-light));
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.tab-button.active::after {
+    width: 80%;
+}
+
+/* Indicador visual mejorado para pestañas activas */
+.tab-button.active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(60, 186, 189, 0.3);
+}
 .session-item {
     display: flex;
     flex-direction: column;

@@ -1,4 +1,4 @@
-// ===== NAVEGACIÓN MÓVIL SIMPLE =====
+// ===== NAVEGACIÓN MÓVIL ORIGINAL =====
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
@@ -50,7 +50,7 @@ if (navToggle && navMenu) {
     });
 }
 
-// ===== SCROLL EFFECTS MEJORADO =====
+// ===== SCROLL EFFECTS ORIGINAL (BARRA FIJA Y NAVBAR) =====
 let lastScrollY = window.scrollY;
 const headerTop = document.querySelector('.header-top');
 const mainNav = document.querySelector('.main-nav');
@@ -61,14 +61,14 @@ function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollDirection = scrollTop > lastScrollY ? 'down' : 'up';
 
-    // Comportamiento de la navegación principal
+    // Comportamiento de la navegación principal - FUNCIONA EN MÓVILES Y DESKTOP
     if (scrollTop > 80) {
         mainNav.classList.add('scrolled');
     } else {
         mainNav.classList.remove('scrolled');
     }
 
-    // Comportamiento de la barra superior (ocultar/mostrar)
+    // Comportamiento de la barra superior (ocultar/mostrar) - FUNCIONA EN MÓVILES Y DESKTOP
     if (scrollTop > 100) {
         if (scrollDirection === 'down') {
             // Scrolling down - ocultar barra superior
@@ -138,7 +138,7 @@ function updateActiveNavLink(scrollTop) {
 // Aplicar debounce al scroll para mejor rendimiento en móviles
 window.addEventListener('scroll', debounce(handleScroll, 10));
 
-// ===== SMOOTH SCROLL MEJORADO =====
+// ===== SMOOTH SCROLL ORIGINAL MEJORADO =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         // No aplicar smooth scroll a enlaces externos o con target _blank
@@ -181,6 +181,91 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// ===== SISTEMA DE PESTAÑAS MEJORADO =====
+function initTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    console.log('Inicializando pestañas:', {
+        botones: tabButtons.length,
+        contenidos: tabContents.length
+    });
+    
+    if (tabButtons.length === 0 || tabContents.length === 0) {
+        console.error('No se encontraron elementos de pestañas');
+        return;
+    }
+    
+    // Función para cambiar pestaña
+    function switchTab(tabId, button) {
+        console.log('Cambiando a pestaña:', tabId);
+        
+        // Remover active de todos
+        tabButtons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+        });
+        
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+            content.setAttribute('aria-hidden', 'true');
+            // Asegurar que esté oculto
+            content.style.display = 'none';
+        });
+        
+        // Activar elementos seleccionados
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        
+        const targetContent = document.getElementById(tabId);
+        
+        if (targetContent) {
+            targetContent.classList.add('active');
+            targetContent.setAttribute('aria-hidden', 'false');
+            targetContent.style.display = 'block';
+            
+            console.log('Contenido activado:', tabId);
+            
+            // Refresh AOS para animaciones
+            if (typeof AOS !== 'undefined') {
+                setTimeout(() => {
+                    AOS.refresh();
+                }, 100);
+            }
+        } else {
+            console.error('No se encontró el contenido para:', tabId);
+        }
+    }
+    
+    // Event listeners para todos los dispositivos
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tabId = this.getAttribute('data-tab');
+            switchTab(tabId, this);
+        });
+    });
+    
+    // Activar primera pestaña por defecto si no hay ninguna activa
+    const activeTab = document.querySelector('.tab-button.active');
+    const activeContent = document.querySelector('.tab-content.active');
+    
+    if (!activeTab && tabButtons.length > 0) {
+        console.log('Activando primera pestaña por defecto');
+        tabButtons[0].click();
+    } else if (activeTab && activeContent) {
+        console.log('Pestaña activa encontrada:', activeTab.getAttribute('data-tab'));
+        // Asegurar que solo el contenido activo sea visible
+        tabContents.forEach(content => {
+            if (content !== activeContent) {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
+        });
+    }
+}
 
 // ===== CONTADOR REGRESIVO =====
 function updateCountdown() {
@@ -242,155 +327,32 @@ function initCountdown() {
     updateCountdown(); // Ejecutar inmediatamente
 }
 
-// ===== SISTEMA DE PESTAÑAS COMPLETAMENTE REVISADO =====
-function initTabs() {
-    console.log('Inicializando sistema de pestañas...');
+// ===== FILTRADO DE TALLERES =====
+function initTalleresFilters() {
+    const filterBtns = document.querySelectorAll('.filtro-btn');
+    const tallerCards = document.querySelectorAll('.taller-card');
     
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    // Verificar que existen elementos
-    if (tabButtons.length === 0 || tabContents.length === 0) {
-        console.error('No se encontraron pestañas o contenidos');
-        return;
-    }
-    
-    console.log(`Encontradas ${tabButtons.length} pestañas y ${tabContents.length} contenidos`);
-    
-    // Función para cambiar de pestaña
-    function switchTab(tabId, button) {
-        console.log(`Cambiando a pestaña: ${tabId}`);
-        
-        // Remover active de todos los botones
-        tabButtons.forEach(btn => {
-            btn.classList.remove('active');
-            btn.setAttribute('aria-selected', 'false');
-        });
-        
-        // Ocultar todos los contenidos
-        tabContents.forEach(content => {
-            content.classList.remove('active');
-            content.setAttribute('aria-hidden', 'true');
-        });
-        
-        // Activar el botón clickeado
-        button.classList.add('active');
-        button.setAttribute('aria-selected', 'true');
-        
-        // Mostrar el contenido correspondiente
-        const targetContent = document.getElementById(tabId);
-        if (targetContent) {
-            targetContent.classList.add('active');
-            targetContent.setAttribute('aria-hidden', 'false');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
             
-            console.log(`Contenido ${tabId} activado`);
+            const horario = this.getAttribute('data-horario');
             
-            // Refresh AOS para animaciones
-            if (typeof AOS !== 'undefined') {
-                setTimeout(() => {
-                    AOS.refresh();
-                    console.log('AOS refrescado');
-                }, 100);
-            }
-        } else {
-            console.error(`No se encontró el contenido para: ${tabId}`);
-        }
-    }
-    
-    // Agregar event listeners a los botones
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const tabId = this.getAttribute('data-tab');
-            switchTab(tabId, this);
+            tallerCards.forEach(card => {
+                if (horario === 'todos') {
+                    card.style.display = 'block';
+                } else {
+                    if (card.getAttribute('data-horario') === horario) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
         });
-        
-        // También permitir navegación con teclado
-        button.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                const tabId = this.getAttribute('data-tab');
-                switchTab(tabId, this);
-            }
-        });
-    });
-    
-    // Activar primera pestaña por defecto si no hay ninguna activa
-    const activeTab = document.querySelector('.tab-button.active');
-    if (!activeTab && tabButtons.length > 0) {
-        console.log('Activando primera pestaña por defecto');
-        tabButtons[0].click();
-    } else if (activeTab) {
-        console.log('Pestaña activa encontrada:', activeTab.getAttribute('data-tab'));
-    }
-    
-    // Debug: mostrar estado inicial
-    console.log('Estado inicial de pestañas:');
-    tabContents.forEach(content => {
-        console.log(`- ${content.id}: ${content.classList.contains('active') ? 'visible' : 'oculto'}`);
     });
 }
-
-// ===== INICIALIZACIÓN MEJORADA =====
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM completamente cargado - Inicializando componentes');
-    
-    // Inicializar AOS primero
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            mirror: false,
-            offset: 100,
-            disable: function() {
-                return window.innerWidth < 768;
-            }
-        });
-        console.log('AOS inicializado');
-    }
-    
-    // Inicializar componentes en orden
-    initTabs();
-    initCountdown();
-    initTalleresFilters();
-    
-    // Forzar verificación final
-    setTimeout(() => {
-        console.log('Verificación final del sistema de pestañas:');
-        const activeTabs = document.querySelectorAll('.tab-content.active');
-        console.log(`Contenidos activos: ${activeTabs.length}`);
-        
-        if (activeTabs.length !== 1) {
-            console.warn('ADVERTENCIA: No hay exactamente un contenido activo. Re-inicializando...');
-            initTabs();
-        }
-    }, 500);
-    
-    console.log('Todos los componentes inicializados');
-});
-
-// ===== MANEJO DE ERRORES =====
-window.addEventListener('error', function(e) {
-    console.error('Error global:', e.error);
-});
-
-// Función auxiliar para debug
-function debugTabs() {
-    console.log('=== DEBUG PESTAÑAS ===');
-    console.log('Botones:');
-    document.querySelectorAll('.tab-button').forEach((btn, i) => {
-        console.log(` ${i + 1}. ${btn.getAttribute('data-tab')} - active: ${btn.classList.contains('active')}`);
-    });
-    
-    console.log('Contenidos:');
-    document.querySelectorAll('.tab-content').forEach((content, i) => {
-        console.log(` ${i + 1}. ${content.id} - active: ${content.classList.contains('active')} - display: ${window.getComputedStyle(content).display}`);
-    });
-    console.log('=====================');
-}
-
-// Ejecutar debug en consola: debugTabs()
 
 // ===== BOTÓN VOLVER ARRIBA =====
 const scrollToTop = document.getElementById('scrollToTop');
@@ -423,6 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar componentes
     initTabs();
     initCountdown();
+    initTalleresFilters();
     
     // Forzar un reflow para evitar problemas de visualización en móviles
     setTimeout(() => {
@@ -476,52 +439,33 @@ window.addEventListener('orientationchange', function() {
     }, 100);
 });
 
-// ===== PREVENIR COMPORTAMIENTOS NO DESEADOS =====
-// Prevenir pull-to-refresh en móviles
-document.addEventListener('touchmove', function(e) {
-    if (navMenu && navMenu.classList.contains('active')) {
-        e.preventDefault();
-    }
-}, { passive: false });
-
-// Prevenir zoom en inputs en iOS
-document.addEventListener('touchstart', function(e) {
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
-        document.documentElement.style.zoom = '1';
-    }
-});
-
-// ===== FILTRADO DE TALLERES =====
-function initTalleresFilters() {
-    const filterBtns = document.querySelectorAll('.filtro-btn');
-    const tallerCards = document.querySelectorAll('.taller-card');
+// ===== FIX DE EMERGENCIA PARA PESTAÑAS EN MÓVILES =====
+setTimeout(function() {
+    // Verificar que las pestañas funcionen correctamente en móviles
+    const tabContents = document.querySelectorAll('.tab-content');
+    const activeTab = document.querySelector('.tab-button.active');
     
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remover active de todos los botones
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Agregar active al botón clickeado
-            btn.classList.add('active');
-            
-            const horario = btn.getAttribute('data-horario');
-            
-            // Filtrar talleres
-            tallerCards.forEach(card => {
-                if (horario === 'todos') {
-                    card.classList.remove('hidden');
-                } else {
-                    if (card.getAttribute('data-horario') === horario) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                }
-            });
+    if (tabContents.length > 0 && !document.querySelector('.tab-content.active')) {
+        console.log('Aplicando fix de emergencia para pestañas móviles...');
+        
+        // Ocultar todos los contenidos
+        tabContents.forEach(content => {
+            content.style.display = 'none';
         });
-    });
-}
-
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    initTalleresFilters();
-});
+        
+        // Mostrar solo el contenido correspondiente al botón activo
+        if (activeTab) {
+            const tabId = activeTab.getAttribute('data-tab');
+            const activeContent = document.getElementById(tabId);
+            if (activeContent) {
+                activeContent.style.display = 'block';
+                activeContent.classList.add('active');
+            }
+        } else {
+            // Activar el primero por defecto
+            tabContents[0].style.display = 'block';
+            tabContents[0].classList.add('active');
+            document.querySelector('.tab-button')?.classList.add('active');
+        }
+    }
+}, 500);

@@ -51,16 +51,46 @@ let lastScrollY = window.scrollY;
 const headerTop = document.querySelector('.header-top');
 const mainNav = document.querySelector('.main-nav');
 
+// ===== MEJORAS PARA EL BOTÓN VER DETALLES EN MÓVILES =====
+function enhanceModalButtons() {
+    const openModalButtons = document.querySelectorAll('.open-modal-btn');
+    
+    openModalButtons.forEach(button => {
+        // Pausar animación de flotar cuando el botón está en hover
+        button.addEventListener('mouseenter', function() {
+            this.style.animationPlayState = 'paused';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.animationPlayState = 'running';
+        });
+        
+        // Para dispositivos táctiles, mantener la animación siempre activa
+        button.addEventListener('touchstart', function() {
+            this.style.animationPlayState = 'paused';
+        });
+        
+        button.addEventListener('touchend', function() {
+            setTimeout(() => {
+                this.style.animationPlayState = 'running';
+            }, 1000);
+        });
+    });
+}
+
+// ===== CORRECCIÓN DE POSICIÓN DEL BOTÓN IR ARRIBA =====
 function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollDirection = scrollTop > lastScrollY ? 'down' : 'up';
 
+    // Comportamiento de la navegación principal
     if (scrollTop > 80) {
         mainNav.classList.add('scrolled');
     } else {
         mainNav.classList.remove('scrolled');
     }
 
+    // Comportamiento de la barra superior
     if (scrollTop > 100) {
         if (scrollDirection === 'down') {
             headerTop.classList.add('hidden');
@@ -71,22 +101,27 @@ function handleScroll() {
         headerTop.classList.remove('hidden');
     }
 
+    // CORRECCIÓN: Botón ir arriba - verificar que esté por encima del footer
     const scrollToTop = document.getElementById('scrollToTop');
     if (scrollToTop) {
-        if (scrollTop > 400) {
+        const footer = document.querySelector('.site-footer');
+        const footerTop = footer ? footer.offsetTop : Infinity;
+        
+        // Mostrar botón solo cuando no esté en el área del footer
+        if (scrollTop > 400 && scrollTop < (footerTop - 300)) {
             scrollToTop.classList.add('visible');
         } else {
             scrollToTop.classList.remove('visible');
         }
     }
 
+    // Active nav link (solo en desktop)
     if (window.innerWidth >= 768) {
         updateActiveNavLink(scrollTop);
     }
 
     lastScrollY = scrollTop;
 }
-
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {

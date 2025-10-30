@@ -358,6 +358,42 @@ body {
     transform: translateX(-50%) translateY(-50%);
     object-fit: cover;
     z-index: 0;
+        /* Efectos para simular cámara lenta */
+    filter: 
+        brightness(1.1) 
+        contrast(0.9) 
+        saturate(1.3)
+        blur(0.3px);
+    
+    /* Transformación sutil para efecto dreamy */
+    transform: translateX(-50%) translateY(-50%) scale(1.01);
+    
+    /* Transición suave para efectos */
+    transition: 
+        filter 3s ease-in-out,
+        transform 3s ease-in-out,
+        opacity 2s ease-in-out;
+    
+    /* Mejorar rendimiento */
+    will-change: transform, filter;
+}
+
+/* Overlay adicional para efecto más cinematográfico */
+.hero-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(35, 32, 70, 0.1) 0%,
+        rgba(45, 42, 94, 0.05) 50%,
+        rgba(35, 32, 70, 0.1) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
 }
 
 .hero-content {
@@ -519,7 +555,12 @@ body {
 }
 
 .text-center {
+    display: flex;
     text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
 }
 
 .lead {
@@ -1207,6 +1248,7 @@ body {
     margin-top: 60px;
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 
 .site-footer::before {
@@ -1377,9 +1419,10 @@ body {
 
 /* ===== BOTÓN VOLVER ARRIBA CORREGIDO ===== */
 .scroll-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    z-index: 9999 !important;
     width: 50px;
     height: 50px;
     background: linear-gradient(135deg, var(--accent-turquoise), var(--accent-light));
@@ -1392,7 +1435,6 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
-    z-index: 1000;
     box-shadow: var(--shadow-medium);
     border: 2px solid var(--pure-white);
     font-size: 1rem;
@@ -1547,6 +1589,7 @@ body {
     .main-nav{
         top: 102px;
     }
+
 }
 
 @media (max-width: 480px) {
@@ -1590,6 +1633,9 @@ body {
         width: 45px;
         height: 45px;
     }
+        .text-center {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 767px) {
@@ -1620,6 +1666,17 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
+        animation: float 3s ease-in-out infinite;
+        position: relative;
+    }
+    
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) scale(1);
+        }
+        50% {
+            transform: translateY(-5px) scale(1.05);
+        }
     }
     
     .mini-session {
@@ -1637,9 +1694,8 @@ body {
     }
     
     .mini-session:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-medium);
-        border-color: var(--accent-turquoise);
+        animation: none;
+        transform: translateY(-3px) scale(1.1);
     }
     
     .mini-time {
@@ -1744,15 +1800,29 @@ body {
     }
     
     /* Footer móvil */
+    .site-footer {
+        padding: 40px 0 20px;
+    }
+
     .footer-main {
         text-align: center;
+        gap: 20px;
+    }
+    
+    .footer-section:first-child {
+        display: none;
     }
     
     .footer-grid {
+        grid-template-columns: 1fr;
         gap: 25px;
     }
     
     .footer-section {
+        text-align: center;
+    }
+    
+    .footer-section h5 {
         text-align: center;
     }
     
@@ -1763,12 +1833,33 @@ body {
     
     .social-links {
         gap: 12px;
+        justify-content: center;
+        margin-top: 15px;
     }
     
+    .footer-logo {
+        margin: 0 auto 15px;
+    }
+
     .social-link {
         width: 35px;
         height: 35px;
         font-size: 0.9rem;
+    }
+        .footer-brand h4 {
+        font-size: 1.2rem;
+    }
+    
+    .footer-brand p {
+        font-size: 0.85rem;
+    }
+    
+    .contact-item {
+        font-size: 0.85rem;
+    }
+    
+    .footer-copyright {
+        font-size: 0.75rem;
     }
 }
 
@@ -2141,7 +2232,7 @@ body {
     .site-footer {
         padding: 80px 0 30px;
         border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-        margin-top: 80px;
+        margin: 0;
     }
     
     .scroll-to-top {

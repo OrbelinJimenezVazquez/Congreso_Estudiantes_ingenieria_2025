@@ -4,11 +4,10 @@ const navMenu = document.getElementById('navMenu');
 
 if (navToggle && navMenu) {
     navToggle.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevenir que el click se propague
+        e.stopPropagation();
         navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
         
-        // Prevenir scroll cuando el menú está abierto
         if (navMenu.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
             document.documentElement.style.overflow = 'hidden';
@@ -18,7 +17,6 @@ if (navToggle && navMenu) {
         }
     });
 
-    // Cerrar menú al hacer click en un link
     document.querySelectorAll('.nav-item').forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
@@ -28,7 +26,6 @@ if (navToggle && navMenu) {
         });
     });
 
-    // Cerrar menú al hacer click fuera de él
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.nav-menu') && !e.target.closest('.nav-toggle') && 
             navMenu.classList.contains('active')) {
@@ -39,7 +36,6 @@ if (navToggle && navMenu) {
         }
     });
 
-    // Cerrar menú al redimensionar (si se abre en móvil y se cambia a desktop)
     window.addEventListener('resize', () => {
         if (window.innerWidth >= 768 && navMenu.classList.contains('active')) {
             navMenu.classList.remove('active');
@@ -50,39 +46,31 @@ if (navToggle && navMenu) {
     });
 }
 
-// ===== SCROLL EFFECTS ORIGINAL (BARRA FIJA Y NAVBAR) =====
+// ===== SCROLL EFFECTS ORIGINAL =====
 let lastScrollY = window.scrollY;
 const headerTop = document.querySelector('.header-top');
 const mainNav = document.querySelector('.main-nav');
-let scrollTimeout;
 
-// Función para manejar el scroll optimizada para móviles
 function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollDirection = scrollTop > lastScrollY ? 'down' : 'up';
 
-    // Comportamiento de la navegación principal - FUNCIONA EN MÓVILES Y DESKTOP
     if (scrollTop > 80) {
         mainNav.classList.add('scrolled');
     } else {
         mainNav.classList.remove('scrolled');
     }
 
-    // Comportamiento de la barra superior (ocultar/mostrar) - FUNCIONA EN MÓVILES Y DESKTOP
     if (scrollTop > 100) {
         if (scrollDirection === 'down') {
-            // Scrolling down - ocultar barra superior
             headerTop.classList.add('hidden');
         } else {
-            // Scrolling up - mostrar barra superior
             headerTop.classList.remove('hidden');
         }
     } else {
-        // En la parte superior - siempre mostrar
         headerTop.classList.remove('hidden');
     }
 
-    // Back to top button
     const scrollToTop = document.getElementById('scrollToTop');
     if (scrollToTop) {
         if (scrollTop > 400) {
@@ -92,7 +80,6 @@ function handleScroll() {
         }
     }
 
-    // Active nav link (solo en desktop)
     if (window.innerWidth >= 768) {
         updateActiveNavLink(scrollTop);
     }
@@ -100,7 +87,6 @@ function handleScroll() {
     lastScrollY = scrollTop;
 }
 
-// Debounce para mejorar rendimiento en móviles
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -113,7 +99,6 @@ function debounce(func, wait) {
     };
 }
 
-// Actualizar enlace activo en navegación
 function updateActiveNavLink(scrollTop) {
     const sections = document.querySelectorAll('.content-section, .hero-banner');
     const navItems = document.querySelectorAll('.nav-item');
@@ -135,13 +120,11 @@ function updateActiveNavLink(scrollTop) {
     });
 }
 
-// Aplicar debounce al scroll para mejor rendimiento en móviles
 window.addEventListener('scroll', debounce(handleScroll, 10));
 
 // ===== SMOOTH SCROLL ORIGINAL MEJORADO =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        // No aplicar smooth scroll a enlaces externos o con target _blank
         if (this.getAttribute('target') === '_blank' || this.getAttribute('href').includes('http')) {
             return;
         }
@@ -149,7 +132,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         
-        // Si es el mismo enlace actual, no hacer nada
         if (targetId === window.location.hash) {
             return;
         }
@@ -157,21 +139,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(targetId);
         
         if (target) {
-            // Calcular offset basado en el dispositivo
             const isMobile = window.innerWidth < 768;
             const navHeight = isMobile ? 80 : 120;
             const offsetTop = target.offsetTop - navHeight;
             
-            // Smooth scroll con comportamiento suave
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
             });
 
-            // Actualizar URL sin recargar la página
             history.pushState(null, null, targetId);
             
-            // Cerrar menú móvil si está abierto
             if (navMenu && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
@@ -197,11 +175,9 @@ function initTabs() {
         return;
     }
     
-    // Función para cambiar pestaña
     function switchTab(tabId, button) {
         console.log('Cambiando a pestaña:', tabId);
         
-        // Remover active de todos
         tabButtons.forEach(btn => {
             btn.classList.remove('active');
             btn.setAttribute('aria-selected', 'false');
@@ -210,11 +186,9 @@ function initTabs() {
         tabContents.forEach(content => {
             content.classList.remove('active');
             content.setAttribute('aria-hidden', 'true');
-            // Asegurar que esté oculto
             content.style.display = 'none';
         });
         
-        // Activar elementos seleccionados
         button.classList.add('active');
         button.setAttribute('aria-selected', 'true');
         
@@ -227,7 +201,6 @@ function initTabs() {
             
             console.log('Contenido activado:', tabId);
             
-            // Refresh AOS para animaciones
             if (typeof AOS !== 'undefined') {
                 setTimeout(() => {
                     AOS.refresh();
@@ -238,7 +211,6 @@ function initTabs() {
         }
     }
     
-    // Event listeners para todos los dispositivos
     tabButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
@@ -247,7 +219,6 @@ function initTabs() {
         });
     });
     
-    // Activar primera pestaña por defecto si no hay ninguna activa
     const activeTab = document.querySelector('.tab-button.active');
     const activeContent = document.querySelector('.tab-content.active');
     
@@ -256,7 +227,6 @@ function initTabs() {
         tabButtons[0].click();
     } else if (activeTab && activeContent) {
         console.log('Pestaña activa encontrada:', activeTab.getAttribute('data-tab'));
-        // Asegurar que solo el contenido activo sea visible
         tabContents.forEach(content => {
             if (content !== activeContent) {
                 content.style.display = 'none';
@@ -273,7 +243,6 @@ function updateCountdown() {
     const now = new Date().getTime();
     const distance = eventDate - now;
 
-    // Si la fecha ya pasó, mostrar mensaje
     if (distance < 0) {
         showEventStarted();
         return;
@@ -284,7 +253,6 @@ function updateCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Actualizar números con animación
     updateCountdownElement('days', days);
     updateCountdownElement('hours', hours);
     updateCountdownElement('minutes', minutes);
@@ -294,7 +262,6 @@ function updateCountdown() {
 function updateCountdownElement(elementId, value) {
     const element = document.getElementById(elementId);
     if (element) {
-        // Animación simple al cambiar números
         if (element.textContent !== value.toString().padStart(2, '0')) {
             element.style.transform = 'scale(1.1)';
             setTimeout(() => {
@@ -320,11 +287,10 @@ function showEventStarted() {
     clearInterval(countdownInterval);
 }
 
-// Iniciar contador
 let countdownInterval;
 function initCountdown() {
     countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // Ejecutar inmediatamente
+    updateCountdown();
 }
 
 // ===== FILTRADO DE TALLERES =====
@@ -366,9 +332,209 @@ if (scrollToTop) {
     });
 }
 
+// ===== SISTEMA DE MODAL MEJORADO =====
+function initModalSystem() {
+    const modalOverlay = document.getElementById('project-modal');
+    
+    if (!modalOverlay) {
+        console.error('No se encontró el modal');
+        return;
+    }
+
+    const modalCloseBtn = document.getElementById('modal-close');
+    const modalTitle = document.getElementById('modal-project-title');
+    const modalBody = document.getElementById('modal-project-body');
+    const openModalButtons = document.querySelectorAll('.open-modal-btn');
+
+    const openModal = (e) => {
+        e.preventDefault();
+        
+        const button = e.currentTarget;
+        const title = button.dataset.title;
+        const integrantes = button.dataset.integrantes;
+        
+        modalTitle.textContent = title;
+        modalBody.innerHTML = `<h5>Integrantes:</h5><p>${integrantes}</p>`;
+        
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+    };
+
+    openModalButtons.forEach(button => {
+        button.addEventListener('click', openModal);
+    });
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+    }
+
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const modalContent = modalOverlay.querySelector('.modal-content');
+    if (modalContent) {
+        modalContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+}
+
+// ===== MANEJO DEL VIDEO DE FONDO =====
+function initVideoBackground() {
+    const heroVideo = document.querySelector('.hero-banner video');
+    
+    if (heroVideo) {
+        heroVideo.setAttribute('playsinline', '');
+        heroVideo.setAttribute('webkit-playsinline', '');
+        heroVideo.setAttribute('muted', '');
+        heroVideo.setAttribute('loop', '');
+        
+        const playVideo = () => {
+            heroVideo.play().catch(function(error) {
+                console.log('La reproducción automática del video fue prevenida:', error);
+                setTimeout(() => {
+                    heroVideo.play().catch(e => console.log('Segundo intento fallido:', e));
+                }, 1000);
+            });
+        };
+        
+        if (heroVideo.readyState >= 3) {
+            playVideo();
+        } else {
+            heroVideo.addEventListener('loadeddata', playVideo);
+        }
+        
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                heroVideo.pause();
+            } else {
+                playVideo();
+            }
+        });
+    }
+}
+
+// ===== SISTEMA DE PONENTES CON "VER MÁS" =====
+function initPonentesSystem() {
+    const verMasBtn = document.getElementById('ver-mas-ponentes');
+    const ponentesHidden = document.querySelectorAll('.speaker-profile.hidden');
+    
+    console.log('Inicializando sistema de ponentes:', {
+        boton: verMasBtn ? 'encontrado' : 'no encontrado',
+        ponentesOcultos: ponentesHidden.length
+    });
+    
+    if (!verMasBtn || ponentesHidden.length === 0) {
+        console.log('No se encontraron ponentes ocultos o el botón');
+        return;
+    }
+    
+    verMasBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Mostrando ponentes ocultos...');
+        
+        ponentesHidden.forEach((ponente, index) => {
+            setTimeout(() => {
+                ponente.style.display = 'block';
+                ponente.classList.remove('hidden');
+                ponente.offsetHeight;
+                ponente.style.opacity = '1';
+                ponente.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+        
+        setTimeout(() => {
+            this.style.opacity = '0';
+            setTimeout(() => {
+                this.style.display = 'none';
+            }, 300);
+        }, ponentesHidden.length * 200 + 200);
+        
+        if (typeof AOS !== 'undefined') {
+            setTimeout(() => {
+                AOS.refresh();
+                console.log('AOS refresh ejecutado');
+            }, 500);
+        }
+    });
+}
+
+// ===== EFECTO HOVER UNIFICADO PARA TODOS LOS BOTONES =====
+function initUnifiedButtonHover() {
+    const allButtons = document.querySelectorAll('.btn, .filtro-btn, .scroll-to-top');
+    
+    allButtons.forEach(button => {
+        // Agregar efecto de ripple al hacer click
+        button.addEventListener('click', function(e) {
+            if (this.classList.contains('open-modal-btn')) return;
+            
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                pointer-events: none;
+            `;
+            
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+}
+
+// Agregar el CSS para la animación ripple dinámicamente
+function addRippleAnimation() {
+    if (!document.querySelector('#ripple-animation')) {
+        const style = document.createElement('style');
+        style.id = 'ripple-animation';
+        style.textContent = `
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
 // ===== INICIALIZACIÓN AL CARGAR EL DOM =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar AOS si existe
+    console.log('XIX CEI 2025 - Inicializando sitio web...');
+    
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 800,
@@ -377,26 +543,28 @@ document.addEventListener('DOMContentLoaded', function() {
             mirror: false,
             offset: 100,
             disable: function() {
-                return window.innerWidth < 768; // Deshabilitar AOS en móviles si es necesario
+                return window.innerWidth < 768;
             }
         });
     }
     
-    // Inicializar componentes
     initTabs();
     initCountdown();
     initTalleresFilters();
+    initModalSystem();
+    initVideoBackground();
+    initPonentesSystem();
+    addRippleAnimation();
+    initUnifiedButtonHover();
     
-    // Forzar un reflow para evitar problemas de visualización en móviles
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
     
-    // Prevenir zoom en inputs en iOS
     document.addEventListener('touchstart', function() {}, { passive: true });
     document.addEventListener('touchmove', function() {}, { passive: true });
     
-    console.log('XIX CEI 2025 - Sitio optimizado para móviles');
+    console.log('XIX CEI 2025 - Sitio optimizado para móviles inicializado correctamente');
 });
 
 // ===== MANEJO DE REDIMENSIONAMIENTO =====
@@ -404,12 +572,10 @@ let resizeTimeout;
 window.addEventListener('resize', function() {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(function() {
-        // Refresh AOS en redimensionamiento
         if (typeof AOS !== 'undefined') {
             AOS.refresh();
         }
         
-        // Actualizar navegación activa
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         updateActiveNavLink(scrollTop);
     }, 250);
@@ -417,7 +583,6 @@ window.addEventListener('resize', function() {
 
 // ===== MEJORA DE ACCESIBILIDAD =====
 document.addEventListener('keydown', function(e) {
-    // Cerrar menú con ESC
     if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
         navMenu.classList.remove('active');
         navToggle.classList.remove('active');
@@ -428,32 +593,31 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ===== FIX PARA VIEWPORT EN IOS =====
-// Prevenir problemas de viewport en Safari iOS
 window.addEventListener('orientationchange', function() {
     setTimeout(function() {
-        // Forzar recálculo del viewport
         const viewport = document.querySelector('meta[name="viewport"]');
         if (viewport) {
             viewport.content = viewport.content;
+        }
+        
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
         }
     }, 100);
 });
 
 // ===== FIX DE EMERGENCIA PARA PESTAÑAS EN MÓVILES =====
 setTimeout(function() {
-    // Verificar que las pestañas funcionen correctamente en móviles
     const tabContents = document.querySelectorAll('.tab-content');
     const activeTab = document.querySelector('.tab-button.active');
     
     if (tabContents.length > 0 && !document.querySelector('.tab-content.active')) {
         console.log('Aplicando fix de emergencia para pestañas móviles...');
         
-        // Ocultar todos los contenidos
         tabContents.forEach(content => {
             content.style.display = 'none';
         });
         
-        // Mostrar solo el contenido correspondiente al botón activo
         if (activeTab) {
             const tabId = activeTab.getAttribute('data-tab');
             const activeContent = document.getElementById(tabId);
@@ -462,7 +626,6 @@ setTimeout(function() {
                 activeContent.classList.add('active');
             }
         } else {
-            // Activar el primero por defecto
             tabContents[0].style.display = 'block';
             tabContents[0].classList.add('active');
             document.querySelector('.tab-button')?.classList.add('active');

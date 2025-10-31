@@ -430,6 +430,138 @@ function initModalSystem() {
     }
 }
 
+// ===== SISTEMA DE MODAL PARA PONENTES =====
+function initSpeakerModalSystem() {
+    const speakerModal = document.getElementById('speaker-modal');
+    
+    if (!speakerModal) {
+        console.error('No se encontró el modal de ponentes');
+        return;
+    }
+
+    const speakerModalClose = document.getElementById('speaker-modal-close');
+    const openSpeakerButtons = document.querySelectorAll('.open-speaker-btn');
+    const modalSpeakerName = document.getElementById('modal-speaker-name');
+    const modalSpeakerTitle = document.getElementById('modal-speaker-title');
+    const modalSpeakerPhoto = document.getElementById('modal-speaker-photo');
+    const modalSpeakerFallback = document.getElementById('modal-speaker-fallback');
+    const modalSpeakerBio = document.getElementById('modal-speaker-bio');
+    const modalSpeakerTopics = document.getElementById('modal-speaker-topics');
+    const modalSpeakerContact = document.getElementById('modal-speaker-contact');
+
+    const openSpeakerModal = (e) => {
+        e.preventDefault();
+        
+        const button = e.currentTarget;
+        const name = button.dataset.name;
+        const title = button.dataset.title;
+        const photoUrl = button.dataset.photoUrl;
+        const bio = button.dataset.bio;
+        const topics = button.dataset.topics;
+        const contactWeb = button.dataset.contactWeb || '';
+        const contactEmail = button.dataset.contactEmail || '';
+
+        // Llenar la información del modal
+        modalSpeakerName.textContent = name;
+        modalSpeakerTitle.textContent = title;
+        modalSpeakerBio.textContent = bio;
+
+        // Manejar la foto del ponente
+        if (photoUrl) {
+            modalSpeakerPhoto.src = photoUrl;
+            modalSpeakerPhoto.style.display = 'block';
+            modalSpeakerFallback.style.display = 'none';
+            
+            // Manejar error de carga de imagen
+            modalSpeakerPhoto.onerror = function() {
+                modalSpeakerPhoto.style.display = 'none';
+                modalSpeakerFallback.style.display = 'flex';
+            };
+        } else {
+            modalSpeakerPhoto.style.display = 'none';
+            modalSpeakerFallback.style.display = 'flex';
+        }
+
+        // Llenar los temas
+        modalSpeakerTopics.innerHTML = '';
+        if (topics) {
+            const topicsArray = topics.split('|');
+            topicsArray.forEach(topic => {
+                if (topic.trim()) {
+                    const topicTag = document.createElement('span');
+                    topicTag.className = 'topic-tag';
+                    topicTag.textContent = topic.trim();
+                    modalSpeakerTopics.appendChild(topicTag);
+                }
+            });
+        }
+
+        // Llenar la información de contacto
+        const contactLinks = modalSpeakerContact.querySelector('.contact-links');
+        contactLinks.innerHTML = '';
+        
+        if (contactWeb) {
+            const webLink = document.createElement('a');
+            webLink.href = contactWeb;
+            webLink.className = 'contact-link';
+            webLink.target = '_blank';
+            webLink.rel = 'noopener noreferrer';
+            webLink.innerHTML = '<i class="fas fa-globe"></i><span>Sitio Web</span>';
+            contactLinks.appendChild(webLink);
+        }
+        
+        if (contactEmail) {
+            const emailLink = document.createElement('a');
+            emailLink.href = `mailto:${contactEmail}`;
+            emailLink.className = 'contact-link';
+            emailLink.innerHTML = '<i class="fas fa-envelope"></i><span>Correo Electrónico</span>';
+            contactLinks.appendChild(emailLink);
+        }
+
+        // Mostrar u ocultar sección de contacto
+        modalSpeakerContact.style.display = (contactWeb || contactEmail) ? 'block' : 'none';
+
+        // Mostrar el modal
+        speakerModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+    };
+
+    const closeSpeakerModal = () => {
+        speakerModal.classList.remove('active');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+    };
+
+    // Agregar event listeners a los botones de ponentes
+    openSpeakerButtons.forEach(button => {
+        button.addEventListener('click', openSpeakerModal);
+    });
+
+    if (speakerModalClose) {
+        speakerModalClose.addEventListener('click', closeSpeakerModal);
+    }
+
+    speakerModal.addEventListener('click', (e) => {
+        if (e.target === speakerModal) {
+            closeSpeakerModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && speakerModal.classList.contains('active')) {
+            closeSpeakerModal();
+        }
+    });
+
+    const speakerModalContent = speakerModal.querySelector('.speaker-modal-content');
+    if (speakerModalContent) {
+        speakerModalContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+}
+
 // ===== MANEJO DEL VIDEO DE FONDO =====
 function initVideoBackground() {
     const heroVideo = document.querySelector('.hero-banner video');
@@ -587,6 +719,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCountdown();
     initTalleresFilters();
     initModalSystem();
+    initSpeakerModalSystem(); // ← Agregar esta línea
     initVideoBackground();
     initPonentesSystem();
     addRippleAnimation();

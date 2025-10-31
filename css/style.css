@@ -106,7 +106,8 @@ body {
 }
 
 .event-dates #ceilogo{
-    display: none;
+    width: 30px;
+    height: auto;
 }
 
 .divider {
@@ -1577,6 +1578,204 @@ body {
     align-items: flex-start;
 }
 
+/* ===== ESTILOS PARA EL MODAL DE PONENTES ===== */
+.speaker-modal-content {
+    max-width: 600px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.speaker-modal-header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    color: var(--pure-white);
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+.speaker-modal-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-turquoise), var(--accent-light));
+}
+
+.speaker-modal-avatar {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.speaker-modal-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-medium);
+}
+
+.speaker-modal-avatar-fallback {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent-turquoise), var(--accent-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pure-white);
+    font-size: 2rem;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+}
+
+.speaker-modal-info {
+    flex: 1;
+}
+
+.speaker-modal-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: var(--pure-white);
+}
+
+.speaker-modal-info p {
+    opacity: 0.9;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.speaker-modal-content .modal-body {
+    padding: 30px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.speaker-bio-section,
+.speaker-topics-section,
+.speaker-contact-section {
+    margin-bottom: 25px;
+}
+
+.speaker-bio-section:last-child,
+.speaker-topics-section:last-child,
+.speaker-contact-section:last-child {
+    margin-bottom: 0;
+}
+
+.speaker-modal-content h4 {
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent-turquoise);
+    display: inline-block;
+}
+
+.speaker-modal-content #modal-speaker-bio {
+    line-height: 1.6;
+    color: var(--dark-text);
+    font-size: 0.95rem;
+}
+
+.topics-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.topic-tag {
+    background: linear-gradient(135deg, var(--accent-turquoise), var(--accent-light));
+    color: var(--pure-white);
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-soft);
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: var(--light-bg);
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    color: var(--dark-text);
+    transition: var(--transition);
+    border: 1px solid var(--gray-light);
+}
+
+.contact-link:hover {
+    background: var(--pure-white);
+    transform: translateX(5px);
+    box-shadow: var(--shadow-soft);
+    border-color: var(--accent-turquoise);
+}
+
+.contact-link i {
+    color: var(--accent-turquoise);
+    width: 20px;
+    text-align: center;
+}
+
+/* Responsive para el modal de ponentes */
+@media (max-width: 768px) {
+    .speaker-modal-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+    
+    .speaker-modal-avatar {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .speaker-modal-avatar-fallback {
+        font-size: 1.5rem;
+    }
+    
+    .speaker-modal-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    .speaker-modal-content .modal-body {
+        padding: 20px;
+        max-height: 50vh;
+    }
+    
+    .topics-tags {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .speaker-modal-content {
+        width: 95%;
+    }
+    
+    .speaker-modal-header {
+        padding: 20px 15px;
+    }
+    
+    .speaker-modal-content .modal-body {
+        padding: 15px;
+    }
+}
+
 /* ===== RESPONSIVE PARA MÓVILES ===== */
 @media (min-width: 400px) {
     .main-nav{
@@ -2038,6 +2237,10 @@ body {
     }
     
     .footer-section {
+        text-align: left;
+    }
+    
+    .footer-section h5 {
         text-align: left;
     }
     

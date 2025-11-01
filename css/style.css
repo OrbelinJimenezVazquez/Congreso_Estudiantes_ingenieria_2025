@@ -110,6 +110,14 @@ body {
     height: auto;
 }
 
+.institutional-info #ceilogo{
+    width: 30px;
+    height: auto;
+    display: inline-block;
+    margin-left: 5px;
+    display: none;
+}
+
 .divider {
     color: var(--accent-turquoise);
     font-weight: bold;
@@ -359,27 +367,19 @@ body {
     transform: translateX(-50%) translateY(-50%);
     object-fit: cover;
     z-index: 0;
-        /* Efectos para simular cámara lenta */
     filter: 
         brightness(1.1) 
         contrast(0.9) 
         saturate(1.3)
         blur(0.3px);
-    
-    /* Transformación sutil para efecto dreamy */
     transform: translateX(-50%) translateY(-50%) scale(1.01);
-    
-    /* Transición suave para efectos */
     transition: 
         filter 3s ease-in-out,
         transform 3s ease-in-out,
         opacity 2s ease-in-out;
-    
-    /* Mejorar rendimiento */
     will-change: transform, filter;
 }
 
-/* Overlay adicional para efecto más cinematográfico */
 .hero-banner::after {
     content: '';
     position: absolute;
@@ -421,7 +421,6 @@ body {
     overflow: hidden;
 }
 
-/* EFECTO HOVER UNIFICADO PARA TODOS LOS BOTONES PRINCIPALES */
 .btn::before {
     content: '';
     position: absolute;
@@ -495,7 +494,6 @@ body {
     overflow: hidden;
 }
 
-/* QUITAMOS EL EFECTO UNIFICADO PARA ESTE BOTÓN ESPECÍFICO */
 .open-modal-btn::before {
     display: none;
 }
@@ -684,6 +682,11 @@ body {
     overflow: hidden;
     opacity: 1;
     transform: translateY(0);
+}
+
+.speaker-profile a{
+    text-decoration: none;
+    color: inherit;
 }
 
 .speaker-profile.hidden {
@@ -1378,8 +1381,54 @@ body {
 .footer-copyright {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     font-size: 0.8rem;
+    opacity: 0.9;
+    text-align: center;
+    width: 100%;
+}
+
+.copyright-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.developer-credit {
+    margin-top: 8px;
+}
+
+.developer-link {
+    color: var(--accent-turquoise);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.developer-link:hover {
+    color: var(--pure-white);
+    background: rgba(60, 186, 189, 0.2);
+    transform: translateY(-1px);
+}
+
+
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.external-icon {
+    font-size: 0.6rem;
     opacity: 0.7;
 }
 
@@ -1471,41 +1520,43 @@ body {
     border-radius: var(--border-radius);
 }
 
-/* ===== ESTILOS PARA EL MODAL DE PROYECTOS ===== */
+/* ===== MEJORAS PARA MODALES ===== */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(35, 32, 70, 0.8);
-    backdrop-filter: blur(5px);
+    background: rgba(35, 32, 70, 0.95);
+    backdrop-filter: blur(10px);
     z-index: 2000;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-content {
     background: var(--pure-white);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-strong);
-    padding: 30px;
+    padding: 0;
     width: 90%;
     max-width: 500px;
+    max-height: 85vh;
     position: relative;
-    transform: translateY(-20px) scale(0.95);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-30px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
+    overflow: hidden;
 }
 
 .modal-overlay.active .modal-content {
@@ -1516,45 +1567,56 @@ body {
     position: absolute;
     top: 15px;
     right: 20px;
-    background: none;
+    background: rgba(255, 255, 255, 0.9);
     border: none;
     font-size: 1.5rem;
-    color: var(--gray-medium);
+    color: var(--primary-dark);
     cursor: pointer;
     line-height: 1;
     transition: var(--transition);
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+    box-shadow: var(--shadow-soft);
 }
 
 .modal-close:hover {
-    color: var(--primary-dark);
-    background: var(--light-bg);
-    transform: rotate(90deg);
+    background: var(--accent-turquoise);
+    color: var(--pure-white);
+    transform: rotate(90deg) scale(1.1);
 }
 
+/* ===== MODAL DE PROYECTOS MEJORADO ===== */
 .modal-header {
-    border-bottom: 1px solid var(--accent-turquoise);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    color: var(--pure-white);
+    padding: 25px 30px 20px;
+    border-bottom: 3px solid var(--accent-turquoise);
 }
 
-#modal-project-title {
-    color: var(--primary-dark);
-    font-size: 1.2rem;
+.modal-header h3 {
+    color: var(--pure-white);
+    font-size: 1.3rem;
     line-height: 1.4;
     margin: 0;
     font-weight: 600;
+    text-align: center;
+}
+
+.modal-body {
+    padding: 25px 30px;
+    max-height: calc(85vh - 120px);
+    overflow-y: auto;
 }
 
 .modal-body h5 {
     color: var(--accent-turquoise);
-    font-size: 0.9rem;
-    margin-bottom: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1563,26 +1625,21 @@ body {
 .modal-body p {
     font-size: 1rem;
     color: var(--dark-text);
-    line-height: 1.5;
+    line-height: 1.6;
     margin: 0;
-    padding: 12px 15px;
+    padding: 15px;
     background: var(--light-bg);
     border-radius: var(--border-radius-sm);
-    border-left: 3px solid var(--accent-turquoise);
+    border-left: 4px solid var(--accent-turquoise);
+    box-shadow: var(--shadow-soft);
 }
 
-.mini-session-info {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-/* ===== ESTILOS PARA EL MODAL DE PONENTES ===== */
+/* ===== MODAL DE PONENTES MEJORADO ===== */
 .speaker-modal-content {
     max-width: 600px;
     padding: 0;
     overflow: hidden;
+    background: var(--pure-white);
 }
 
 .speaker-modal-header {
@@ -1591,8 +1648,9 @@ body {
     padding: 30px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     position: relative;
+    border-bottom: 3px solid var(--accent-turquoise);
 }
 
 .speaker-modal-header::before {
@@ -1607,8 +1665,8 @@ body {
 
 .speaker-modal-avatar {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     flex-shrink: 0;
 }
 
@@ -1619,6 +1677,7 @@ body {
     object-fit: cover;
     border: 4px solid rgba(255, 255, 255, 0.3);
     box-shadow: var(--shadow-medium);
+    transition: var(--transition);
 }
 
 .speaker-modal-avatar-fallback {
@@ -1630,8 +1689,15 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--pure-white);
-    font-size: 2rem;
+    font-size: 2.5rem;
     border: 4px solid rgba(255, 255, 255, 0.3);
+    transition: var(--transition);
+}
+
+.speaker-modal-avatar:hover img,
+.speaker-modal-avatar:hover .speaker-modal-avatar-fallback {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
 .speaker-modal-info {
@@ -1639,122 +1705,142 @@ body {
 }
 
 .speaker-modal-info h3 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin-bottom: 8px;
     color: var(--pure-white);
+    font-weight: 700;
 }
 
 .speaker-modal-info p {
-    opacity: 0.9;
-    font-size: 1rem;
+    opacity: 0.95;
+    font-size: 1.1rem;
     line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .speaker-modal-content .modal-body {
     padding: 30px;
-    max-height: 60vh;
+    max-height: calc(85vh - 200px);
     overflow-y: auto;
 }
 
 .speaker-bio-section,
-.speaker-topics-section,
-.speaker-contact-section {
-    margin-bottom: 25px;
+.speaker-topics-section {
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--gray-light);
 }
 
 .speaker-bio-section:last-child,
-.speaker-topics-section:last-child,
-.speaker-contact-section:last-child {
+.speaker-topics-section:last-child {
     margin-bottom: 0;
+    border-bottom: none;
 }
 
 .speaker-modal-content h4 {
     color: var(--primary-dark);
-    font-size: 1.1rem;
-    margin-bottom: 12px;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
     padding-bottom: 8px;
-    border-bottom: 2px solid var(--accent-turquoise);
+    border-bottom: 3px solid var(--accent-turquoise);
     display: inline-block;
+    font-weight: 600;
 }
 
 .speaker-modal-content #modal-speaker-bio {
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--dark-text);
-    font-size: 0.95rem;
+    font-size: 1rem;
+    text-align: justify;
 }
 
 .topics-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
 }
 
 .topic-tag {
     background: linear-gradient(135deg, var(--accent-turquoise), var(--accent-light));
     color: var(--pure-white);
-    padding: 6px 12px;
-    border-radius: 15px;
-    font-size: 0.8rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
     font-weight: 500;
     box-shadow: var(--shadow-soft);
-}
-
-.contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.contact-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-    background: var(--light-bg);
-    border-radius: var(--border-radius-sm);
-    text-decoration: none;
-    color: var(--dark-text);
     transition: var(--transition);
-    border: 1px solid var(--gray-light);
+    border: 2px solid transparent;
 }
 
-.contact-link:hover {
-    background: var(--pure-white);
-    transform: translateX(5px);
-    box-shadow: var(--shadow-soft);
-    border-color: var(--accent-turquoise);
+.topic-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-dark);
 }
 
-.contact-link i {
-    color: var(--accent-turquoise);
-    width: 20px;
-    text-align: center;
+/* ===== EFECTOS DE CARGA Y ANIMACIONES ===== */
+@keyframes modalSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-/* Responsive para el modal de ponentes */
+.modal-overlay.active .modal-content {
+    animation: modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== RESPONSIVE PARA MODALES ===== */
 @media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .modal-header {
+        padding: 20px 25px 15px;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .modal-body {
+        padding: 20px 25px;
+        max-height: calc(90vh - 100px);
+    }
+    
     .speaker-modal-header {
         flex-direction: column;
         text-align: center;
         padding: 25px 20px;
+        gap: 15px;
     }
     
     .speaker-modal-avatar {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
     }
     
     .speaker-modal-avatar-fallback {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
     
     .speaker-modal-info h3 {
         font-size: 1.3rem;
     }
     
+    .speaker-modal-info p {
+        font-size: 1rem;
+    }
+    
     .speaker-modal-content .modal-body {
         padding: 20px;
-        max-height: 50vh;
+        max-height: calc(90vh - 180px);
     }
     
     .topics-tags {
@@ -1763,17 +1849,77 @@ body {
 }
 
 @media (max-width: 480px) {
-    .speaker-modal-content {
-        width: 95%;
+    .modal-overlay {
+        padding: 10px;
+    }
+    
+    .modal-content {
+        width: 100%;
+        border-radius: var(--border-radius);
+    }
+    
+    .modal-header {
+        padding: 15px 20px 10px;
+    }
+    
+    .modal-body {
+        padding: 15px 20px;
+    }
+    
+    .modal-close {
+        top: 10px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
     }
     
     .speaker-modal-header {
         padding: 20px 15px;
     }
     
+    .speaker-modal-avatar {
+        width: 80px;
+        height: 80px;
+    }
+    
     .speaker-modal-content .modal-body {
         padding: 15px;
     }
+    
+    .speaker-bio-section,
+    .speaker-topics-section {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .speaker-modal-content h4 {
+        font-size: 1.1rem;
+    }
+    
+    .topic-tag {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* ===== SCROLLBAR PERSONALIZADO PARA MODALES ===== */
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: var(--light-bg);
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--accent-turquoise), var(--accent-light));
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
 }
 
 /* ===== RESPONSIVE PARA MÓVILES ===== */
@@ -1781,7 +1927,6 @@ body {
     .main-nav{
         top: 102px;
     }
-
 }
 
 @media (max-width: 480px) {
@@ -2265,6 +2410,15 @@ body {
         font-size: 0.85rem;
     }
     
+    .header-top-content{
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .header-top .container{
+        margin: auto;
+        height: auto;
+    }
     .main-nav {
         top: 90px;
         padding: 15px 0;
@@ -2301,9 +2455,20 @@ body {
     }
 
     .event-dates #ceilogo{
-        display: block;
+        display: none;
         width: 50px;
         height: auto;
+    }
+
+    .institutional-info #ceilogo{
+    width: 40px;
+    height: auto;
+    display: inline-block;
+    margin-left: 5px;
+    }
+
+    #divider1 {
+        display: none;
     }
 
     .countdown-grid {

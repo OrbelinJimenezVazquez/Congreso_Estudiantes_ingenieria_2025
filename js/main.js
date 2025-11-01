@@ -1,4 +1,4 @@
-// ===== NAVEGACIÓN MÓVIL =====
+// ===== NAVEGACIÓN MÓVIL ORIGINAL =====
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
@@ -78,37 +78,36 @@ function enhanceModalButtons() {
     });
 }
 
-// ===== CORRECCIÓN DE POSICIÓN DEL BOTÓN IR ARRIBA =====
+// ===== COMPORTAMIENTO CORREGIDO DEL SCROLL =====
+// ===== COMPORTAMIENTO CORREGIDO DEL SCROLL =====
 function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollDirection = scrollTop > lastScrollY ? 'down' : 'up';
 
-    // Comportamiento de la navegación principal
-    if (scrollTop > 80) {
+    console.log('Scroll:', { scrollTop, scrollDirection, lastScrollY });
+
+    // HEADER TOP: Ocultar al bajar, mostrar al subir
+    if (scrollDirection === 'down' && scrollTop > 50) {
+        console.log('Ocultando header top - Scroll hacia abajo');
+        headerTop.style.transform = 'translateY(-100%)';
+        headerTop.style.transition = 'transform 0.3s ease';
+    } else if (scrollDirection === 'up') {
+        console.log('Mostrando header top - Scroll hacia arriba');
+        headerTop.style.transform = 'translateY(0)';
+        headerTop.style.transition = 'transform 0.3s ease';
+    }
+
+    // NAVBAR: Fijo cuando hay scroll
+    if (scrollTop > 100) {
         mainNav.classList.add('scrolled');
     } else {
         mainNav.classList.remove('scrolled');
     }
 
-    // Comportamiento de la barra superior
-    if (scrollTop > 100) {
-        if (scrollDirection === 'down') {
-            headerTop.classList.add('hidden');
-        } else {
-            headerTop.classList.remove('hidden');
-        }
-    } else {
-        headerTop.classList.remove('hidden');
-    }
-
-    // CORRECCIÓN: Botón ir arriba - verificar que esté por encima del footer
+    // BOTÓN ARRIBA: Aparece después de cierto scroll
     const scrollToTop = document.getElementById('scrollToTop');
     if (scrollToTop) {
-        const footer = document.querySelector('.site-footer');
-        const footerTop = footer ? footer.offsetTop : Infinity;
-        
-        // Mostrar botón solo cuando no esté en el área del footer
-        if (scrollTop > 400 && scrollTop < (footerTop - 300)) {
+        if (scrollTop > 400) {
             scrollToTop.classList.add('visible');
         } else {
             scrollToTop.classList.remove('visible');
@@ -373,7 +372,7 @@ function initModalSystem() {
     const modalOverlay = document.getElementById('project-modal');
     
     if (!modalOverlay) {
-        console.error('No se encontró el modal de proyectos');
+        console.error('No se encontró el modal');
         return;
     }
 
@@ -384,70 +383,45 @@ function initModalSystem() {
 
     const openModal = (e) => {
         e.preventDefault();
-        e.stopPropagation();
         
         const button = e.currentTarget;
         const title = button.dataset.title;
         const integrantes = button.dataset.integrantes;
         
-        // Efecto de vibración en el botón clickeado
-        button.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            button.style.transform = '';
-        }, 150);
-        
-        // Llenar contenido del modal
         modalTitle.textContent = title;
-        modalBody.innerHTML = `
-            <h5>Integrantes del Proyecto</h5>
-            <p>${integrantes}</p>
-        `;
+        modalBody.innerHTML = `<h5>Integrantes:</h5><p>${integrantes}</p>`;
         
-        // Mostrar modal con animación
         modalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
         document.documentElement.style.overflow = 'hidden';
-        
-        // Agregar clase para prevenir scroll en el body
-        document.body.classList.add('modal-open');
     };
 
     const closeModal = () => {
         modalOverlay.classList.remove('active');
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
-        document.body.classList.remove('modal-open');
     };
 
-    // Event listeners mejorados
     openModalButtons.forEach(button => {
         button.addEventListener('click', openModal);
-        // Mejorar accesibilidad
-        button.setAttribute('role', 'button');
-        button.setAttribute('aria-haspopup', 'dialog');
-        button.setAttribute('aria-expanded', 'false');
     });
 
     if (modalCloseBtn) {
         modalCloseBtn.addEventListener('click', closeModal);
-        modalCloseBtn.setAttribute('aria-label', 'Cerrar modal');
     }
 
-    // Cerrar al hacer click fuera del contenido
     modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
             closeModal();
         }
     });
 
-    // Cerrar con tecla Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
             closeModal();
         }
     });
 
-    // Prevenir propagación en el contenido del modal
     const modalContent = modalOverlay.querySelector('.modal-content');
     if (modalContent) {
         modalContent.addEventListener('click', (e) => {
@@ -456,7 +430,7 @@ function initModalSystem() {
     }
 }
 
-// ===== SISTEMA DE MODAL PARA PONENTES MEJORADO =====
+// ===== SISTEMA DE MODAL PARA PONENTES =====
 function initSpeakerModalSystem() {
     const speakerModal = document.getElementById('speaker-modal');
     
@@ -473,113 +447,99 @@ function initSpeakerModalSystem() {
     const modalSpeakerFallback = document.getElementById('modal-speaker-fallback');
     const modalSpeakerBio = document.getElementById('modal-speaker-bio');
     const modalSpeakerTopics = document.getElementById('modal-speaker-topics');
+    const modalSpeakerContact = document.getElementById('modal-speaker-contact');
 
     const openSpeakerModal = (e) => {
         e.preventDefault();
-        e.stopPropagation();
         
         const button = e.currentTarget;
-        
-        // Efecto visual en el botón clickeado
-        button.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            button.style.transform = '';
-        }, 150);
-        
         const name = button.dataset.name;
         const title = button.dataset.title;
         const photoUrl = button.dataset.photoUrl;
         const bio = button.dataset.bio;
         const topics = button.dataset.topics;
-
-        // Mostrar estado de carga
-        modalSpeakerName.textContent = 'Cargando...';
-        modalSpeakerTitle.textContent = '';
-        modalSpeakerBio.textContent = 'Cargando información...';
-        modalSpeakerTopics.innerHTML = '<span class="topic-tag">Cargando...</span>';
+        const contactWeb = button.dataset.contactWeb || '';
+        const contactEmail = button.dataset.contactEmail || '';
 
         // Llenar la información del modal
-        setTimeout(() => {
-            modalSpeakerName.textContent = name;
-            modalSpeakerTitle.textContent = title;
-            modalSpeakerBio.textContent = bio;
+        modalSpeakerName.textContent = name;
+        modalSpeakerTitle.textContent = title;
+        modalSpeakerBio.textContent = bio;
 
-            // Manejar la foto del ponente
-            if (photoUrl) {
-                modalSpeakerPhoto.src = photoUrl;
-                modalSpeakerPhoto.style.display = 'block';
-                modalSpeakerFallback.style.display = 'none';
-                
-                // Manejar error de carga de imagen
-                modalSpeakerPhoto.onerror = function() {
-                    modalSpeakerPhoto.style.display = 'none';
-                    modalSpeakerFallback.style.display = 'flex';
-                    modalSpeakerFallback.innerHTML = `<i class="fas fa-user-graduate"></i>`;
-                };
-                
-                // Manejar carga exitosa
-                modalSpeakerPhoto.onload = function() {
-                    modalSpeakerPhoto.style.opacity = '0';
-                    setTimeout(() => {
-                        modalSpeakerPhoto.style.transition = 'opacity 0.5s ease';
-                        modalSpeakerPhoto.style.opacity = '1';
-                    }, 50);
-                };
-            } else {
+        // Manejar la foto del ponente
+        if (photoUrl) {
+            modalSpeakerPhoto.src = photoUrl;
+            modalSpeakerPhoto.style.display = 'block';
+            modalSpeakerFallback.style.display = 'none';
+            
+            // Manejar error de carga de imagen
+            modalSpeakerPhoto.onerror = function() {
                 modalSpeakerPhoto.style.display = 'none';
                 modalSpeakerFallback.style.display = 'flex';
-                modalSpeakerFallback.innerHTML = `<i class="fas fa-user-graduate"></i>`;
-            }
+            };
+        } else {
+            modalSpeakerPhoto.style.display = 'none';
+            modalSpeakerFallback.style.display = 'flex';
+        }
 
-            // Llenar los temas
-            modalSpeakerTopics.innerHTML = '';
-            if (topics) {
-                const topicsArray = topics.split('|');
-                topicsArray.forEach(topic => {
-                    if (topic.trim()) {
-                        const topicTag = document.createElement('span');
-                        topicTag.className = 'topic-tag';
-                        topicTag.textContent = topic.trim();
-                        modalSpeakerTopics.appendChild(topicTag);
-                    }
-                });
-            }
-        }, 300);
+        // Llenar los temas
+        modalSpeakerTopics.innerHTML = '';
+        if (topics) {
+            const topicsArray = topics.split('|');
+            topicsArray.forEach(topic => {
+                if (topic.trim()) {
+                    const topicTag = document.createElement('span');
+                    topicTag.className = 'topic-tag';
+                    topicTag.textContent = topic.trim();
+                    modalSpeakerTopics.appendChild(topicTag);
+                }
+            });
+        }
+
+        // Llenar la información de contacto
+        const contactLinks = modalSpeakerContact.querySelector('.contact-links');
+        contactLinks.innerHTML = '';
+        
+        if (contactWeb) {
+            const webLink = document.createElement('a');
+            webLink.href = contactWeb;
+            webLink.className = 'contact-link';
+            webLink.target = '_blank';
+            webLink.rel = 'noopener noreferrer';
+            webLink.innerHTML = '<i class="fas fa-globe"></i><span>Sitio Web</span>';
+            contactLinks.appendChild(webLink);
+        }
+        
+        if (contactEmail) {
+            const emailLink = document.createElement('a');
+            emailLink.href = `mailto:${contactEmail}`;
+            emailLink.className = 'contact-link';
+            emailLink.innerHTML = '<i class="fas fa-envelope"></i><span>Correo Electrónico</span>';
+            contactLinks.appendChild(emailLink);
+        }
+
+        // Mostrar u ocultar sección de contacto
+        modalSpeakerContact.style.display = (contactWeb || contactEmail) ? 'block' : 'none';
 
         // Mostrar el modal
         speakerModal.classList.add('active');
         document.body.style.overflow = 'hidden';
         document.documentElement.style.overflow = 'hidden';
-        document.body.classList.add('modal-open');
-        
-        // Actualizar accesibilidad
-        button.setAttribute('aria-expanded', 'true');
     };
 
     const closeSpeakerModal = () => {
         speakerModal.classList.remove('active');
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
-        document.body.classList.remove('modal-open');
-        
-        // Resetear estados de accesibilidad
-        openSpeakerButtons.forEach(btn => {
-            btn.setAttribute('aria-expanded', 'false');
-        });
     };
 
     // Agregar event listeners a los botones de ponentes
     openSpeakerButtons.forEach(button => {
         button.addEventListener('click', openSpeakerModal);
-        // Mejorar accesibilidad
-        button.setAttribute('role', 'button');
-        button.setAttribute('aria-haspopup', 'dialog');
-        button.setAttribute('aria-expanded', 'false');
     });
 
     if (speakerModalClose) {
         speakerModalClose.addEventListener('click', closeSpeakerModal);
-        speakerModalClose.setAttribute('aria-label', 'Cerrar modal de ponente');
     }
 
     speakerModal.addEventListener('click', (e) => {
@@ -759,7 +719,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCountdown();
     initTalleresFilters();
     initModalSystem();
-    initSpeakerModalSystem();
+    initSpeakerModalSystem(); // ← Agregar esta línea
     initVideoBackground();
     initPonentesSystem();
     addRippleAnimation();
@@ -840,37 +800,3 @@ setTimeout(function() {
         }
     }
 }, 500);
-
-// ===== MEJORAS DE ACCESIBILIDAD GLOBAL PARA MODALES =====
-document.addEventListener('keydown', function(e) {
-    // Cerrar modales con Escape
-    const activeModals = document.querySelectorAll('.modal-overlay.active');
-    if (e.key === 'Escape' && activeModals.length > 0) {
-        activeModals.forEach(modal => {
-            modal.classList.remove('active');
-        });
-        document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
-        document.body.classList.remove('modal-open');
-    }
-    
-    // Navegación por teclado en modales
-    if (e.key === 'Tab' && document.body.classList.contains('modal-open')) {
-        const modal = document.querySelector('.modal-overlay.active');
-        const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-        
-        if (e.shiftKey) {
-            if (document.activeElement === firstElement) {
-                lastElement.focus();
-                e.preventDefault();
-            }
-        } else {
-            if (document.activeElement === lastElement) {
-                firstElement.focus();
-                e.preventDefault();
-            }
-        }
-    }
-});

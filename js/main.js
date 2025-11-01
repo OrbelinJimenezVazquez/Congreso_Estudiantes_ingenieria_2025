@@ -1,4 +1,4 @@
-// ===== NAVEGACIÓN MÓVIL ORIGINAL =====
+// ===== NAVEGACIÓN MÓVIL =====
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 

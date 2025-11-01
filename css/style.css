@@ -1405,7 +1405,7 @@ body {
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     padding: 4px 8px;
     border-radius: 4px;
 }

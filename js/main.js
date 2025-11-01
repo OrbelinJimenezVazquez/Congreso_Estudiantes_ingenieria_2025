@@ -79,7 +79,6 @@ function enhanceModalButtons() {
 }
 
 // ===== COMPORTAMIENTO CORREGIDO DEL SCROLL =====
-// ===== COMPORTAMIENTO CORREGIDO DEL SCROLL =====
 function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollDirection = scrollTop > lastScrollY ? 'down' : 'up';
@@ -154,8 +153,6 @@ function updateActiveNavLink(scrollTop) {
         }
     });
 }
-
-window.addEventListener('scroll', debounce(handleScroll, 10));
 
 // ===== SMOOTH SCROLL ORIGINAL MEJORADO =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -390,7 +387,7 @@ function initModalSystem() {
         
         modalTitle.textContent = title;
         modalBody.innerHTML = `<h5>Integrantes:</h5><p>${integrantes}</p>`;
-        
+
         modalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
         document.documentElement.style.overflow = 'hidden';
@@ -447,7 +444,6 @@ function initSpeakerModalSystem() {
     const modalSpeakerFallback = document.getElementById('modal-speaker-fallback');
     const modalSpeakerBio = document.getElementById('modal-speaker-bio');
     const modalSpeakerTopics = document.getElementById('modal-speaker-topics');
-    const modalSpeakerContact = document.getElementById('modal-speaker-contact');
 
     const openSpeakerModal = (e) => {
         e.preventDefault();
@@ -495,31 +491,6 @@ function initSpeakerModalSystem() {
                 }
             });
         }
-
-        // Llenar la información de contacto
-        const contactLinks = modalSpeakerContact.querySelector('.contact-links');
-        contactLinks.innerHTML = '';
-        
-        if (contactWeb) {
-            const webLink = document.createElement('a');
-            webLink.href = contactWeb;
-            webLink.className = 'contact-link';
-            webLink.target = '_blank';
-            webLink.rel = 'noopener noreferrer';
-            webLink.innerHTML = '<i class="fas fa-globe"></i><span>Sitio Web</span>';
-            contactLinks.appendChild(webLink);
-        }
-        
-        if (contactEmail) {
-            const emailLink = document.createElement('a');
-            emailLink.href = `mailto:${contactEmail}`;
-            emailLink.className = 'contact-link';
-            emailLink.innerHTML = '<i class="fas fa-envelope"></i><span>Correo Electrónico</span>';
-            contactLinks.appendChild(emailLink);
-        }
-
-        // Mostrar u ocultar sección de contacto
-        modalSpeakerContact.style.display = (contactWeb || contactEmail) ? 'block' : 'none';
 
         // Mostrar el modal
         speakerModal.classList.add('active');
@@ -698,32 +669,153 @@ function addRippleAnimation() {
     }
 }
 
-// ===== INICIALIZACIÓN AL CARGAR EL DOM =====
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('XIX CEI 2025 - Inicializando sitio web...');
-    
+// ===== CONFIGURACIÓN AOS CORREGIDA =====
+function initAOS() {
     if (typeof AOS !== 'undefined') {
+        const isMobile = window.innerWidth < 768;
+        
         AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
+            duration: isMobile ? 400 : 600,
+            easing: 'ease-out-cubic',
             once: true,
             mirror: false,
-            offset: 100,
+            offset: isMobile ? 20 : 50,
             disable: function() {
-                return window.innerWidth < 768;
+                // Solo deshabilitar en pantallas muy pequeñas
+                return window.innerWidth < 320;
+            },
+            startEvent: 'DOMContentLoaded',
+            animatedClassName: 'aos-animate'
+        });
+        
+        console.log('AOS configurado - Móvil:', isMobile);
+    }
+}
+
+// ===== OPTIMIZACIONES MEJORADAS PARA MÓVILES =====
+function optimizeMobileAnimations() {
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+        // Reducir delays en animaciones para móviles
+        document.querySelectorAll('[data-aos-delay]').forEach(element => {
+            const currentDelay = element.getAttribute('data-aos-delay');
+            if (currentDelay && parseInt(currentDelay) > 300) {
+                const newDelay = Math.min(parseInt(currentDelay), 300);
+                element.setAttribute('data-aos-delay', newDelay.toString());
             }
         });
+
+        // Optimizar performance sin bloquear animaciones
+        const animatedElements = document.querySelectorAll('.speaker-profile, .taller-card, .feature-card');
+        animatedElements.forEach(element => {
+            element.style.willChange = 'transform, opacity';
+        });
     }
+}
+
+// ===== MEJORAS ESPECÍFICAS PARA ANIMACIONES TÁCTILES =====
+function enhanceTouchAnimations() {
+    // Suavizar animaciones al tocar botones
+    const allButtons = document.querySelectorAll('.btn, .filtro-btn, .open-modal-btn');
     
+    allButtons.forEach(button => {
+        button.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+            this.style.transition = 'transform 0.1s ease';
+        });
+        
+        button.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+            this.style.transition = 'transform 0.2s ease';
+        });
+    });
+
+    // Mejorar animación del menú móvil
+    const navMenu = document.getElementById('navMenu');
+    if (navMenu) {
+        navMenu.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    }
+
+    // Optimizar animaciones de modales para touch
+    const modals = document.querySelectorAll('.modal-overlay');
+    modals.forEach(modal => {
+        modal.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    });
+}
+
+// ===== PREVENIR ANIMACIONES DURANTE SCROLL EN MÓVILES =====
+function preventAnimationsDuringScroll() {
+    let scrollTimer;
+    const elements = document.querySelectorAll('[data-aos]');
+    
+    window.addEventListener('scroll', function() {
+        // Añadir clase durante el scroll
+        document.body.classList.add('scrolling');
+        
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function() {
+            document.body.classList.remove('scrolling');
+        }, 100);
+    }, { passive: true });
+}
+
+// ===== FIX DE EMERGENCIA PARA AOS EN MÓVILES =====
+function applyAOSMobileFix() {
+    if (window.innerWidth < 768) {
+        setTimeout(() => {
+            const aosElements = document.querySelectorAll('[data-aos]');
+            console.log('Elementos AOS encontrados:', aosElements.length);
+            
+            // Forzar refresh de AOS
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+                console.log('AOS refresh ejecutado en fix de emergencia');
+            }
+        }, 1500);
+    }
+}
+
+// ===== INICIALIZACIÓN AL CARGAR EL DOM - CORREGIDA =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Inicializar AOS PRIMERO
+    initAOS();
+    
+    // 2. Inicializar todos los sistemas
     initTabs();
     initCountdown();
     initTalleresFilters();
     initModalSystem();
-    initSpeakerModalSystem(); // ← Agregar esta línea
+    initSpeakerModalSystem();
     initVideoBackground();
     initPonentesSystem();
     addRippleAnimation();
     initUnifiedButtonHover();
+    enhanceModalButtons();
+    
+    // 3. Optimizaciones (después de AOS)
+    optimizeMobileAnimations();
+    enhanceTouchAnimations();
+    preventAnimationsDuringScroll();
+    
+    // 4. Scroll event optimizado
+    let ticking = false;
+    function optimizedMobileScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    if (window.innerWidth < 768) {
+        window.removeEventListener('scroll', debounce(handleScroll, 10));
+        window.addEventListener('scroll', optimizedMobileScroll, { passive: true });
+    } else {
+        window.addEventListener('scroll', debounce(handleScroll, 10));
+    }
     
     setTimeout(() => {
         document.body.style.opacity = '1';
@@ -746,6 +838,9 @@ window.addEventListener('resize', function() {
         
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         updateActiveNavLink(scrollTop);
+        
+        // Re-aplicar optimizaciones para móviles
+        optimizeMobileAnimations();
     }, 250);
 });
 
@@ -771,7 +866,10 @@ window.addEventListener('orientationchange', function() {
         if (typeof AOS !== 'undefined') {
             AOS.refresh();
         }
-    }, 100);
+        
+        // Re-aplicar optimizaciones
+        optimizeMobileAnimations();
+    }, 300);
 });
 
 // ===== FIX DE EMERGENCIA PARA PESTAÑAS EN MÓVILES =====
@@ -800,3 +898,29 @@ setTimeout(function() {
         }
     }
 }, 500);
+
+// ===== APLICAR FIX DE AOS DESPUÉS DE CARGA COMPLETA =====
+window.addEventListener('load', function() {
+    if (window.innerWidth < 768) {
+        applyAOSMobileFix();
+    }
+});
+
+// ===== DEBUG AOS (OPCIONAL) =====
+function debugAOS() {
+    const animatedElements = document.querySelectorAll('[data-aos]');
+    console.log('=== DEBUG AOS ===');
+    console.log('Total elementos:', animatedElements.length);
+    console.log('Elementos animados:', document.querySelectorAll('.aos-animate').length);
+    
+    animatedElements.forEach((el, index) => {
+        console.log(`Elemento ${index}:`, {
+            tieneAosAnimate: el.classList.contains('aos-animate'),
+            estiloOpacity: window.getComputedStyle(el).opacity,
+            visible: el.getBoundingClientRect().top < window.innerHeight
+        });
+    });
+}
+
+// Ejecutar debug después de 3 segundos (opcional)
+setTimeout(debugAOS, 3000);

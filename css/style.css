@@ -30,7 +30,21 @@
 
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overflow-x: hidden;
 }
+
+@viewport {
+    width: device-width;
+    zoom: 1.0;
+}
+
+@-ms-viewport {
+    width: device-width;
+}
+
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -39,6 +53,9 @@ body {
     background: var(--pure-white);
     line-height: 1.6;
     padding-top: 120px;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
 }
 
 /* CORRECCIÓN: Container sin padding en móvil */
@@ -181,81 +198,19 @@ body {
     border: none;
     cursor: pointer;
     padding: 8px;
-    z-index: 1000;
+    z-index: 1002;
     position: relative;
     width: 30px;
     height: 30px;
+    
 }
-
 .nav-toggle span {
     width: 22px;
-    height: 2px;
+    height: 3px;
     background: var(--primary-dark);
     margin: 2px 0;
     transition: var(--transition);
-    border-radius: 1px;
-}
-
-.nav-menu {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 70%;
-    height: 100vh;
-    background: var(--pure-white);
-    flex-direction: column;
-    padding: 80px 0 30px;
-    display: flex;
-    gap: 0;
-    transition: var(--transition);
-    z-index: 999;
-    overflow-y: auto;
-    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
-    border-right: 1px solid var(--gray-light);
-    border-radius: 0 15px 15px 0;
-}
-
-.nav-menu.active {
-    left: 0;
-}
-
-.nav-item {
-    padding: 16px 25px;
-    text-decoration: none;
-    color: var(--primary-dark);
-    font-weight: 500;
-    transition: var(--transition);
-    text-align: left;
-    font-size: 1rem;
-    border: none;
-    background: none;
-    border-left: 3px solid transparent;
-}
-
-.nav-item:hover,
-.nav-item.active {
-    color: var(--accent-turquoise);
-    background: rgba(60, 186, 189, 0.05);
-    border-left-color: var(--accent-turquoise);
-    transform: none;
-}
-
-.menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 998;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition);
-}
-
-.menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
+    border-radius: 2px;
 }
 
 .nav-toggle.active span:nth-child(1) {
@@ -268,6 +223,72 @@ body {
 
 .nav-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(3px, -2px);
+}
+
+.nav-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100vh;
+    background: var(--pure-white);
+    box-shadow: var(--shadow-strong);
+    z-index: 1001;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    padding: 80px 20px 30px;
+    overflow-y: auto;
+    
+}
+
+.nav-menu.active {
+    left: 0;
+}
+
+.nav-item {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 600;
+    border-radius: 20px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent-turquoise), var(--accent-light));
+    transition: var(--transition);
+    z-index: -1;
+    border-radius: 10px;
+}
+
+.nav-item:hover::before,
+.nav-item.active::before {
+    left: 0;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: var(--pure-white);
+    transform: translateX(5px);
+    border-color: var(--accent-turquoise);
+}
+.header-top {
+    z-index: 1003;
+}
+
+.main-nav {
+    z-index: 1002;
 }
 
 /* ===== SECCIÓN HERO - MOBILE FIRST ===== */
@@ -1615,9 +1636,6 @@ body {
     text-align: center;
 }
 
-body.menu-open {
-    overflow: hidden;
-}
 .modal-body {
     padding: 25px 30px;
     max-height: calc(85vh - 120px);
@@ -2251,17 +2269,24 @@ body.menu-open {
     
     .nav-menu {
         position: static;
-        display: flex;
-        flex-direction: row;
+        width: auto;
+        height: auto;
         background: transparent;
         box-shadow: none;
+        flex-direction: row;
         padding: 0;
-        gap: 15px;
+        overflow: visible;
     }
     
     .nav-item {
         margin: 0;
-        width: auto;
+        padding: 10px 15px;
+        text-align: center;
+        margin-bottom: 0;
+    }
+    
+    .nav-item:hover {
+        transform: translateY(-2px);
     }
     
     .hero-banner {

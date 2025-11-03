@@ -58,6 +58,11 @@ body {
     position: relative;
 }
 
+a, button, input {
+    /* Deshabilita el highlight de toque por defecto en WebKit */
+    -webkit-tap-highlight-color: transparent; 
+}
+
 /* CORRECCIÓN: Container sin padding en móvil */
 .container {
     width: 100%;
@@ -204,6 +209,12 @@ body {
     height: 30px;
     
 }
+
+.nav-toggle:active {
+    transform: scale(0.9);
+    transition: transform 0.1s ease;
+}
+
 .nav-toggle span {
     width: 22px;
     height: 3px;
@@ -215,6 +226,7 @@ body {
 
 .nav-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 5px);
+    width: 23px;
 }
 
 .nav-toggle.active span:nth-child(2) {
@@ -223,6 +235,7 @@ body {
 
 .nav-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(3px, -2px);
+    width: 23px;
 }
 
 .nav-menu {
@@ -239,6 +252,7 @@ body {
     flex-direction: column;
     padding: 80px 20px 30px;
     overflow-y: auto;
+    gap: 10px;
     
 }
 
@@ -282,6 +296,7 @@ body {
     color: var(--pure-white);
     transform: translateX(5px);
     border-color: var(--accent-turquoise);
+    transition: transform 0.1s ease;
 }
 .header-top {
     z-index: 1003;
@@ -473,11 +488,24 @@ body {
     box-shadow: var(--shadow-medium);
 }
 
+/* APLICADO: Efecto Active para el click en móviles */
+.btn:active {
+    transform: scale(0.98); 
+    box-shadow: none;       
+    transition: transform 0.1s ease;
+}
+
 .btn-primary {
-    background: linear-gradient(135deg, var(--accent-turquoise), var(--accent-light));
+    background: transparent;
     color: var(--pure-white);
     box-shadow: var(--shadow-soft);
+    border-color: linear-gradient(135deg, var(--accent-turquoise), var(--accent-light));
 }
+.btn-primary:active{
+    transform: translateY(0);
+    box-shadow: var(--shadow-soft);
+}
+
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.15);
@@ -510,10 +538,6 @@ body {
 
 /* ===== BOTÓN VER DETALLES (EFECTO ESPECIAL) ===== */
 .open-modal-btn {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--accent-turquoise);
-    text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -524,6 +548,10 @@ body {
     border: 1px solid var(--accent-turquoise);
     position: relative;
     overflow: hidden;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-turquoise);
+    text-decoration: none;
 }
 
 .open-modal-btn::before {
@@ -535,6 +563,13 @@ body {
     background: var(--accent-turquoise);
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 20px rgba(60, 186, 189, 0.3);
+}
+
+/* APLICADO: Efecto Active para el click en móviles */
+.open-modal-btn:active {
+    transform: scale(0.98); 
+    box-shadow: 0 4px 10px rgba(60, 186, 189, 0.3);
+    transition: transform 0.1s ease;
 }
 
 .open-modal-btn i {
@@ -744,6 +779,14 @@ body {
     transform: scaleX(1);
 }
 
+/* APLICADO: Efecto Active para el click en móviles */
+.speaker-profile:active {
+    transform: scale(0.98); 
+    box-shadow: var(--shadow-soft);
+    border-color: var(--accent-turquoise);
+    transition: transform 0.1s ease;
+}
+
 .speaker-avatar {
     width: 100px;
     height: 100px;
@@ -865,8 +908,9 @@ body {
 
 .tab-button.active {
     border-color: var(--accent-turquoise);
-    box-shadow: var(--shadow-medium);
-    transform: translateY(-5px);
+    transform: scale(0.98) translateY(0);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.1s ease;
 }
 
 .tab-button.active::before,
@@ -935,6 +979,13 @@ body {
     box-shadow: var(--shadow-soft);
     border: 1px solid var(--gray-light);
     transition: var(--transition);
+}
+
+.event-content:active {
+    transform: scale(0.99);
+    box-shadow: var(--shadow-soft);
+    border-color: var(--primary-dark);
+    transition: transform 0.1s ease;
 }
 
 .event-badge {
@@ -1119,12 +1170,32 @@ body {
     box-shadow: var(--shadow-soft);
 }
 
+/* APLICADO: Efecto Active para el click en móviles */
+.mini-session:active {
+    transform: scale(0.99);
+    background: var(--gray-light);
+    box-shadow: none;
+    transition: transform 0.1s ease, background 0.1s ease;
+}
+
+
 .session-block:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
 }
 
 /* ===== ESTILOS PARA TALLERES ===== */
+.talleres-registro-header{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.talleres-registro-header p{
+    font-size: .9rem;
+    color: var(--primary-dark);
+    margin-top: 0.8rem;
+}
+
 .talleres-filtros {
     display: flex;
     justify-content: center;
@@ -1168,6 +1239,13 @@ body {
     color: var(--pure-white);
     border-color: transparent;
     transform: translateY(-2px);
+}
+
+/* APLICADO: Efecto Active para el click en móviles */
+.filtro-btn:active {
+    transform: scale(0.98); 
+    box-shadow: none;
+    transition: transform 0.1s ease;
 }
 
 .talleres-grid {
@@ -1273,6 +1351,14 @@ body {
     transform: translateY(-5px);
     box-shadow: var(--shadow-medium);
     border-color: var(--accent-turquoise);
+}
+
+/* APLICADO: Efecto Active para el click en móviles */
+.taller-card:active {
+    transform: scale(0.98); 
+    box-shadow: var(--shadow-soft);
+    border-color: var(--accent-turquoise);
+    transition: transform 0.1s ease;
 }
 
 /* ===== FOOTER MINIMALISTA E INGENIOSO ===== */
@@ -1459,8 +1545,6 @@ body {
     }
 }
 
-
-
 .social-links {
     display: flex;
     justify-content: center;
@@ -1487,6 +1571,12 @@ body {
     background: var(--accent-turquoise);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(60, 186, 189, 0.3);
+}
+
+.social-link:active {
+    transform: scale(0.95);
+    box-shadow: none;
+    transition: transform 0.1s ease;
 }
 
 /* ===== BOTÓN VOLVER ARRIBA CORREGIDO ===== */
@@ -1537,6 +1627,13 @@ body {
 .scroll-to-top:hover {
     transform: translateY(-5px) scale(1.1);
     box-shadow: var(--shadow-strong);
+}
+
+/* APLICADO: Efecto Active para el click en móviles */
+.scroll-to-top:active {
+    transform: scale(0.95);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.1s ease;
 }
 
 /* ===== MÁRGENES DE SCROLL - MOBILE FIRST ===== */
@@ -2000,6 +2097,18 @@ body {
 }
 
 @media (max-width: 767px) {
+
+    :root {
+        --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .feature-card, 
+    .speaker-profile, 
+    .taller-card {
+        /* Esto ayuda a que las animaciones sean más fluidas, previniendo stuttering */
+        will-change: transform, box-shadow;
+    }
+
     .timeline-line {
         left: 20px;
     }
@@ -2077,6 +2186,14 @@ body {
         line-height: 1.4;
         font-weight: 500;
         flex: 1;
+    }
+    
+    .mini-speaker {
+        font-size: 0.7rem;
+        color: var(--gray-medium);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
     }
     
     .mini-session-info {
@@ -2193,9 +2310,7 @@ body {
     }
     
     .social-links {
-        gap: 12px;
         justify-content: center;
-        margin-top: 15px;
     }
     
     .footer-logo {
@@ -2203,8 +2318,8 @@ body {
     }
 
     .social-link {
-        width: 35px;
-        height: 35px;
+        width: 44px;
+        height: 44px;
         font-size: 0.9rem;
     }
         .footer-brand h4 {
@@ -2222,6 +2337,8 @@ body {
     .footer-copyright {
         font-size: 0.75rem;
     }
+
+
 }
 
 /* ===== MEDIA QUERIES - TABLET  ===== */
@@ -2714,5 +2831,17 @@ body {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+}
+
+@media (pointer: coarse) {
+    /* Coarse pointer indica dispositivos táctiles (touch) */
+
+    .btn:hover,
+    .speaker-profile:hover,
+    .taller-card:hover {
+        /* Anular los efectos de hover que imitan el movimiento del ratón */
+        transform: none !important;
+        box-shadow: none !important;
     }
 }

@@ -1,4 +1,3 @@
-<!-- build: 2025-11-01 15:55 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,9 +11,51 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <link rel="stylesheet" href="css/style.css">
-</head>
+
+    <style>
+      /* ======================================= */
+      /* === ESTILOS DE LA PANTALLA DE CARGA === */
+      /* ======================================= */
+      #preloader {
+        position: fixed; /* Se queda fijo en la pantalla */
+        top: 0;
+        left: 0;
+        width: 100vw; /* 100% del ancho de la ventana */
+        height: 100vh; /* 100% del alto de la ventana */
+        z-index: 9999; /* Se asegura de estar encima de todo */
+        background-color: #fff; /* Fondo blanco (igual que tu GIF) */
+        
+        /* Centrado del GIF */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      
+        /* Estado inicial (visible) */
+        opacity: 1;
+        visibility: visible;
+      
+        /* La animación de salida */
+        transition: opacity 0.75s ease, visibility 0.75s ease;
+      }
+      
+      /* Esta es la clase que JavaScript agregará cuando la página cargue */
+      #preloader.preloader-hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      
+      /* Tamaño del GIF */
+      #preloader img {
+        width: 250px; /* Puedes ajustar este valor */
+        height: auto;
+      }
+    </style>
+    </head>
 <body>
-    <!-- Barra Superior -->
+    <div id="preloader">
+        <img src="assets\img\Diseño+sin+título-min.gif" alt="Cargando...">
+    </div>
+    <!-- Encabezado Superior -->
 <div class="header-top" id="headerTop" data-aos="fade-down" data-aos-duration="600" data-aos-delay="100">
         <div class="container">
             <div class="header-top-content">
@@ -69,7 +110,7 @@
 <section id="inicio" class="hero-banner">
     <!-- Video de fondo agregado -->
     <video autoplay muted loop playsinline>
-        <source src="assets/video/videocei.mp4" type="video/mp4">
+        <source src="assets/video/Video_Generado_Listo.mp4" type="video/mp4">
         Tu navegador no soporta el elemento de video.
     </video>
     <div class="container">
@@ -229,8 +270,8 @@
            class="btn btn-outline open-speaker-btn"
            data-name="PhD Renée Martin-Nagle"
            data-title="Secretary General, International Water Resources Association"
-           data-photo-url="assets/img/ponentes/renee-martin-nagle.png"
-           data-bio="Conferencia sobre liderazgo, sostenibilidad y cómo alinear proyectos de ingeniería con los retos globales del agua."
+           data-photo-url="assets\img\Renée Martin-Nagle.png"
+           data-bio="La Dra. Renée Martin-Nagle es una experta de renombre mundial en recursos de agua dulce y cambio climático. Actualmente, es Secretaria General de la Asociación Internacional de Recursos Hídricos y experta en agua para la consultora Accenture, donde diseña programas para garantizar la resiliencia ante inundaciones y escasez de agua. Participa frecuentemente como oradora en foros internacionales y es autora de más de 30 publicaciones, incluyendo su innovador libro sobre la gobernanza de los recursos marinos de agua dulce. Antes de dedicarse al tema del agua dulce, la Dra. Martin-Nagle fue durante 25 años la principal asesora jurídica en Estados Unidos de fabricantes de aeronaves franceses, incluyendo más de 20 años como Consejera General de Airbus Americas. Posee cinco títulos universitarios, entre ellos un doctorado en Derecho."
            data-topics="Liderazgo|Sostenibilidad|Recursos hídricos|Carrera profesional"
            data-contact-web="https://www.iwra.org"
            data-contact-email="renee@iwra.org">
@@ -251,7 +292,7 @@
            data-name="Dr. Javier Valencia Méndez"
            data-title="Profesor Investigador, UADY / Premio Logístico 2025"
            data-photo-url="assets/img/ponentes/javier-valencia.png"
-           data-bio="Analiza cómo la reconfiguración geopolítica impacta las cadenas de suministro y la logística en México."
+           data-bio="El Dr. Javier Valencia Méndez es un destacado académico y profesional en el campo de la logística y la ingeniería industrial. Es Doctor en Ingeniería Industrial por la Universidad de Zaragoza (UNIZAR), donde obtuvo la calificación Cum Laude y el premio CEL a la mejor tesis doctoral en logística en España. Asimismo, posee un Máster en Sistemas Mecánicos por la UNIZAR y un Máster en Logística por el Zaragoza Logistics Center (ZLC), institución de prestigio internacional afiliada al MIT."
            data-topics="Logística|Geopolítica|Cadenas de suministro|Comercio internacional"
            data-contact-web="https://www.uady.mx"
            data-contact-email="jvalencia@uady.mx">
@@ -293,7 +334,8 @@
             data-name="Dra. Mónica de la Luz Corea Téllez"
             data-title="IPN – ESIQIE"
             data-photo-url="assets/img/ponentes/Dr. Monica de la Cruz.png"
-            data-bio="Casos de uso de nanotecnología en procesos industriales, materiales avanzados y mejora de productos."
+            data-bio="La Dra. Mónica de la Luz Corea Téllez es profesor de la Escuela Superior de Ingeniería Química e Industrias Extractivas de IPN. Es Ingeniero Químico por la Universidad Autónoma del Estado de México, tiene una Maestría en Ciencias de Materiales por la misma universidad y el Doctorado en Ingeniería por la Universidad Nacional Autónoma de México.
+            Fundadora del Doctorado en Nanociencias y Micro-Nanotecnologías del Instituto Politécnico Nacional. Miembro del Sistema Nacional de Investigadores Nivel II. Cuenta con 47 artículos JCR, y ha dirigido diversas tesis de licenciatura, maestría y doctorado. Tiene varias estancias de investigación en países como España, Francia y Japón."
             data-topics="Nanotecnología|Ingeniería química|Materiales avanzados"
             data-contact-web="https://www.ipn.mx"
             data-contact-email="mcorea@ipn.mx">
@@ -313,8 +355,9 @@
            class="btn btn-outline open-speaker-btn"
            data-name="Dr. Tonatiuh Hernández del Toro"
            data-title="Universidad de Guadalajara"
-           data-photo-url="assets/img/ponentes/tonatiuh-hernandez.png"
-           data-bio="Cómo integrar LLMs en flujos de análisis de datos, riesgos, calidad y despliegue."
+           data-photo-url="assets\img\Tonatiuh.png"
+           data-bio="El Dr. Tonatiuh Hernández-Del-Toro es un investigador destacado en ciencia de datos e inteligencia artificial. Es doctor en Ciencias de la Computación y máster en Física y Química por la Universidad de Guadalajara. Actualmente es profesor en la Universidad de Guadalajara y científico de datos principal en IBM, donde lidera proyectos estratégicos en áreas como inteligencia artificial generativa, sistemas de apoyo a la decisión y aplicaciones de computación cuántica. 
+            El Dr Hernández es coautor en el desarrollo de certificaciones  técnicas de IBM, contribuyendo a la estandarización y formación en tecnologías emergentes. Su  labor ha sido publicada en revistas, capítulos y conferencias y ha realizado estancias en diversas instituciones académicas."
            data-topics="LLM|Ciencia de datos|IA aplicada|PLN"
            data-contact-web="https://www.udg.mx"
            data-contact-email="tonatiuh.hernandez@udg.mx">
@@ -335,7 +378,7 @@
             data-name="Dra. Perla Osorio Díaz"
             data-title="IPN – Centro de Desarrollo de Productos Bióticos"
             data-photo-url="assets/img/ponentes/Dra. Perla Osorio.png"
-            data-bio="Desarrollo de alimentos con valor agregado, bioactivos y aplicación de bioprocesos."
+            data-bio="La Dra. Perla Osorio Díaz es una reconocida nutricionista e investigadora. Es licenciada en Nutrición por el IPN, tiene una maestría en Ciencias de los Alimentos por la Escuela Nacional de Biología y un doctorado en Ciencias de los Alimentos por la Universidad Autónoma de Querétaro. Ha realizado investigaciones en la Escuela Nacional de Nutrición de Quito, Ecuador, y en el Departamento de Alimentos y Nutrición Experimental de la Universidad de São Paulo, Brasil. La Dra. Díaz trabaja en el Centro de Desarrollo de Productos Bioquímicos del IPN desde 1998 y actualmente es Profesora Titular. También ha sido Subdirectora del Consejo Académico y de Investigación del CeProBi y ha pertenecido a diversas organizaciones, como el IPN, SOMENTA, SLAN, IFT y ACS. Asimismo, ha participado en numerosas conferencias y proyectos internacionales, entre ellos el proyecto <Complementación de Equipos para el Estudio Nutricional de Alminado y Componentes de Fibra Dietética>"
             data-topics="Ingeniería de alimentos|Bioprocesos|Alimentos funcionales"
             data-contact-web="https://www.ipn.mx"
             data-contact-email="posorio@ipn.mx">
@@ -355,8 +398,8 @@
            class="btn btn-outline open-speaker-btn"
            data-name="Dra. María Cristina Verde Rodarte"
            data-title="Instituto de Ingeniería, UNAM"
-           data-photo-url="assets/img/ponentes/maria-cristina-verde.png"
-           data-bio="Explica el rol silencioso de la cibernética en sistemas modernos, control y automatización."
+           data-photo-url="assets\img\Dra. Cristina Verde.png"
+           data-bio="La Dra. Cristina Verde Rodarte es Ingeniera en comunicaciones y electrónica por el ESIME-IPN (1973) y destaca por ser la primera mujer en obtener la Maestría en ingeniería del CINVESTAV-IPN, además de un doctorado por la Universidad de Duisburgo. Desde 1984, es investigadora en el Instituto de Ingeniería de la UNAM, actualmente como titular C, con un área disciplinaria enfocada en la tecnología de control automático, seguridad, diagnóstico de fallas y resiliencia en sistemas complejos. Es miembro del SNI desde 1985, de la Academia Mexicana de Ciencias desde 1997, y fue la primera mujer en ser distinguida como Académica de Honor en la Academia de Ingeniería. Entre sus reconocimientos se incluye la distinción Sor Juana Inés de la Cruz por la UNAM (2005) y la presidencia del Comité Internacional del Congreso /Safeprocess/ en 2024, además, un estudio de 2011 ubicó a su grupo de investigación en el segundo lugar de Latinoamérica en sistemas de diagnóstico de fugas."
            data-topics="Cibernética|Control|Automatización"
            data-contact-web="https://www.ingenieria.unam.mx"
            data-contact-email="mcristina.verde@unam.mx">
@@ -377,7 +420,7 @@
            data-name="M.C. Paola Severo Martínez"
            data-title="Cinvestav – Área ambiental"
            data-photo-url="assets/img/ponentes/paola-severo.png"
-           data-bio="Procesos fisiológicos de defensa y su vínculo con biotecnología vegetal."
+           data-bio="La Mtra. Estefania Paola Severo Martínez es  bióloga licenciada por la Universidad Autónoma Metropolitana (UAM), donde ha sido profesora durante los últimos cuatro años. Posee una maestría en Energía y Ciencias Ambientales y actualmente cursa un doctorado en Remediación Ambiental con enfoque energético integral. Su tesis doctoral se centra en el control biológico de insectos y plagas del suelo. Ha publicado artículos científicos sobre contaminantes emergentes y ha colaborado en proyectos ambientales. Ha impartido clases tanto a nivel de licenciatura como de posgrado, además de realizar voluntariado en servicios sociales y ofrecer diversos cursos teórico-prácticos."
            data-topics="Biología vegetal|Biotecnología|Medio ambiente"
            data-contact-web="https://www.cinvestav.mx"
            data-contact-email="pseverom@cinvestav.mx">
@@ -419,7 +462,8 @@
            data-name="Dr. Rogelio Reyes Galaviz"
            data-title="Especialista en neurotecnología"
            data-photo-url="assets/img/ponentes/rogelio-reyes.png"
-           data-bio="Explora cómo la neurotecnología permite comprender y modular el dolor."
+           data-bio="Candidato a Doctor en Ciencias y Tecnologías Biomédicas por el Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE). Maestro en Ciencias y Tecnologías Biomédicas por el mismo instituto (INAOE) e Ingeniero Mecatrónico por la Universidad Politécnica de Tlaxcala.
+            Las líneas de interés son Procesamiento de bioseñales, Inteligencia Artificial, Neuro Tecnologías y Procesos cognitivos/sensoriales. Ha participado en múltiples foros científicos, tanto nacionales como internacionales y recientemente realizó una estancia de investigación en la Universidad de Winnipeg, Canadá para aplicar técnicas de aprendizaje profundo a la clasificación de Dolor. También es organizador y fundador de Tlax Consciencia, un proyecto de divulgación científica en el estado de Tlaxcala, miembro estudiante de la Red en Inteligencia Computacional Aplicada (Red ICA) y miembro de la red colaborativa de LatinX in Artificial Intelligence (LXAI)."
            data-topics="Neurotecnología|Neurociencia|Salud"
            data-contact-web=""
            data-contact-email="rreyesg@neurotec.mx">
@@ -461,7 +505,7 @@
            data-name="Dr. Ramón Ronzón Lavié"
            data-title="Especialista invitado"
            data-photo-url="assets/img/ponentes/ramon-ronzon.png"
-           data-bio="Sesión técnica con enfoque en innovación y transferencia de conocimiento a la industria."
+           data-bio="Matemático especializado en Geometría Algebraica, con un particular interés en la teoría de singularidades, sistemas dinámicos, así como las matemáticas educativas. Su tesis de Licenciatura fue galardonado con la medalla Sotero Prieto a la excelencia en un trabajo de tesis de Licenciatura. Ramón cuenta artículos publicados en las revistas especializadas 'Transactions of the American Mathematical Society' y 'Journal of Singularities'. El profesor Ronzón cuenta con un doctorado en Matemáticas por parte de la Universidad de Toronto, una maestría por parte de la Universidad Paris-Saclay (Escuela Politécnica y Universidad de Versalles) y una licenciatura por parte de la Universidad de Guanajuato (en conjunto con el Centro de Investigación en Matemáticas). Ha asistido a diferentes actividades académicas, como el taller 'New Techniques in Resolution of Singularities' organizado por el Instituto Oberwolfach (Alemania) y ha presentado ponencias en el Congreso Nacional de Matemáticas organizado por la Sociedad Matemática Mexicana."
            data-topics="Innovación|Transferencia tecnológica|Industria"
            data-contact-web=""
            data-contact-email="rronzon@industria.mx">
@@ -545,7 +589,7 @@
            data-name="Ing. Jorge Zavala"
            data-title="Ingeniero – Silicon Valley"
            data-photo-url="assets/img/ponentes/jorge-zavala.png"
-           data-bio="Cómo acelerar el aprendizaje de IA con enfoque práctico y disruptivo."
+           data-bio="Jorge Zavala es un Ingeniero Electrónico , innovador y emprendedor con experiencia tanto en Latinoamérica como en Silicon Valley. Inició su carrera desarrollando proyectos tecnológicos avanzados, como sistemas de emergencia durante el terremoto de 1985 en México , y llegó a fundar diez empresas tecnológicas en México y Estados Unidos. Tras mudarse a Silicon Valley, escribió el manual 'Think like Silicon Valley being anywhere' y, como director de la aceleradora TechBA, ayudó a más de 700 empresas mexicanas a adoptar la cultura de innovación de ese polo tecnológico. Actualmente, se dedica a desarrollar talento para semiconductores , escribe su blog 'Viajando a la Innovación' y promueve 'Experiencias Disruptivas de Aprendizaje' un método enfocado en el autoaprendizaje, el análisis crítico y la resiliencia."
            data-topics="Inteligencia Artificial|Innovación|Tecnología emergente"
            data-contact-web=""
            data-contact-email="jzavala@siliconvalley.ai">
@@ -565,14 +609,142 @@
            class="btn btn-outline open-speaker-btn"
            data-name="Lic. Oscar Rébora"
            data-title="Secretaría de Ecología y Medio Ambiente"
-           data-photo-url="assets/img/ponentes/oscar-rebora.png"
-           data-bio="Enfoque en adaptación climática y acciones urgentes a nivel local."
+           data-photo-url="assets\img\Oscar Rebora.png"
+           data-bio="Óscar Alberto Rébora Aguilera es Licenciado en Derecho por la Universidad Panamericana, cuenta con un posgrado en Sustentabilidad por el Instituto Tecnológico de Massachusetts (MIT) y cursa una Maestría en Finanzas en la Universidad Anáhuac. Con una sólida trayectoria en el servicio público, ha ocupado cargos clave como Subsecretario de Gestión y Protección Ambiental y Regidor Presidente de la Comisión de Turismo, Ecología y Ambiente en Benito Juárez. Actualmente, se desempeña como Secretario de Ecología y Medio Ambiente del Estado de Quintana Roo y Presidente de la Asociación Nacional de Autoridades Ambientales Estatales (ANAAE). Durante su gestión al frente de la SEMA, ha encabezado iniciativas emblemáticas como la valorización del sargazo, la creación del primer Centro de Monitoreo Satelital del Sargazo en América Latina, la primera planta piloto de biogás en México y la actualización del marco normativo ambiental, consolidando a Quintana Roo como referente en innovación verde y economía circular. Además, ha fortalecido programas de participación ciudadana como Recicla por tu Futuro y las Caravanas de Bienestar Animal. Con una visión moderna y un compromiso firme con la legalidad, la transparencia y la acción climática, Óscar Rébora impulsa una gestión ambiental que transforma los retos ecológicos en oportunidades de desarrollo sostenible para Quintana Roo."
            data-topics="Cambio climático|Adaptación|Sostenibilidad"
            data-contact-web="https://www.sema.qroo.gob.mx"
            data-contact-email="orebora@sema.qroo.gob.mx">
           Conócelo más
         </a>
       </div>
+
+        <!-- 18) Mtra. Estefania Paola Severo Martínez -->
+      <div class="speaker-profile hidden" data-aos="fade-up">
+        <div class="speaker-avatar">
+          <i class="fas fa-wind"></i>
+        </div>
+        <h3 class="speaker-name">Mtra. Estefania Paola Severo Martínez</h3>
+        <p class="speaker-role">UAM</p>
+        <p class="speaker-session">Taller: Energía Eólica: De la teoría a la práctica</p>
+        <a href="#"
+           class="btn btn-outline open-speaker-btn"
+           data-name="Mtra. Estefania Paola Severo Martínez"
+           [cite_start]data-title="Profesora e Investigadora, UAM "
+           data-photo-url="assets\img\Foto digital Estefanía.jpg"
+           data-bio="Bióloga licenciada por la UAM, donde ha sido profesora. Posee una maestría en Energía y Ciencias Ambientales y actualmente cursa un doctorado en Remediación Ambiental con enfoque energético integral."
+           data-topics="Energía eólica|Remediación ambiental|Ciencias ambientales|Sostenibilidad"
+           data-contact-web="https://www.uam.mx"
+           data-contact-email="esevero@uam.mx">
+          Conócela más
+        </a>
+      </div>
+
+      <!-- 19) Mtra. Samia Yolanda Cárdenas Gaucin-->
+      <div class="speaker-profile hidden" data-aos="fade-up">
+        <div class="speaker-avatar">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <h3 class="speaker-name">Mtra. Samia Yolanda Cárdenas Gaucin</h3>
+        <p class="speaker-role">IMPI</p>
+        <p class="speaker-session">Taller: Protege tu creatividad</p>
+        <a href="#"
+           class="btn btn-outline open-speaker-btn"
+           data-name="Mtra. Samia Yolanda Cárdenas Gaucin"
+           data-title="Especialista en Marcas, IMPI"
+           data-photo-url="assets\img\Samia Yolanda.png"
+           data-bio="Licenciada en Administración (UVM) con Maestría en Desarrollo del Potencial Humano. Cuenta con más de 10 años de experiencia en el área de marcas en el IMPI. Apoya a emprendedores, artesanos y MIPYMES en el uso estratégico de la propiedad industrial."
+           data-topics="Propiedad industrial|Marcas|Emprendimiento|Innovación"
+           data-contact-web="https://www.gob.mx/impi"
+           data-contact-email="scardenas@impi.gob.mx">
+          Conócela más
+        </a>
+      </div>
+      <!-- 20) Mtro. Juan Diego Canul Chablé-->
+      <div class="speaker-profile hidden" data-aos="fade-up">
+        <div class="speaker-avatar">
+          <i class="fas fa-calculator"></i>
+        </div>
+        <h3 class="speaker-name">Mtro. Juan Diego Canul Chablé</h3>
+        <p class="speaker-role">Universidad del Caribe</p>
+        <p class="speaker-session">Taller: Taller Maple</p>
+        <a href="#"
+           class="btn btn-outline open-speaker-btn"
+           data-name="Mtro. Juan Diego Canul Chablé"
+           data-title="Profesor de Matemáticas, Universidad Tecnológica de Cancún [cite: 148]"
+           data-photo-url="assets/img/ponentes/oscar-rebora.png"
+           data-bio="Matemático con doctorado de la Facultad de Matemáticas de la UADY. Tiene 17 años de experiencia docente. Es partidario del uso de software matemático como Maple. Actualmente es profesor en la Universidad Tecnológica de Cancún y de la Universidad del Caribe."
+           data-topics="Matemáticas|Software Maple|Educación|Tecnología"
+           data-contact-web="https://www.utcancun.edu.mx"
+           data-contact-email="jcanul@utcancun.edu.mx">
+          Conócelo más
+        </a>
+      </div>
+
+      <!-- 21) Dr. Francisco López Monzalvo-->
+      <div class="speaker-profile hidden" data-aos="fade-up">
+        <div class="speaker-avatar">
+          <i class="fas fa-cogs"></i>
+        </div>
+        <h3 class="speaker-name">Dr. Francisco López Monzalvo</h3>
+        <p class="speaker-role">Universidad del Caribe</p>
+        <p class="speaker-session">Taller: Simulación con SolidWorks</p>
+        <a href="#"
+           class="btn btn-outline open-speaker-btn"
+           data-name="Dr. Francisco López Monzalvo"
+           data-title="Profesor Investigador, Universidad del Caribe"
+           data-photo-url="assets\img\Francisco Monzalvo.png"
+           data-bio="Ingeniero Industrial (IPN), Maestro en Automatización y Diseño (Univ. de Cranfield, UK) y Doctor en Ciencias de la Computación (CICESE). Colaboró en proyectos para Johnson & Johnson y Chrysler de México. Actualmente es docente e investigador en la Universidad del Caribe y promotor de la Artesanía Digital."
+           data-topics="Simulación|SolidWorks|Impresión 3D|Artesanía Digital|Robótica"
+           data-contact-web="https://www.unicaribe.mx"
+           data-contact-email="flopezm@unicaribe.edu.mx">
+          Conócelo más
+        </a>
+      </div>
+
+      <!-- 22) Melchor Ernesto Muñoz Dzib-->
+      <div class="speaker-profile hidden" data-aos="fade-up">
+        <div class="speaker-avatar">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3 class="speaker-name">Mtro. Melchor Ernesto Muñoz Dzib</h3>
+        <p class="speaker-role">Docente de la Unicaribe y Asesor en Sustentabilidad</p>
+        <p class="speaker-session">Auditoría ambiental</p>
+        <a href="#"
+           class="btn btn-outline open-speaker-btn"
+           data-name="Mtro. Melchor Ernesto Muñoz Dzib"
+           data-title="Docente y Asesor en Sustentabilidad y Normatividad Ambiental"
+           data-photo-url="assets\img\Melchor.png"
+           data-bio="Maestro en Administración Integral del Ambiente (El Colef/CICESE) y Lic. en Turismo Sustentable (Univ. del Caribe). Se desempeña como asesor y auditor en normatividad ambiental. Colabora en proyectos con la UNESCO y la Carta de la Tierra. Es docente a nivel licenciatura y maestría, e investigador en temas de cambio climático y sustentabilidad."
+           data-topics="Sustentabilidad|Cambio climático|Normatividad ambiental|Turismo|Educación ambiental"
+           data-contact-web=""
+           data-contact-email="">
+          Conócelo más
+        </a>
+      </div>
+
+      <!-- 22) Diana Burgos Lugo-->
+      <div class="speaker-profile hidden" data-aos="fade-up">
+        <div class="speaker-avatar">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <h3 class="speaker-name">M. en C. Diana Elidé Burgos Lugo</h3>
+        <p class="speaker-role">UADY/ECOSUR</p>
+        <p class="speaker-session">Una mirada cualitativa a la complejidad ambiental</p>
+        <a href="#"
+           class="btn btn-outline open-speaker-btn"
+           data-name="M. en C. Diana Elidé Burgos Lugo"
+           data-title="Bióloga egresada de la Universidad Autónoma de Yucatán (UADY) y Maestra en Ciencias en Manejo de Recursos Naturales y Desarrollo Rural por El Colegio de la Frontera Sur (ECOSUR)"
+           data-photo-url="assets\img\Diana Elide.png"
+           data-bio="Bióloga egresada de la Universidad Autónoma de Yucatán (UADY) y Maestra en Ciencias en Manejo de Recursos Naturales y Desarrollo Rural por El Colegio de la Frontera Sur (ECOSUR), Unidad San Cristóbal de Las Casas, Chiapas. Actualmente candidata a Dra. en la especialidad de Ecología Humana por el Centro de Investigación y de Estudios Avanzados del Instituto Politécnico Nacional (Cinvestav). Con más de 14 años de experiencia como técnica y coordinadora de proyectos ecológicos y de planeación territorial participativa en comunidades indígenas de Campeche, Yucatán y Chiapas."
+           data-topics="Sustentabilidad|Cambio climático|Normatividad ambiental|Turismo|Educación ambiental"
+           data-contact-web=""
+           data-contact-email="">
+          Conócelo más
+        </a>
+      </div>
+
+      
+      
     </div>
 
     <div class="text-center" data-aos="fade-up" data-aos-delay="500">
@@ -803,19 +975,51 @@
                                         <div class="session-items">
                                             <div class="mini-session">
                                                 <span class="mini-time">16:00</span>
-                                                <span class="mini-title">Dashboard programas sociales</span>
+                                                <div class="mini-session-info">
+                                                    <span class="mini-title">Dashboards programas sociales</span>
+                                                    <!-- Botón modificado -->
+                                                    <a href="#" class="open-modal-btn" 
+                                                    data-title="Dashboard estratégico para el monitoreo de programas sociales y gestión de una alcaldía de CDMX"
+                                                    data-integrantes="Dylan Chan, Greysi Griz y Valeria Sánchez">
+                                                    <span>Ver detalles</span> <i class="fas fa-plus-circle"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                             <div class="mini-session">
                                                 <span class="mini-time">16:30</span>
-                                                <span class="mini-title">Optimización picking</span>
+                                                <div class="mini-session-info">
+                                                    <span class="mini-title">Optimización picking</span>
+                                                    <!-- Botón modificado -->
+                                                    <a href="#" class="open-modal-btn" 
+                                                    data-title="Diseño de la técnica de organización slotting para optimizar el proceso de picking en el CEDIS de Ancona Autopartes, 2025."
+                                                    data-integrantes="Berenice Palacios y Manuel Osorio">
+                                                    <span>Ver detalles</span> <i class="fas fa-plus-circle"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                             <div class="mini-session">
                                                 <span class="mini-time">17:00</span>
-                                                <span class="mini-title">Red distribución climas</span>
+                                                <div class="mini-session-info">
+                                                    <span class="mini-title">Red distribución de fletes</span>
+                                                    <!-- Botón modificado -->
+                                                    <a href="#" class="open-modal-btn" 
+                                                    data-title="Diseño de una red de distribución para la reducción de costos de fletes de una empresa proveedora de climas en Cancún, Quintana Roo."
+                                                    data-integrantes="Fernanda Guzmán e Irving Chablé">
+                                                    <span>Ver detalles</span> <i class="fas fa-plus-circle"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                             <div class="mini-session">
                                                 <span class="mini-time">17:30</span>
-                                                <span class="mini-title">Gestión inventarios vinos</span>
+                                                <div class="mini-session-info">
+                                                    <span class="mini-title">Planeacion de gestión de inventarios</span>
+                                                    <!-- Botón modificado -->
+                                                    <a href="#" class="open-modal-btn" 
+                                                    data-title="Diseño de planeación de la demanda y gestión de inventarios mediante el uso de almacén fiscalizdo en una importadora de vinos de Cancún, Quintana Roo."
+                                                    data-integrantes="Geraldine De Dios, Pamela Romero y Arturo Valera">
+                                                    <span>Ver detalles</span> <i class="fas fa-plus-circle"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -828,15 +1032,51 @@
                                         <div class="session-items">
                                             <div class="mini-session">
                                                 <span class="mini-time">16:00</span>
-                                                <span class="mini-title">Análisis térmico Hydrilla</span>
+                                                <div class="mini-session-info">
+                                                    <span class="mini-title">Análisis térmico Hydrilla</span>
+                                                    <!-- Botón modificado -->
+                                                    <a href="#" class="open-modal-btn" 
+                                                    data-title="Análisis preliminar de la influencia térmica en la propagación de Hydrilla verticillata en la ciénaga El Pajaral"
+                                                    data-integrantes="Mayra Bermudez">
+                                                    <span>Ver detalles</span> <i class="fas fa-plus-circle"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                             <div class="mini-session">
                                                 <span class="mini-time">16:30</span>
-                                                <span class="mini-title">Dashboard residuos hoteleros</span>
+                                                <div class="mini-session-info">
+                                                    <span class="mini-title">Dashboard de gestión de residuos</span>
+                                                    <!-- Botón modificado -->
+                                                    <a href="#" class="open-modal-btn" 
+                                                    data-title="Dashboard descriptivo para la gestión de residuos sólidos en la industria hotelera"
+                                                    data-integrantes="Gary González, Ángel Jiménez y Freda Pérez">
+                                                    <span>Ver detalles</span> <i class="fas fa-plus-circle"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                             <div class="mini-session">
                                                 <span class="mini-time">17:00</span>
-                                                <span class="mini-title">Sistema web gestión sostenible</span>
+                                                <div class="mini-session-info">
+                                                    <span class="mini-title">Sistema web de gestión sostenible</span>
+                                                    <!-- Botón modificado -->
+                                                    <a href="#" class="open-modal-btn" 
+                                                    data-title="Sistema web de gestión sostenible: analítica y control de residuos para hoteles"
+                                                    data-integrantes="Melanie Calderón, Joan González y Noé Chablé">
+                                                    <span>Ver detalles</span> <i class="fas fa-plus-circle"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="mini-session">
+                                                <span class="mini-time">17:30</span>
+                                                <div class="mini-session-info">
+                                                    <span class="mini-title">Almacén de datos con actualización automática</span>
+                                                    <!-- Botón modificado -->
+                                                    <a href="#" class="open-modal-btn" 
+                                                    data-title="Creación de un almacén de datos con actualización automática para la analítica de una empresa de calificación hotelera."
+                                                    data-integrantes="Ezequiel Alvizo, Azael Mex y Víctor Pérez">
+                                                    <span>Ver detalles</span> <i class="fas fa-plus-circle"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -884,7 +1124,7 @@
                     </div>
 
                     <div class="timeline-event event-central" data-aos="fade-up" data-aos-delay="100">
-                        <div class="event-time">10:00 - 10:30</div>
+                        <div class="event-time">10:00 - 12:30</div>
                         <div class="event-content">
                             <div class="event-badge event-competition">Concurso</div>
                             <h4>Desafío IA por un futuro sostenible</h4>
@@ -904,7 +1144,7 @@
                     </div>
 
                     <div class="timeline-event event-central" data-aos="fade-up" data-aos-delay="200">
-                        <div class="event-time">13:30 - 14:00</div>
+                        <div class="event-time">13:30 - 15:00</div>
                         <div class="event-content">
                             <div class="event-badge event-break">Receso</div>
                             <h4>Tiempo para networking</h4>
@@ -922,18 +1162,19 @@
                         </div>
                     </div>
 
-                    <div class="timeline-event event-right" data-aos="fade-left" data-aos-delay="300">
+                    <div class="timeline-event event-right" data-aos="fade-right">
                         <div class="event-time">16:00 - 17:00</div>
                         <div class="event-content">
-                            <div class="event-badge event-competition">Concurso</div>
-                            <h4>Desafío Lógico para mentes ingeniosas</h4>
-                            <p class="event-location">Competencia estudiantil</p>
+                            <div class="event-badge event-keynote">Conferencia</div>
+                            <h4>Adaptación. El planeta no se está calentando ... ya se calentó</h4>
+                            <p class="event-speaker">Lic. Oscar Rébora Aguilera</p>
+                            <p class="event-location">SEMA</p>
                             <span class="event-auditorio">Auditorio G</span>
                         </div>
                     </div>
 
                     <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="350">
-                        <div class="event-time">17:00 - 17:30</div>
+                        <div class="event-time">17:00 - 18:00</div>
                         <div class="event-content">
                             <div class="event-badge event-talk">Charla</div>
                             <h4>Emprendedurismo y liderazgo</h4>
@@ -944,7 +1185,7 @@
                     </div>
 
                     <div class="timeline-event event-right" data-aos="fade-left" data-aos-delay="400">
-                        <div class="event-time">18:00 - 18:30</div>
+                        <div class="event-time">18:00 - 19:00</div>
                         <div class="event-content">
                             <div class="event-badge event-keynote">Conferencia</div>
                             <h4>LLMs en la Ciencia de Datos: Aplicaciones y Desafíos</h4>
@@ -955,7 +1196,7 @@
                     </div>
 
                     <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="450">
-                        <div class="event-time">19:00 - 19:30</div>
+                        <div class="event-time">19:00 - 20:00</div>
                         <div class="event-content">
                             <div class="event-badge event-talk">Charla</div>
                             <h4>De la universidad a la industria TI</h4>
@@ -972,7 +1213,7 @@
                     <div class="timeline-line"></div>
                     
                     <div class="timeline-event event-left" data-aos="fade-right">
-                        <div class="event-time">9:00 - 9:30</div>
+                        <div class="event-time">9:00 - 10:00</div>
                         <div class="event-content">
                             <div class="event-badge event-keynote">Conferencia</div>
                             <h4>Ingeniería de alimentos: Alimentos funcionales</h4>
@@ -983,7 +1224,7 @@
                     </div>
 
                     <div class="timeline-event event-left" data-aos="fade-left" data-aos-delay="50">
-                        <div class="event-time">10:00 - 10:30</div>
+                        <div class="event-time">10:00 - 11:00</div>
                         <div class="event-content">
                             <div class="event-badge event-keynote">Conferencia</div>
                             <h4>Cibernética: Indispensable, Ubicua e Invisible</h4>
@@ -1068,7 +1309,7 @@
                     </div>
 
                     <div class="timeline-event event-central" data-aos="fade-up" data-aos-delay="150">
-                        <div class="event-time">14:20 - 14:30</div>
+                        <div class="event-time">14:20 - 16:00</div>
                         <div class="event-content">
                             <div class="event-badge event-break">Receso</div>
                             <h4>Tiempo para networking</h4>
@@ -1077,18 +1318,29 @@
                     </div>
 
                     <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="200">
-                        <div class="event-time">16:00 - 16:30</div>
+                        <div class="event-time">16:00 - 17:00</div>
                         <div class="event-content">
                             <div class="event-badge event-talk">Charla</div>
-                            <h4>Como ir a una entrevista y no fracasar en el intento</h4>
+                            <h4>De candidato a talento: la evolución del perfil profesional universitario</h4>
                             <p class="event-speaker">Lic. Ninive Eulalia Torres Rodríguez</p>
                             <p class="event-location">BEPENSA</p>
                             <span class="event-auditorio">Auditorio G</span>
                         </div>
                     </div>
 
+                    <div class="timeline-event event-central" data-aos="fade-up" data-aos-delay="100">
+                        <div class="event-time">17:00 - 18:00</div>
+                        <div class="event-content">
+                            <div class="event-badge event-competition">Concurso</div>
+                            <h4>Desafío Lógico para mentes ingeniosas</h4>
+                            <p class="event-location">Competencia estudiantil</p>
+                            <span class="event-auditorio">Auditorio G</span>
+                        </div>
+                    </div>
+                    
+
                     <div class="timeline-event event-left" data-aos="fade-left" data-aos-delay="250">
-                        <div class="event-time">17:00 - 17:30</div>
+                        <div class="event-time">18:00 - 19:00</div>
                         <div class="event-content">
                             <div class="event-badge event-keynote">Conferencia</div>
                             <h4>Aprendiendo Disruptivamente AI</h4>
@@ -1098,13 +1350,12 @@
                         </div>
                     </div>
 
-                    <div class="timeline-event event-left" data-aos="fade-right" data-aos-delay="300">
-                        <div class="event-time">18:00 - 18:30</div>
+                    <div class="timeline-event event-central" data-aos="fade-up" data-aos-delay="100">
+                        <div class="event-time">17:00 - 18:00</div>
                         <div class="event-content">
-                            <div class="event-badge event-keynote">Conferencia</div>
-                            <h4>Adaptación. El planeta no se está calentando...ya se calentó</h4>
-                            <p class="event-speaker">Lic. Oscar Rébora</p>
-                            <p class="event-location">SEMA</p>
+                            <div class="event-badge event-inauguration">Clausura</div>
+                            <h4>Ceremonia de Clausura</h4>
+                            <p class="event-location">Competencia estudiantil</p>
                             <span class="event-auditorio">Auditorio G</span>
                         </div>
                     </div>
@@ -1128,21 +1379,7 @@
         </div>
 
         <div class="talleres-grid">
-            <!-- Taller 1 -->
-            <div class="taller-card" data-aos="fade-up" data-aos-delay="200" data-horario="manana">
-                <div class="taller-header">
-                    <span class="taller-lugar">LAMA</span>
-                </div>
-                <h3 class="taller-titulo">Simulación</h3>
-                <p class="taller-ponente">Dr. Francisco López Monzalvo</p>
-                <p class="taller-procedencia">Universidad del Caribe</p>
-                <div class="taller-info">
-                    <span class="taller-horario">10:00 - 13:00 hrs</span>
-                    <span class="taller-fecha">6 Nov</span>
-                </div>
-                <div class="taller-badge">Taller Matutino</div>
-            </div>
-
+           
             <!-- Taller 2 -->
             <div class="taller-card" data-aos="fade-up" data-aos-delay="250" data-horario="manana">
                 <div class="taller-header">
@@ -1188,6 +1425,21 @@
                 <div class="taller-badge">Taller Matutino</div>
             </div>
 
+            <!-- Taller 4.5 -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="200" data-horario="tarde">
+                <div class="taller-header">
+                    <span class="taller-lugar">LAMA</span>
+                </div>
+                <h3 class="taller-titulo">Simulación</h3>
+                <p class="taller-ponente">Dr. Francisco López Monzalvo</p>
+                <p class="taller-procedencia">Universidad del Caribe</p>
+                <div class="taller-info">
+                    <span class="taller-horario">15:00 - 18:00 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge-v">Taller Vespertino</div>
+            </div>
+
             <!-- Taller 5 -->
             <div class="taller-card" data-aos="fade-up" data-aos-delay="400" data-horario="tarde">
                 <div class="taller-header">
@@ -1218,7 +1470,24 @@
                 <div class="taller-badge-v">Taller Vespertino</div>
             </div>
 
-            <!-- Taller 7 -->
+            <!-- Taller 7 - Mtro. Melchor Ernesto Muñoz Dzib -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="350" data-horario="manana">
+                <div class="taller-header">
+                    <span class="taller-lugar">LEL</span>
+                </div>
+                <h3 class="taller-titulo">Auditoría ambiental</h3>
+                <p class="taller-ponente">Mtro. Melchor Ernesto Muñoz Dzib</p>
+                <p class="taller-procedencia">Colef</p>
+                <div class="taller-info">
+                    <span class="taller-horario">10:00 - 13:30 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge">Taller Matutino</div>
+            </div>
+
+            
+
+            <!-- Taller 8 -->
             <div class="taller-card" data-aos="fade-up" data-aos-delay="500" data-horario="manana">
                 <div class="taller-header">
                     <span class="taller-lugar">LIPI</span>
@@ -1233,7 +1502,7 @@
                 <div class="taller-badge">Taller Matutino</div>
             </div>
 
-            <!-- Taller 8 - Dra. Diana Burgos Lugo -->
+            <!-- Taller 9 - Dra. Diana Burgos Lugo -->
             <div class="taller-card" data-aos="fade-up" data-aos-delay="550" data-horario="manana">
                 <div class="taller-header">
                     <span class="taller-lugar">LFQ</span>
@@ -1241,6 +1510,21 @@
                 <h3 class="taller-titulo">Una mirada cualitativa a la complejidad ambiental</h3>
                 <p class="taller-ponente">Dra. Diana Burgos Lugo</p>
                 <p class="taller-procedencia">CINVESTAV</p>
+                <div class="taller-info">
+                    <span class="taller-horario">10:00 - 13:00 hrs</span>
+                    <span class="taller-fecha">6 Nov</span>
+                </div>
+                <div class="taller-badge">Taller Matutino</div>
+            </div>
+
+            <!-- Taller 10 - -->
+            <div class="taller-card" data-aos="fade-up" data-aos-delay="550" data-horario="manana">
+                <div class="taller-header">
+                    <span class="taller-lugar">LAMA</span>
+                </div>
+                <h3 class="taller-titulo">Simulación Neumática como Base de los Sistemas Industriales.</h3>
+                <p class="taller-ponente">Estudiantes Jesús Rodolfo Sánchez Ku, Gerardo Enrique Esquivel Euan y Jasson Nicolás Jiménez</p>
+                <p class="taller-procedencia">Unicaribe</p>
                 <div class="taller-info">
                     <span class="taller-horario">10:00 - 13:00 hrs</span>
                     <span class="taller-fecha">6 Nov</span>

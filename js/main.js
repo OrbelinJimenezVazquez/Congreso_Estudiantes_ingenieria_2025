@@ -901,6 +901,13 @@ setTimeout(function() {
 
 // ===== APLICAR FIX DE AOS DESPUÉS DE CARGA COMPLETA =====
 window.addEventListener('load', function() {
+    /* ========= CÓDIGO DEL PRELOADER AÑADIDO ========= */
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.classList.add('preloader-hidden');
+    }
+    /* ================================================= */
+
     if (window.innerWidth < 768) {
         applyAOSMobileFix();
     }

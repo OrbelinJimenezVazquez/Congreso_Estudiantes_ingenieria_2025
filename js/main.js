@@ -269,26 +269,81 @@ function initTabs() {
     }
 }
 
-// ===== CONTADOR REGRESIVO =====
+// ===== CONTADOR REGRESIVO MEJORADO =====
 function updateCountdown() {
-    const eventDate = new Date('Nov 5, 2025 09:00:00').getTime();
+    const eventStartDate = new Date('Nov 5, 2025 09:00:00').getTime();
+    const eventEndDate = new Date('Nov 7, 2025 20:00:00').getTime();
     const now = new Date().getTime();
-    const distance = eventDate - now;
+    const distanceToStart = eventStartDate - now;
+    const distanceToEnd = eventEndDate - now;
 
-    if (distance < 0) {
-        showEventStarted();
+    // Si el evento ya comenzó pero aún no termina
+    if (distanceToStart < 0 && distanceToEnd > 0) {
+        showEventInProgress(distanceToEnd);
+        return;
+    }
+    
+    // Si el evento ya terminó
+    if (distanceToEnd < 0) {
+        showEventEnded();
         return;
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Si el evento aún no comienza
+    const days = Math.floor(distanceToStart / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distanceToStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distanceToStart % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distanceToStart % (1000 * 60)) / 1000);
 
     updateCountdownElement('days', days);
     updateCountdownElement('hours', hours);
     updateCountdownElement('minutes', minutes);
     updateCountdownElement('seconds', seconds);
+}
+
+function showEventInProgress(distanceToEnd) {
+    const countdownEl = document.getElementById('countdown');
+    if (countdownEl) {
+        const days = Math.floor(distanceToEnd / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distanceToEnd % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distanceToEnd % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distanceToEnd % (1000 * 60)) / 1000);
+        
+        countdownEl.innerHTML = `
+            <div class="countdown-text"><p>¡El evento está en curso! Termina en:</p></div>
+            <div class="countdown-grid">
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="days-end">${days.toString().padStart(2, '0')}</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="hours-end">${hours.toString().padStart(2, '0')}</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="minutes-end">${minutes.toString().padStart(2, '0')}</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="seconds-end">${seconds.toString().padStart(2, '0')}</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+function showEventEnded() {
+    const countdownEl = document.getElementById('countdown');
+    if (countdownEl) {
+        countdownEl.innerHTML = `
+            <div class="event-ended-message" style="text-align: center; padding: 20px;">
+                <h3 style="color: var(--pure-white); margin-bottom: 10px;">¡El XIX CEI 2025 ha concluido!</h3>
+                <p style="color: var(--pure-white); opacity: 0.9;">Gracias por ser parte de este evento</p>
+            </div>
+        `;
+    }
+    clearInterval(countdownInterval);
 }
 
 function updateCountdownElement(elementId, value) {
@@ -304,19 +359,6 @@ function updateCountdownElement(elementId, value) {
             element.textContent = value.toString().padStart(2, '0');
         }
     }
-}
-
-function showEventStarted() {
-    const countdownEl = document.getElementById('countdown');
-    if (countdownEl) {
-        countdownEl.innerHTML = `
-            <div class="event-started-message" style="text-align: center; padding: 20px;">
-                <h3 style="color: var(--pure-white); margin-bottom: 10px;">¡El evento está en curso!</h3>
-                <p style="color: var(--pure-white); opacity: 0.9;">Únete a nosotros en el Auditorio de Ingenierías</p>
-            </div>
-        `;
-    }
-    clearInterval(countdownInterval);
 }
 
 let countdownInterval;

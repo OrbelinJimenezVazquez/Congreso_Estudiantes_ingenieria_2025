@@ -981,6 +981,19 @@ a, button, input {
     transition: var(--transition);
 }
 
+.event-content #programa_detalle {
+    display: flex;
+    flex-direction: column;
+    color: var(--accent-turquoise);
+    height: 80%;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 8px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
 .event-content:active {
     transform: scale(0.99);
     box-shadow: var(--shadow-soft);
@@ -1032,6 +1045,8 @@ a, button, input {
     margin-bottom: 8px;
     color: var(--primary-dark);
 }
+
+
 
 .event-speaker {
     font-size: 0.85rem;
@@ -1135,6 +1150,62 @@ a, button, input {
     transition: var(--transition);
 }
 
+.mini-session.technical-session {
+    background: var(--pure-white);
+    border: 1px solid var(--gray-light);
+    border-left: 5px solid var(--primary-dark); /* Línea de acento sutil */
+    box-shadow: var(--shadow-soft);
+    padding: 15px 20px; 
+    transition: var(--transition); /* Aplicamos la transición base */
+    
+    /* Distribución Horizontal (Escritorio/Tablet) */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Aplicar color primario para el texto interno y dar jerarquía */
+.mini-session.technical-session .mini-title,
+.mini-session.technical-session .mini-speaker {
+    color: var(--primary-dark); /* Color primario fuerte */
+    opacity: 1; 
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.mini-session.technical-session .mini-time {
+    color: var(--accent-turquoise); /* Color de acento para la hora */
+    font-weight: 700;
+    font-size: 0.85rem;
+    min-width: 65px;
+    flex-shrink: 0;
+    text-align: right;
+}
+
+.mini-session.technical-session .mini-title {
+    font-size: 1rem; /* Más legible */
+    flex-grow: 1; 
+}
+
+.mini-session.technical-session .mini-speaker {
+    font-size: 0.9rem;
+    font-style: normal;
+    text-align: right;
+    width: 30%; 
+}
+
+/* Hover/Active minimalista */
+.mini-session.technical-session:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--accent-turquoise); /* Cambio de color de borde al pasar el ratón */
+}
+.mini-session.technical-session:active {
+    transform: scale(0.99);
+    box-shadow: var(--shadow-soft);
+}
+
 .mini-time {
     font-size: 0.75rem;
     font-weight: 600;
@@ -1163,6 +1234,7 @@ a, button, input {
     box-shadow: var(--shadow-medium);
     border-color: var(--accent-turquoise);
 }
+
 
 .mini-session:hover {
     transform: translateX(5px);
@@ -1972,6 +2044,38 @@ a, button, input {
     .topics-tags {
         justify-content: center;
     }
+
+    .mini-session.technical-session {
+        /* Volver a distribución vertical en pantallas muy pequeñas */
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 15px;
+    }
+    
+    .mini-session.technical-session .mini-title {
+        order: 2; /* Mueve el título al centro */
+        width: 100%;
+        margin-bottom: 5px;
+        font-size: 0.95rem; /* Asegurar que el tamaño se vea bien */
+    }
+
+    .mini-session.technical-session .mini-speaker {
+        order: 3; /* Ponente abajo */
+        width: 100%;
+        text-align: left;
+        font-size: 0.85rem;
+        color: var(--gray-medium); /* Menor jerarquía para el ponente en móvil */
+    }
+    
+    .mini-session.technical-session .mini-time {
+        order: 1; /* Hora arriba */
+        margin-bottom: 8px;
+        min-width: auto;
+        padding: 0;
+        text-align: left;
+        color: var(--accent-turquoise); /* Mantiene el color de acento */
+    }
+
 }
 
 
@@ -2337,8 +2441,6 @@ a, button, input {
     .footer-copyright {
         font-size: 0.75rem;
     }
-
-
 }
 
 /* ===== MEDIA QUERIES - TABLET  ===== */
@@ -2394,7 +2496,7 @@ a, button, input {
         padding: 0;
         overflow: visible;
     }
-    
+
     .nav-item {
         margin: 0;
         padding: 10px 15px;
@@ -2750,6 +2852,7 @@ a, button, input {
     }
     .session-track{
         gap:15px;
+        min-width: 240px;
     }
     .session-track .session-items{
         gap: 10px;
@@ -2793,8 +2896,53 @@ a, button, input {
     .social-links {
         margin-top: 0;
     }
-}
 
+    .session-items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Espacio uniforme entre todas las tarjetas */
+    }
+    
+    .mini-session {
+        /* Reset de los estilos Mobile first que afectaban el layout de las tarjetas normales */
+        transform: none;
+        box-shadow: none;
+        border: 1px solid var(--gray-light);
+        padding: 10px 15px; 
+        flex-direction: column;
+    }
+    
+    .mini-session:hover {
+        transform: translateY(-2px); /* Mantener el hover sutil del mini-session original */
+        box-shadow: var(--shadow-soft);
+    }
+    
+    /* Aseguramos que las tarjetas technical-session mantengan su diseño horizontal */
+    .mini-session.technical-session {
+        display: flex;
+        flex-direction: column;
+    }
+    .mini-session.technical-session .mini-title,
+    .mini-session.technical-session .mini-speaker,
+    .mini-session.technical-session .mini-time {
+        order: initial; /* Resetea el orden para desktop */
+        width: auto;
+        text-align: left;
+        font-size: .8rem;
+        margin: 0;
+    }
+    .mini-session.technical-session .mini-time {
+        background: rgba(60, 186, 189, 0.1);
+        text-align: center;
+        padding: 3px 4px;
+        border-radius: 8px;
+    }
+    .mini-session.technical-session .mini-speaker {
+        margin-top: 5px;
+        font-size: 0.75rem;
+        color: #67d7d9;
+    }
+}
 /* ===== EFECTOS HOVER SOLO DESKTOP ===== */
 @media (min-width: 1024px) {
     .feature-card:hover {

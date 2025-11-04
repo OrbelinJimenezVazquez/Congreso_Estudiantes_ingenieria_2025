@@ -1369,6 +1369,11 @@ a, button, input {
     line-height: 1.3;
 }
 
+.taller-nota{
+    font-size: 0.75rem;
+    color: var(--gray-medium);
+    margin-bottom: 10px;
+}
 .taller-ponente {
     font-size: 0.9rem;
     color: var(--accent-turquoise);

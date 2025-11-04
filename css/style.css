@@ -1353,6 +1353,15 @@ a, button, input {
     border-radius: 15px;
 }
 
+.taller-lugar-v{
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--pure-white);
+    background: linear-gradient(135deg, #0d2db9, #e73d4b);
+    padding: 4px 12px;
+    border-radius: 15px;
+    
+}
 .taller-titulo {
     font-size: 1.1rem;
     color: var(--primary-dark);

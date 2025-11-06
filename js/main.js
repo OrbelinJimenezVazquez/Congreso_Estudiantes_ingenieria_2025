@@ -154,41 +154,51 @@ function updateActiveNavLink(scrollTop) {
     });
 }
 
-// ===== SMOOTH SCROLL ORIGINAL MEJORADO =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// ===== SMOOTH SCROLL ORIGINAL MEJORADO - ACTUALIZADO PARA NAVEGACIÓN ENTRE PÁGINAS =====
+document.querySelectorAll('a[href^="#"], a[href$=".html"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        if (this.getAttribute('target') === '_blank' || this.getAttribute('href').includes('http')) {
+        const href = this.getAttribute('href');
+        const targetId = href.startsWith('#') ? href : null;
+        const isExternalLink = href.startsWith('http') || this.getAttribute('target') === '_blank';
+        const isInternalAnchor = targetId !== null;
+        
+        if (isExternalLink) {
             return;
         }
-        
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        
-        if (targetId === window.location.hash) {
-            return;
-        }
-        
-        const target = document.querySelector(targetId);
-        
-        if (target) {
-            const isMobile = window.innerWidth < 768;
-            const navHeight = isMobile ? 80 : 120;
-            const offsetTop = target.offsetTop - navHeight;
-            
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
 
-            history.pushState(null, null, targetId);
+        if (isInternalAnchor) {
+            // Maneja el smooth scroll SÓLO si es un enlace interno de la página actual
+            e.preventDefault();
             
-            if (navMenu && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-                document.body.style.overflow = '';
-                document.documentElement.style.overflow = '';
+            // Si ya estamos en la página de anclaje, simplemente desplázate
+            if (href === window.location.hash) {
+                return;
+            }
+
+            const target = document.querySelector(targetId);
+            
+            if (target) {
+                const isMobile = window.innerWidth < 768;
+                // Ajusta el offset de scroll para la navegación fija
+                const navHeight = isMobile ? 80 : 120;
+                const offsetTop = target.offsetTop - navHeight;
+                
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+
+                history.pushState(null, null, targetId);
+                
+                if (navMenu && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                    document.documentElement.style.overflow = '';
+                }
             }
         }
+        // Si no es un anchor (#) ni un enlace externo (http), se asume que es una navegación entre páginas (.html) y se permite la acción por defecto.
     });
 });
 

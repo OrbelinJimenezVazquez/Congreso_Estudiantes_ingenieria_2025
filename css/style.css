@@ -3007,3 +3007,202 @@ a, button, input {
         box-shadow: none !important;
     }
 }
+
+/* ======================================= */
+/* ===  NUEVO DISEÑO MODAL (2 COLUMNAS) === */
+/* ======================================= */
+
+/* Ajuste al cuerpo del modal para el nuevo layout */
+.modal-body {
+  padding: 0; /* Sin padding, el contenedor interno lo maneja */
+  max-height: 70vh;
+  overflow-y: auto;
+  background-color: #f4f5f7; /* Color de fondo ligero */
+}
+
+/* Contenedor principal de la lista */
+.project-list-container {
+  width: 100%;
+}
+
+/* Fila de Encabezado (simula el <thead>) */
+.project-list-header {
+  display: flex;
+  background-color: #004a63; /* Color oscuro de tu paleta */
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  position: sticky; /* Encabezado fijo */
+  top: 0;
+  z-index: 10;
+}
+
+.project-time-header,
+.project-details-header {
+  padding: 16px 20px;
+}
+
+.project-time-header {
+  flex-basis: 30%; /* 30% para la hora */
+  flex-shrink: 0;
+}
+
+.project-details-header {
+  flex-basis: 70%; /* 70% para el resto */
+}
+
+/* Cada item de la lista (simula el <tr>) */
+.project-item {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0; /* Separador sutil */
+  background-color: #ffffff;
+}
+
+/* Estilo Cebra (inicia en 'odd' porque el header no cuenta) */
+.project-item:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Columna de la Hora */
+.project-time {
+  flex-basis: 30%; /* Mismo ancho que el header */
+  flex-shrink: 0;
+  padding: 16px 20px;
+  font-weight: 600;
+  color: #333;
+  border-right: 1px solid #e9ecef;
+}
+
+/* Columna de Detalles (Título + Participantes) */
+.project-details {
+  flex-basis: 70%;
+  padding: 16px 20px;
+}
+
+.project-title {
+  display: block; /* Para que ocupe su propia línea */
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 8px; /* Espacio entre título y participantes */
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* ESTILO DE PARTICIPANTES (como en tu imagen) */
+.project-participants {
+  display: block;
+  font-size: 0.9rem;
+  color: #007a7a; /* Color acento (verde/azul corporativo) */
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ======================================= */
+/* ===     DISEÑO RESPONSIVE MÓVIL     === */
+/* ======================================= */
+@media (max-width: 768px) {
+  
+  /* Ocultamos los encabezados en móvil, son redundantes */
+  .project-list-header {
+    display: none;
+  }
+
+  /* Hacemos que las "filas" sean bloques */
+  .project-item {
+    flex-direction: column; /* ¡Apila las columnas! */
+    margin-bottom: 10px; /* Espacio entre "tarjetas" */
+    border: none;
+    border-radius: 8px; /* Bordes curvos para cada item */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    overflow: hidden; /* Para que el borde redondeado funcione */
+  }
+
+  .project-time {
+    width: 100%;
+    flex-basis: auto; /* Resetea el ancho */
+    border-right: none; /* Quita el borde lateral */
+    border-bottom: 1px dashed #ccc; /* Añade un separador */
+    background-color: #fdfdfd; 
+    color: #004a63; /* Color oscuro para resaltar la hora */
+    font-weight: 700; 
+  }
+
+  .project-details {
+    width: 100%;
+    flex-basis: auto;
+    background-color: #ffffff;
+  }
+  
+  /* Hacemos que el modal ocupe casi toda la pantalla */
+  .modal-content {
+     max-width: 95vw;
+     margin: 10px;
+  }
+}
+
+/* ======================================= */
+/* ===  ACTUALIZACIÓN ESTILO DE HORA   === */
+/* ======================================= */
+
+/*
+ * 1. Columna de la Hora (Contenedor)
+ * La convertimos en un 'flex container' para centrar
+ * verticalmente la píldora de la hora.
+*/
+.project-time {
+  flex-basis: 30%;
+  flex-shrink: 0;
+  padding: 16px 20px;
+  border-right: 1px solid #e9ecef;
+  
+  /* Centrado vertical de la píldora */
+  display: flex;
+  align-items: center; 
+}
+
+/*
+ * 2. Píldora de la Hora (Estilo de tu imagen)
+ * Usamos los colores de la paleta de tu sitio.
+*/
+.time-badge {
+  display: inline-block;
+  padding: 6px 14px; /* Ajusta el tamaño de la píldora */
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-align: center;
+  border-radius: 50rem; /* Esto crea la forma de píldora */
+
+  /* Colores inspirados en tu imagen */
+  color: #007a7a; /* Color de acento (verde/azul) */
+  background-color: rgba(0, 122, 122, 0.1); /* Tono muy claro del mismo color */
+}
+
+
+/* ======================================= */
+/* ===     AJUSTE RESPONSIVE MÓVIL     === */
+/* ======================================= */
+@media (max-width: 768px) {
+  
+  /*
+   * 3. Ajuste del contenedor de hora en MÓVIL
+   * Reseteamos flex y ajustamos el padding.
+  */
+  .project-time {
+    width: 100%;
+    flex-basis: auto;
+    border-right: none;
+    border-bottom: 1px dashed #ccc;
+    background-color: #fdfdfd; 
+    
+    display: block; /* Resetea el flex */
+    padding: 12px 16px; /* Padding más pequeño para móvil */
+  }
+
+  /*
+   * 4. Ajuste del contenedor de detalles en MÓVIL
+  */
+  .project-details {
+    padding: 12px 16px; /* Padding consistente */
+  }
+}

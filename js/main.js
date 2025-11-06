@@ -973,3 +973,112 @@ function debugAOS() {
 
 // Ejecutar debug después de 3 segundos (opcional)
 setTimeout(debugAOS, 3000);
+
+/* === CÓDIGO ACTUALIZADO PARA EL MODAL DE PROYECTOS (en main.js) === */
+/* === CON DISEÑO RESPONSIVE DE 2 COLUMNAS === */
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- Referencias al Modal de Proyectos ---
+    const projectModal = document.getElementById('project-modal');
+    if (!projectModal) {
+        console.log("Modal de proyecto no encontrado. Saltando lógica del modal.");
+        return; 
+    }
+
+    const modalTitle = document.getElementById('modal-project-title');
+    const modalBody = document.getElementById('modal-project-body');
+    const modalCloseBtn = document.getElementById('modal-close');
+
+    const projectBtns = document.querySelectorAll('.open-modal-btn');
+
+    projectBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            const title = btn.dataset.title || 'Detalles del Proyecto';
+            const projectsJson = btn.dataset.projectsJson;
+            const integrantes = btn.dataset.integrantes;
+
+            modalTitle.textContent = title;
+            modalBody.innerHTML = ''; // Limpiar contenido anterior
+
+            if (projectsJson) {
+                // --- CASO 1: Construir LISTA DE 2 COLUMNAS (para Shark Tank) ---
+                try {
+                    const projects = JSON.parse(projectsJson);
+                    
+                    // 1. Contenedor principal
+                    const listContainer = document.createElement('div');
+                    listContainer.className = 'project-list-container';
+
+                    // 2. Encabezado (opcional, pero le da un look pro)
+                    const header = document.createElement('div');
+                    header.className = 'project-list-header';
+                    header.innerHTML = `
+                        <div class="project-time-header">Hora</div>
+                        <div class="project-details-header">Proyecto y Participantes</div>
+                    `;
+                    listContainer.appendChild(header);
+
+                    // 3. Crear cada item
+                    projects.forEach(project => {
+                        const item = document.createElement('div');
+                        item.className = 'project-item';
+                        
+                        // Usamos innerHTML para que las etiquetas <br> del JSON funcionen
+                        item.innerHTML = `
+                            <div class="project-time">
+                                <span class="time-badge">${project.hora}</span>
+                            </div>
+                            <div class="project-details">
+                                <span class="project-title">${project.titulo}</span>
+                                <span class="project-participants">${project.equipo}</span>
+                            </div>
+                        `;
+                        listContainer.appendChild(item);
+                    });
+                    
+                    modalBody.appendChild(listContainer);
+
+                } catch (error) {
+                    console.error("Error al parsear JSON de proyectos:", error);
+                    modalBody.textContent = "Error al cargar los datos de los equipos.";
+                }
+
+            } else if (integrantes) {
+                // --- CASO 2: Párrafo simple (Proyectos Terminales) ---
+                // Para que se vea bien, le añadimos un padding que quitamos del modal-body
+                modalBody.style.padding = '20px 30px'; 
+
+                const listTitle = document.createElement('h5');
+                listTitle.textContent = 'Integrantes del Proyecto';
+                modalBody.appendChild(listTitle);
+                const p = document.createElement('p');
+                p.textContent = integrantes;
+                modalBody.appendChild(p);
+            } else {
+                modalBody.style.padding = '20px 30px';
+                modalBody.textContent = 'No hay detalles disponibles.';
+            }
+            
+            // Limpiar el padding por si se usó en el CASO 2
+            if (projectsJson) {
+                 modalBody.style.padding = '0';
+            }
+
+            projectModal.classList.add('active'); 
+            projectModal.setAttribute('aria-hidden', 'false');
+        });
+    });
+
+    // --- Lógica para cerrar el modal ---
+    const closeModal = () => {
+        projectModal.classList.remove('active');
+        projectModal.setAttribute('aria-hidden', 'true');
+    };
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    projectModal.addEventListener('click', (e) => {
+        if (e.target === projectModal) closeModal();
+    });
+});

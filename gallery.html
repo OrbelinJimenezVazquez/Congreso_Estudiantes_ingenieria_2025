@@ -10,102 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <link rel="stylesheet" href="css/style.css">
-    
-    <style>
-      /* Estilos para la galería */
-      .gallery-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 20px;
-          padding: 40px 0;
-      }
-
-      .gallery-item {
-          overflow: hidden;
-          border-radius: var(--border-radius);
-          box-shadow: var(--shadow-medium);
-          position: relative;
-          cursor: pointer;
-          transition: var(--transition);
-          background: var(--light-bg);
-      }
-
-      .gallery-item img {
-          width: 100%;
-          height: 300px;
-          object-fit: cover;
-          display: block;
-          transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-
-      .gallery-item:hover img {
-          transform: scale(1.05);
-      }
-      
-      .gallery-item:hover {
-          transform: translateY(-5px);
-          box-shadow: var(--shadow-strong);
-      }
-      
-      .gallery-caption {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          padding: 15px;
-          background: linear-gradient(to top, rgba(35, 32, 70, 0.8), transparent);
-          color: var(--pure-white);
-          font-weight: 600;
-          font-size: 1rem;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-      }
-      
-      .gallery-item:hover .gallery-caption {
-          opacity: 1;
-      }
-      
-      .gallery-empty {
-          text-align: center;
-          padding: 100px 20px;
-      }
-      
-      .gallery-empty h3 {
-          font-size: 1.8rem;
-          color: var(--primary-dark);
-          margin-bottom: 15px;
-      }
-      
-      .gallery-empty p {
-          font-size: 1.1rem;
-          color: var(--gray-medium);
-      }
-
-      @media (max-width: 768px) {
-        .gallery-grid {
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-        .gallery-item img {
-            height: 250px;
-        }
-      }
-    </style>
-    
-    <style>
-      /* Estilos de preloader */
-      #preloader {
-        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; 
-        background-color: #fff; display: flex; justify-content: center; align-items: center;
-        opacity: 1; visibility: visible; transition: opacity 0.75s ease, visibility 0.75s ease;
-      }
-      #preloader.preloader-hidden {
-        opacity: 0; visibility: hidden;
-      }
-      #preloader img {
-        width: 250px; height: auto;
-      }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js"></script>
 </head>
 <body>
     <div id="preloader">
@@ -162,36 +69,23 @@
     </nav>
 <br><br><br><br>
     <section id="galeria" class="content-section">
-      <!---  <div class="container">
+      <div class="container">
             <h2 class="section-title" data-aos="fade-up">Galería Fotográfica</h2>
             <p class="section-description" data-aos="fade-up" data-aos-delay="100">
                 Los mejores momentos capturados durante el XIX Congreso de Estudiantes de Ingeniería 2025.
             </p>
 
-            <div class="gallery-grid" data-aos="fade-up" data-aos-delay="200">-->
-                <div class="gallery-empty" data-aos="fade-up">
-                    <h3>¡Próximamente!</h3>
-                    <p>Las fotos del evento estarán disponibles aquí al finalizar el congreso. ¡Vuelve pronto!</p>
+            <div class="gallery-grid">
+                <div class="gallery-item gallery-item-featured" data-aos="zoom-in">
+                    <img src="assets/img/placeholder-1.jpg" alt="Foto Principal">
+                    <div class="gallery-caption">Conferencia de Apertura</div>
                 </div>
-           <!--     <div class="gallery-item" data-aos="zoom-in">
-                    <img src="assets/img/placeholder-1.jpg" alt="Ceremonia de Inauguración">
-                    <div class="gallery-caption">Inauguración Oficial del CEI</div>
-                </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="assets/img/placeholder-2.jpg" alt="Conferencia Magistral">
-                    <div class="gallery-caption">Conferencia: Dr. Carlos Reyes García</div>
-                </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="assets/img/placeholder-3.jpg" alt="Sesión de Talleres">
-                    <div class="gallery-caption">Taller de Simulación con SolidWorks</div>
-                </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
-                    <img src="assets/img/placeholder-4.jpg" alt="Networking">
-                    <div class="gallery-caption">Sesión de Networking Estudiantil</div>
-                </div>
-
                 
-            </div>-->
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">...</div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">...</div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">...</div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">...</div>
+            </div>
         </div>
     </section>
 

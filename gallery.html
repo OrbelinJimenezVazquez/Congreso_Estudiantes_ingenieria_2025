@@ -10,9 +10,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <link rel="stylesheet" href="css/style.css">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.css">
+    
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/featherlight-touch@1.0.1/release/featherlight.touch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/featherlight-mousewheel@0.3.0/featherlight.mousewheel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/featherlight-zoom@1.0.0/release/featherlight.zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async=""></script>
 </head>
 <body>
     <div id="preloader">
@@ -68,214 +79,251 @@
         </div>
     </nav>
 <br><br><br><br>
-    <section id="galeria" class="content-section">
+
+    <section id="galeria" class="content-section gallery-section">
       <div class="container">
             <h2 class="section-title" data-aos="fade-up">Galería Fotográfica</h2>
             <p class="section-description" data-aos="fade-up" data-aos-delay="100">
                 Los mejores momentos capturados durante el XIX Congreso de Estudiantes de Ingeniería 2025.
             </p>
 
+            <!-- Filtros de galería -->
+            <div class="gallery-filters" data-aos="fade-up" data-aos-delay="150">
+                <button class="gallery-filter-btn active" data-filter="all">Todas</button>
+                <button class="gallery-filter-btn" data-filter="inauguracion">Inauguración</button>
+                <button class="gallery-filter-btn" data-filter="ponencias">Ponencias</button>
+                <button class="gallery-filter-btn" data-filter="proyectos">Proyectos</button>
+                <button class="gallery-filter-btn" data-filter="miercoles">Miércoles</button>
+            </div>
+
             <div class="gallery-grid" data-aos="fade-up" data-aos-delay="200">
                 
-                <div class="gallery-item featured-large" data-aos="zoom-in">
+                <!-- Separador del día -->
+                <div class="gallery-day-divider">
+                    <h3>Día 1: Miércoles 5 de Noviembre</h3>
+                </div>
+                
+                <!-- Inauguración -->
+                <div class="gallery-item featured-large" data-aos="zoom-in" data-category="inauguracion miercoles">
                     <a href="assets/img/galeria/miercoles/inauguracion/welcome_1.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/inauguracion/welcome_1.jpg" alt="Ceremonia de Inauguración - Vista General">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/inauguracion/welcome_1.jpg" alt="Ceremonia de Inauguración - Vista General">
                         <div class="gallery-caption">Ceremonia de Inauguración del Congreso</div>
                     </a>
                 </div>
 
-                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="100">
+                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="100" data-category="inauguracion miercoles">
                     <a href="assets/img/galeria/miercoles/inauguracion/welcome_2.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/inauguracion/welcome_2.jpg" alt="Mesa de Honor y Autoridades">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/inauguracion/welcome_2.jpg" alt="Mesa de Honor y Autoridades">
                         <div class="gallery-caption">Mesa de Honor y Palabras de Bienvenida</div>
                     </a>
                 </div>
 
-                <div class="gallery-item featured-tall" data-aos="zoom-in" data-aos-delay="200">
+                <div class="gallery-item featured-tall" data-aos="zoom-in" data-aos-delay="200" data-category="inauguracion miercoles">
                     <a href="assets/img/galeria/miercoles/coffeebreak/cf.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/coffeebreak/cf.jpg" alt="Coffee Break y Networking">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/coffeebreak/cf.jpg" alt="Coffee Break y Networking">
                         <div class="gallery-caption">Networking durante el Coffee Break</div>
                     </a>
                 </div>
 
-                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="300">
+                <!-- Ponencias -->
+                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="300" data-category="ponencias miercoles">
                     <a href="assets/img/galeria/miercoles/ponencias/Ponencia_01.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/ponencias/Ponencia_01.jpg" alt="Ponente Magistral en Escenario">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/ponencias/Ponencia_01.jpg" alt="Ponente Magistral en Escenario">
                         <div class="gallery-caption">Conferencia Magistral - Ingeniería Sostenible</div>
                     </a>
                 </div>
                 
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400" data-category="ponencias miercoles">
                     <a href="assets/img/galeria/miercoles/ponencias/Ponencia_02.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/ponencias/Ponencia_02.jpg" alt="Ponente con Público">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/ponencias/Ponencia_02.jpg" alt="Ponente con Público">
                         <div class="gallery-caption">Detalle del Ponente en Pantalla</div>
                     </a>
                 </div>
                 
-                <div class="gallery-item featured-tall" data-aos="zoom-in" data-aos-delay="500">
+                <div class="gallery-item featured-tall" data-aos="zoom-in" data-aos-delay="500" data-category="ponencias miercoles">
                     <a href="assets/img/galeria/miercoles/ponencias/Ponencia_03.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/ponencias/Ponencia_03.jpg" alt="Público en el Auditorio">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/ponencias/Ponencia_03.jpg" alt="Público en el Auditorio">
                         <div class="gallery-caption">Público Atento en el Auditorio G</div>
                     </a>
                 </div>
                 
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="600">
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="600" data-category="ponencias miercoles">
                     <a href="assets/img/galeria/miercoles/ponencias/Ponencia_04.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/ponencias/Ponencia_04.jpg" alt="Ponencia 4">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/ponencias/Ponencia_04.jpg" alt="Ponencia 4">
                         <div class="gallery-caption">Sesión de Preguntas y Respuestas</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="700">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="700" data-category="ponencias miercoles">
                     <a href="assets/img/galeria/miercoles/ponencias/Ponencia_05.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/ponencias/Ponencia_05.jpg" alt="Ponencia 5">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/ponencias/Ponencia_05.jpg" alt="Ponencia 5">
                         <div class="gallery-caption">Panel de Expertos</div>
                     </a>
                 </div>
                 
-                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="800">
+                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="800" data-category="ponencias miercoles">
                     <a href="assets/img/galeria/miercoles/ponencias/Ponencia_06.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/ponencias/Ponencia_06.jpg" alt="Ponencia 6">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/ponencias/Ponencia_06.jpg" alt="Ponencia 6">
                         <div class="gallery-caption">Ponencia de la Tarde</div>
                     </a>
                 </div>
                 
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="900">
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="900" data-category="ponencias miercoles">
                     <a href="assets/img/galeria/miercoles/ponencias/Ponencia_07.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/ponencias/Ponencia_07.jpg" alt="Ponencia 7">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/ponencias/Ponencia_07.jpg" alt="Ponencia 7">
                         <div class="gallery-caption">Vista del Escenario (Ponencia 7)</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1000">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1000" data-category="ponencias miercoles">
                     <a href="assets/img/galeria/miercoles/ponencias/Ponencia_08.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/ponencias/Ponencia_08.jpg" alt="Ponencia 8">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/ponencias/Ponencia_08.jpg" alt="Ponencia 8">
                         <div class="gallery-caption">Vista del Auditorio (Ponencia 8)</div>
                     </a>
                 </div>
-                
-                <div class="gallery-item featured-large" data-aos="zoom-in">
+
+                <!-- Proyectos Terminales -->
+                <div class="gallery-item featured-large" data-aos="zoom-in" data-aos-delay="1100" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_01.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_01.jpg" alt="Presentación de Proyecto Terminal 1">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_01.jpg" alt="Presentación de Proyecto Terminal 1">
                         <div class="gallery-caption">Presentación de Proyectos - Grupo 1</div>
                     </a>
                 </div>
-                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="100">
+                
+                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="1200" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_02.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_02.jpg" alt="Presentación de Proyecto Terminal 2">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_02.jpg" alt="Presentación de Proyecto Terminal 2">
                         <div class="gallery-caption">Proyectos Terminales - Detalle de Expositor</div>
                     </a>
                 </div>
-                <div class="gallery-item featured-tall" data-aos="zoom-in" data-aos-delay="200">
+                
+                <div class="gallery-item featured-tall" data-aos="zoom-in" data-aos-delay="1300" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_03.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_03.jpg" alt="Presentación de Proyecto Terminal 3">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_03.jpg" alt="Presentación de Proyecto Terminal 3">
                         <div class="gallery-caption">Vista de la Exposición de Proyectos</div>
                     </a>
                 </div>
                 
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1400" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_04.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_04.jpg" alt="Proyecto Pt_04">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_04.jpg" alt="Proyecto Pt_04">
                         <div class="gallery-caption">Exposición Pt_04</div>
                     </a>
                 </div>
-                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="400">
+                
+                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="1500" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_06.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_06.jpg" alt="Proyecto Pt_06">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_06.jpg" alt="Proyecto Pt_06">
                         <div class="gallery-caption">Exposición Destacada Pt_06</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="500">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1600" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_07.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_07.jpg" alt="Proyecto Pt_07">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_07.jpg" alt="Proyecto Pt_07">
                         <div class="gallery-caption">Exposición Pt_07</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="600">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1700" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_08.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_08.jpg" alt="Proyecto Pt_08">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_08.jpg" alt="Proyecto Pt_08">
                         <div class="gallery-caption">Exposición Pt_08</div>
                     </a>
                 </div>
                 
-                <div class="gallery-item featured-large" data-aos="zoom-in" data-aos-delay="700">
+                <div class="gallery-item featured-large" data-aos="zoom-in" data-aos-delay="1800" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_09.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_09.jpg" alt="Proyecto Pt_09">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_09.jpg" alt="Proyecto Pt_09">
                         <div class="gallery-caption">Momento Clave: Exposición Pt_09</div>
                     </a>
                 </div>
-                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="800">
+                
+                <div class="gallery-item featured-wide" data-aos="zoom-in" data-aos-delay="1900" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_10.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_10.jpg" alt="Proyecto Pt_10">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_10.jpg" alt="Proyecto Pt_10">
                         <div class="gallery-caption">Exposición Pt_10</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="900">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2000" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_11.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_11.jpg" alt="Proyecto Pt_11">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_11.jpg" alt="Proyecto Pt_11">
                         <div class="gallery-caption">Exposición Pt_11</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1000">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2100" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_12.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_12.jpg" alt="Proyecto Pt_12">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_12.jpg" alt="Proyecto Pt_12">
                         <div class="gallery-caption">Exposición Pt_12</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1100">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2200" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_13.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_13.jpg" alt="Proyecto Pt_13">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_13.jpg" alt="Proyecto Pt_13">
                         <div class="gallery-caption">Exposición Pt_13</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1200">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2300" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_14.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_14.jpg" alt="Proyecto Pt_14">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_14.jpg" alt="Proyecto Pt_14">
                         <div class="gallery-caption">Exposición Pt_14</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1300">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2400" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_15.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_15.jpg" alt="Proyecto Pt_15">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_15.jpg" alt="Proyecto Pt_15">
                         <div class="gallery-caption">Exposición Pt_15</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1400">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2500" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_16.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_16.jpg" alt="Proyecto Pt_16">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_16.jpg" alt="Proyecto Pt_16">
                         <div class="gallery-caption">Exposición Pt_16</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1500">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2600" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_17.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_17.jpg" alt="Proyecto Pt_17">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_17.jpg" alt="Proyecto Pt_17">
                         <div class="gallery-caption">Exposición Pt_17</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1600">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2700" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_18.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_18.jpg" alt="Proyecto Pt_18">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_18.jpg" alt="Proyecto Pt_18">
                         <div class="gallery-caption">Exposición Pt_18</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1700">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2800" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_19.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_19.jpg" alt="Proyecto Pt_19">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_19.jpg" alt="Proyecto Pt_19">
                         <div class="gallery-caption">Exposición Pt_19</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1800">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="2900" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_20.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_20.jpg" alt="Proyecto Pt_20">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_20.jpg" alt="Proyecto Pt_20">
                         <div class="gallery-caption">Exposición Pt_20</div>
                     </a>
                 </div>
-                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="1900">
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="3000" data-category="proyectos miercoles">
                     <a href="assets/img/galeria/miercoles/PT_presentaciones/Pt_21.jpg" data-featherlight="image" target="_blank" download>
-                        <img src="assets/img/galeria/miercoles/PT_presentaciones/Pt_21.jpg" alt="Proyecto Pt_21">
+                        <img class="lazyload" data-src="assets/img/galeria/miercoles/PT_presentaciones/Pt_21.jpg" alt="Proyecto Pt_21">
                         <div class="gallery-caption">Exposición Pt_21</div>
                     </a>
                 </div>
 
-                <div class="gallery-empty" data-aos="fade-up" data-aos-delay="2000">
+                <div class="gallery-empty" data-aos="fade-up" data-aos-delay="3100">
                     <h3>Fin del Día 1: Miércoles</h3>
                     <p>¡Vuelve pronto para ver las fotos de los siguientes días del congreso!</p>
                 </div>
@@ -361,20 +409,154 @@
 
     <a href="#" class="scroll-to-top" id="scrollToTop">
         <i class="fas fa-arrow-up"></i>
-    </a>
+    </a> 
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/main.js"></script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-             const preloader = document.getElementById('preloader');
-             if (preloader) {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
                 preloader.classList.add('preloader-hidden');
             }
             if (typeof AOS !== 'undefined') {
                 AOS.init({ once: true });
             }
+
+            // === INICIALIZACIÓN DE FEATHERLIGHT GALLERY CON ZOOM Y DESCARGA ===
+            $('.gallery-grid a[data-featherlight="image"]').featherlightGallery({
+                gallery: '.gallery-grid a[data-featherlight="image"]',
+                previousIcon: '&#9664;', // <
+                nextIcon: '&#9654;',     // >
+                targetAttr: 'href',
+                openSpeed: 200,
+                closeSpeed: 200,
+                
+                // Función que se ejecuta después de que el contenido (la imagen) se carga
+                afterContent: function() {
+                    var instance = this;
+                    var currentImgUrl = instance.$currentTarget.attr('href');
+                    
+                    // 1. LIMPIAR CONTENIDO ANTERIOR Y AÑADIR CLASE PARA ESTILOS
+                    instance.$content.addClass('featherlight-zoomable');
+                    instance.$content.find('.featherlight-footer').remove();
+                    
+                    // 2. CREAR FOOTER CON BOTONES DE DESCARGA Y ZOOM
+                    var footer = $('<div class="featherlight-footer"></div>');
+                    var controls = $('<div class="featherlight-controls"></div>');
+
+                    // --- BOTONES DE ZOOM ---
+                    var zoomIn = $('<button class="btn btn-zoom" data-zoom-in><i class="fas fa-search-plus"></i> Zoom +</button>');
+                    var zoomOut = $('<button class="btn btn-zoom" data-zoom-out><i class="fas fa-search-minus"></i> Zoom -</button>');
+                    
+                    // --- BOTÓN DE DESCARGA ---
+                    // Importante: El download link debe usar el href de la imagen actual
+                    var downloadLink = $('<a href="' + currentImgUrl + '" class="btn btn-primary" download><i class="fas fa-download"></i> Descargar Foto</a>');
+                    
+                    // 3. AÑADIR CONTROLES Y MANEJAR EVENTOS
+                    controls.append(zoomOut, zoomIn);
+                    footer.append(downloadLink, controls);
+                    instance.$content.append(footer);
+                    
+                    // HABILITAR FUNCIONALIDAD DE ZOOM DEL PLUGIN
+                    instance.zoomable().draggable(); 
+                    
+                    // CONECTAR BOTONES MANUALES CON EL PLUGIN
+                    zoomIn.on('click', function(e) {
+                        e.stopPropagation(); // Previene que cierre el modal
+                        instance.zoomIn(); 
+                    });
+                    zoomOut.on('click', function(e) {
+                        e.stopPropagation(); // Previene que cierre el modal
+                        instance.zoomOut(); 
+                    });
+                }
+            });
+            // === FIN DE INICIALIZACIÓN DE FEATHERLIGHT GALLERY ===
+            // Sistema de filtrado mejorado
+            function initGalleryFilters() {
+            const filterButtons = document.querySelectorAll('.gallery-filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const galleryStats = document.querySelector('.gallery-stats span');
+            
+            // Contador inicial
+            updatePhotoCount('all');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                // Remover clase active de todos los botones
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.style.transform = 'scale(1)';
+                });
+                
+                // Añadir clase active al botón clickeado con animación
+                this.classList.add('active');
+                this.style.transform = 'scale(1.05)';
+                
+                const filterValue = this.getAttribute('data-filter');
+                let visibleCount = 0;
+                
+                // Filtrar items de galería con animación
+                galleryItems.forEach((item, index) => {
+                    setTimeout(() => {
+                    if (filterValue === 'all') {
+                        item.style.display = 'flex';
+                        item.style.opacity = '1';
+                        visibleCount++;
+                    } else {
+                        const categories = item.getAttribute('data-category');
+                        if (categories && categories.includes(filterValue)) {
+                        item.style.display = 'flex';
+                        item.style.opacity = '1';
+                        visibleCount++;
+                        } else {
+                        item.style.opacity = '0';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                        }
+                    }
+                    
+                    // Actualizar contador
+                    if (index === galleryItems.length - 1) {
+                        updatePhotoCount(filterValue, visibleCount);
+                    }
+                    }, index * 50);
+                });
+                
+                // Refrescar animaciones AOS
+                if (typeof AOS !== 'undefined') {
+                    setTimeout(() => {
+                    AOS.refresh();
+                    }, 500);
+                }
+                });
+            });
+            
+            function updatePhotoCount(filter, count = null) {
+                if (!galleryStats) return;
+                
+                const totalItems = document.querySelectorAll('.gallery-item:not(.gallery-empty)').length;
+                if (filter === 'all') {
+                galleryStats.textContent = totalItems;
+                } else if (count !== null) {
+                galleryStats.textContent = count;
+                }
+            }
+            }
+
+            // Inicializar cuando el DOM esté listo
+            document.addEventListener('DOMContentLoaded', function() {
+            initGalleryFilters();
+            
+            // Efecto de aparición escalonada para las imágenes
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+            });
+            });
         });
     </script>
 </body>

@@ -3517,26 +3517,7 @@ a, button, input {
   }
 }
 
-@media (max-width: 480px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  .gallery-item {
-    height: 250px;
-  }
-  
-  .gallery-filters {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: 10px;
-  }
-  
-  .gallery-filter-btn {
-    flex-shrink: 0;
-  }
-}
+
 
 /* ===== FEATHERLIGHT GALLERY STYLES ===== */
 .featherlight-zoomable .featherlight-content {
